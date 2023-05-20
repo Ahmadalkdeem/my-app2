@@ -1,0 +1,89 @@
+.Card {
+    margin: 5px;
+    width: 250px;
+    grid-gap: 10px;
+    padding: 8px 8px 0px 8px;
+    border-radius: none !important;
+    border: none !important;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    flex-shrink: 0;
+}
+
+.titel {
+    margin: 0;
+    font-size: 16px;
+}
+
+.Img {
+    background: white;
+    object-fit: fill;
+    height: 200px;
+    border-radius: none !important;
+    transition: all ease-in-out 0.7s;
+}
+
+.Img:hover {
+    opacity: 0.9;
+}
+
+.Icons {
+    background-color: white;
+    border-radius: 8px;
+    color: #000;
+}
+
+.P {
+    width: 100%;
+    margin: 1.5px 0;
+}
+
+.Endcard {
+    padding-top: 5px;
+    border-top: 1px solid #000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.Btn {
+    color: white;
+    transition: all ease-in-out 0.4s !important;
+}
+
+.Icon {
+    transition: all ease-in-out 0.4s;
+}
+
+.Icon:hover {
+    transform: scale(1.07);
+}
+
+.Btn:hover {
+    animation: myexample 1s ease-in-out;
+}
+
+
+@keyframes myexample {
+    from {
+        transform: rotateZ(0deg);
+    }
+
+    40% {
+        transform: rotateZ(4deg);
+    }
+
+    70% {
+        transform: rotateZ(-4deg);
+    }
+
+    to {
+        transform: rotateZ(0deg);
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .Mytitel {
+        font-size: 16px;
+    }
+}

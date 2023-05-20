@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Almarai:wght@300;400;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Gruppo&family=Montserrat:ital,wght@0,400;1,400;1,500&family=Noto+Sans+Hebrew:wght@300;400;500;600;700;800;900&display=swap');
+
+.div {
+    margin: 0 auto;
+    max-width: 1500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    // background-color: #FBF5E9;
+    padding: 10px;
+}
+
+.ImgCard {
+    border-radius: 50% !important;
+    width: 200px !important;
+    height: 200px;
+    position: relative;
+    top: -50px;
+}
+
+.card {
+    margin: 50px 5px 5px 5px;
+}
+
+.bodycard {
+    margin-top: -40px;
+}
+
+.mydiv {
+    width: 80%;
+    height: 100%;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    margin-top: 20px;
+}
+
+.myimg {
+    height: 220px;
+    margin: 0 auto;
+    border-radius: 10px;
+    border-radius: 50%;
+
+}
+
+.h3 {
+    text-align: center;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.myp {
+    padding: 15px 12px;
+    margin-bottom: 0;
+    text-align: justify;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    line-height: 1.6;
+    color: black;
+    font-weight: 700;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin-bottom: 5px;
+}
+
+.div3 {
+    width: 80%;
+    height: 100%;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    margin-top: 20px;
+    gap: 20px;
+}
+
+.h1 {
+    font-size: 50px;
+    padding: 0 10px;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 0;
+    border-bottom: 2px dashed black;
+}
+
+@media (max-width:600px) {
+    .h1 {
+        font-size: 35px;
+    }
+}
+
+@media (max-width:400px) {
+
+    .mydiv,
+    .div3 {
+        width: 100%;
+        grid-template-columns: repeat(1, minmax(100px, 1fr));
+    }
+}

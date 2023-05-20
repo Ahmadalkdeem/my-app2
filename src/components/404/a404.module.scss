@@ -1,0 +1,54 @@
+.mybody {
+    min-height: 80vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: white;
+}
+
+.myp {
+    display: flex;
+    align-items: center;
+    font-size: 15vw;
+    margin-bottom: 0;
+    font-weight: 900;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.myp2 {
+    font-size: 45px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.link {
+
+    font-family: 'Abel Pro';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+    background-color: black;
+    width: 280px;
+    height: 40px;
+    text-align: center;
+    padding-top: 11px;
+    text-decoration: none;
+}
+
+.link:hover {
+    color: #FFFFFF;
+}
+
+@media (max-width:600px) {
+    .myp {
+        font-size: 28vw;
+    }
+
+    .myp2 {
+        font-size: 25px;
+    }
+}

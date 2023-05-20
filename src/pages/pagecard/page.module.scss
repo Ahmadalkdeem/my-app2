@@ -1,0 +1,187 @@
+.div {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1500px;
+    padding: 0 5% 30px 5%;
+    display: flex;
+    gap: 20px;
+    background-color: whitesmoke;
+}
+
+.Img {
+    width: 400px;
+    min-height: 300px;
+    object-fit: fill;
+    vertical-align: middle;
+}
+
+.price {
+    font-size: 22px;
+}
+
+.delateprice {
+    text-decoration: line-through;
+    color: #999;
+    font-size: 14px;
+    margin-right: 4px;
+}
+
+.h5 {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 2;
+    letter-spacing: 1px;
+    margin: 10px 0;
+    border-top: 1.5px dashed #e5e5e5;
+}
+
+.h3 {
+    font-family: 'Almarai', sans-serif;
+}
+
+.divsizes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.Btn {
+    width: 80%;
+    min-height: 40px;
+    border: none;
+    letter-spacing: 1.5px;
+    margin: 8px 10%;
+    font-weight: 500;
+    background-color: black;
+    color: aliceblue;
+    transition: all 0.3s ease-in-out;
+}
+
+.Btn:hover {
+    background-color: rgba(0, 0, 0, 0.82);
+}
+
+
+
+.Btn1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 4px;
+    padding: 0 2px 2px 2px;
+    border: none;
+    font-size: 20px;
+    min-width: 35px;
+    min-height: 35px;
+    border-radius: 5px;
+    background-color: #e5e5e5;
+}
+
+.Btn2 {
+    font-weight: 500;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5px;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+}
+
+.Btn11 {
+    border: 2px solid black !important;
+
+}
+
+.Btn22 {
+    border-radius: 5px;
+    border: none;
+    height: 35px;
+    width: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Btn33 {
+    border-radius: 5px;
+    border: none;
+    height: 35px;
+    width: 35px;
+    opacity: 0.2;
+    text-decoration: line-through;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.span {
+    border-radius: 5px;
+    display: block;
+    width: 27px;
+    height: 27px;
+}
+
+
+.sizes {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    border-radius: 4px;
+    width: 130px;
+    border: 2px solid black;
+}
+
+.amount {
+    font-size: 20px;
+    padding-top: 2px;
+}
+
+.Container {
+    max-width: 1500px;
+}
+
+
+@media only screen and (max-width: 900px) {
+    .div {
+        flex-direction: column;
+        gap: 0px;
+        padding: 0 15%;
+    }
+
+    .Img {
+        min-height: 250px;
+        max-height: 650px;
+        width: 100%;
+    }
+
+    .corsla {
+        margin: 0;
+    }
+
+
+    .div2 {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .div {
+        padding: 0 7%;
+    }
+
+    .Img {
+        height: auto;
+        max-height: 500px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .div {
+        padding: 0;
+    }
+}

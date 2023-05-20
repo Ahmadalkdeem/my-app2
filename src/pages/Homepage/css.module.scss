@@ -1,0 +1,80 @@
+.Container {
+    max-width: 1500px;
+}
+
+.h2 {
+    text-align: center;
+    margin-top: 10px;
+    font-family: 'Noto Sans Hebrew', sans-serif;
+    padding: 0px 10px;
+    letter-spacing: 4px;
+}
+
+.Div {
+    max-width: 1500px;
+    margin: 0 auto;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+.divlink {
+    height: 400px;
+    overflow: hidden;
+}
+
+.Img {
+    width: 100%;
+    height: 400px;
+    z-index: -2;
+    transition: all ease-in-out 0.3s;
+}
+
+.Img:hover {
+    scale: 1.1;
+    opacity: 0.6;
+}
+
+.btn {
+    width: 90%;
+    font-family: 'Noto Sans Hebrew', sans-serif;
+    text-align: center;
+    font-size: 35px;
+    letter-spacing: 4px;
+    color: white;
+}
+
+.btn {
+    position: relative;
+    top: -220px;
+    margin: 0 auto !important;
+    width: 150px;
+    height: 50px;
+    border: none;
+    font-size: 22px;
+    transition: all ease-in-out 0.3s;
+    color: black;
+}
+
+.btn:hover {
+    background-color: yellow;
+}
+
+
+
+@media only screen and (max-width: 800px) {
+    .divlink {
+        height: 350px;
+    }
+
+    .Img {
+        height: 350px;
+
+    }
+
+    .btn {
+        top: -195px;
+    }
+}

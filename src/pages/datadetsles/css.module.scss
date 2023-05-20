@@ -1,0 +1,46 @@
+.h1 {
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.Container {
+    max-width: 1500px;
+}
+
+.selestdiv {
+    max-width: 1500px;
+    margin: 0 auto;
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.selest {
+    z-index: 5 !important;
+    width: 250px;
+}
+
+.selest2 {
+    width: 250px;
+    // z-index: 1 !important;
+}
+
+.selestdiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+@media only screen and (max-width: 600px) {
+    .selest {
+        width: 80%;
+    }
+
+    .selest2 {
+        width: 80%;
+    }
+}

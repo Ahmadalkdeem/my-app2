@@ -1,0 +1,26 @@
+.acordingn {
+    max-height: 0px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0, 1, 0, 1);
+    white-space: pre-wrap;
+}
+
+.acordingn.conact {
+    height: auto;
+    max-height: 10000px;
+    transition: all 0.3s cubic-bezier(0, 1, 0, 1);
+}
+
+.mytitel {
+    padding-top: 10px;
+}
+
+.item {
+    margin: 0 auto;
+    border-top: 1.5px solid #dddddd;
+    border-radius: 2px;
+    background-color: beige;
+    margin-bottom: 5px;
+    padding: 0 20px 10px 20px;
+    max-width: 1500px;
+}

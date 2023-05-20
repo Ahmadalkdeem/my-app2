@@ -1,0 +1,70 @@
+.button {
+
+    background-color: #fff;
+    border: 1px solid #25D366;
+    padding: 5px;
+    position: fixed;
+    bottom: 15px;
+    left: 15px;
+    width: 7.2em;
+    height: 2.5em;
+    transition: 0.5s;
+    font-size: 17px;
+    border-radius: 0.4em;
+    z-index: 3;
+}
+
+.button p {
+    position: absolute;
+    top: 0.2em !important;
+    left: 1.15em;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+    transition: .5s;
+    color: #25D366;
+}
+
+.button svg {
+    position: absolute;
+    top: 0.45em;
+    right: 0.5em;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    height: 24px !important;
+    width: 24px !important;
+    transition: 0.5s;
+    height: 1em;
+    fill: #fff
+}
+
+.button:hover p {
+    left: 0.5em;
+    color: #fff
+}
+
+.button:hover svg {
+    opacity: 1;
+}
+
+.button:hover {
+    background-color: #25D366;
+}
+
+@media only screen and (max-width: 800px) {
+    .button p {
+        left: 0.5em;
+        color: #fff
+    }
+
+    .button svg {
+        opacity: 1;
+    }
+
+    .button {
+        bottom: 6px;
+        left: 6px;
+        background-color: #25D366;
+    }
+}

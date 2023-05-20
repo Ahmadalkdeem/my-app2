@@ -1,0 +1,134 @@
+.div {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2%;
+}
+
+.btn2 {
+    height: 40px;
+    font-size: 20px;
+    width: 34%;
+    margin: 20px 0;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 7px;
+}
+
+.btnActiv {
+    height: 40px;
+    font-size: 20px;
+    width: 34%;
+    margin: 20px 0;
+    background-color: yellow;
+    border: none;
+    border-radius: 7px;
+}
+
+.input {
+    width: 70%;
+    outline: none;
+    border: 1px solid #ced4da;
+    padding: 0 10px;
+    height: 40px;
+    border-radius: 7px;
+}
+
+.lable {
+    width: 70%;
+    margin: 0 0 0 0;
+}
+
+.h5 {
+    text-align: center;
+}
+
+.btn {
+    height: 40px;
+    font-size: 20px;
+    width: 70%;
+    // margin: 0px 0;
+    background-color: rgba(255, 255, 0, 0.668);
+    border: none;
+    border-radius: 7px;
+}
+
+.btn:hover {
+    background-color: yellow;
+}
+
+.P {
+    width: 70%;
+    padding: 0 4px;
+    font-size: 12px;
+    color: red;
+    font-weight: 500;
+    margin: 2px 0;
+}
+
+.div2 {
+    width: 70%;
+    display: flex;
+    justify-content: left;
+    padding: 0 0 0 10px;
+}
+
+.BtnForgotPassword {
+    margin-top: 3px;
+    font-size: 14px;
+    border: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .input {
+        width: 85%;
+    }
+
+    .div2 {
+        width: 85%;
+    }
+
+    .btn2 {
+        width: 40.5%;
+    }
+
+    .lable {
+        width: 85%;
+    }
+
+    .btn {
+        width: 85%;
+    }
+
+    .P {
+        width: 85%;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    .input {
+        width: 95%;
+    }
+
+    .P {
+        width: 95%;
+    }
+
+    .btn2 {
+        width: 45.5%;
+    }
+
+    .div2 {
+        width: 95%;
+
+    }
+
+    .lable {
+        width: 95%;
+    }
+
+    .btn {
+        width: 95%;
+    }
+}

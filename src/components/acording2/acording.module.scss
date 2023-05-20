@@ -1,0 +1,44 @@
+.acordingn {
+    max-height: 0px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0, 1, 0, 1);
+    white-space: pre-wrap;
+}
+
+.Mylink {
+    color: rgba(0, 0, 0, 0.804);
+    text-decoration: none;
+    // text-align: center;
+    width: 100%;
+    height: 30px;
+    font-size: 18px;
+    // border: 1px solid black;
+}
+
+.Mylink:hover {
+    color: rgba(0, 0, 0, 0.806);
+}
+
+.acordingn.conact {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    max-height: 10000px;
+    transition: all 0.3s cubic-bezier(0, 1, 0, 1);
+}
+
+.mytitel {
+    padding-top: 10px;
+}
+
+.item {
+    margin: 0 auto;
+    border-top: 2px solid #dddddd;
+    border-radius: 2px;
+    background-color: rgba(0, 0, 0, 0.387);
+    margin-bottom: 2px;
+    padding: 0 20px 10px 20px;
+    max-width: 1500px;
+}
