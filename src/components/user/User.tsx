@@ -4,7 +4,9 @@ import axios from 'axios';
 import { valMail } from '../../validators/validators';
 import { useAppDispatch } from '../../app/hooks';
 import { addItem } from '../../features/cards/users';
+import { useAppSelector } from '../../app/hooks';
 const User = () => {
+    const { accessToken } = useAppSelector((s) => s.user);
     let Dispatch = useAppDispatch()
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -14,7 +16,7 @@ const User = () => {
 
     const login = () => {
         if (valMail.test(username)) {
-            axios.post('http://localhost:3001/api/auth/getuser', { email: username }).then((response) => {
+            axios.post(`http://localhost:3001/users/getuser/${accessToken}`, { email: username }).then((response) => {
                 setusername('')
                 seterrusername('')
 
@@ -23,6 +25,8 @@ const User = () => {
                 if (e.response.data.message === 'No Such User') {
                     seterrusername('המייל לא קיים')
                 }
+                console.log(e);
+
             })
         }
         if (!valMail.test(username)) {

@@ -9,7 +9,7 @@ const initialState: any = {
 };
 
 export const fetchUsers2 = createAsyncThunk<any[]>("user2/fetchUsers2", (length1: any) =>
-    fetch(`http://localhost:3001/uplode/pantsproduct/0`).then((res) => res.json())
+    fetch(`http://localhost:3001/cards/pantsproduct/0`).then((res) => res.json())
 );
 
 // fetch user from api
@@ -26,6 +26,8 @@ const cardpants = createSlice({
                 }
             });
             state.users2 = [...state.users2, ...arr];
+            console.log(state.users2);
+
         },
         delteItem2: (state, action) => {
             const index = state.users2.findIndex((c: any) => c._id === action.payload);

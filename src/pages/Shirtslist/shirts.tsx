@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 import Cardlist from '../../components/cardlist/Cardlist';
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
@@ -9,6 +9,7 @@ import { Helmet } from "react-helmet";
 function Shose() {
     const [end, setend] = useState<any>(true);
     const { loading, users, error } = useAppSelector((s) => s.cardshirts);
+
     let Dispatch = useAppDispatch()
 
     const getData = async () => {
@@ -16,7 +17,7 @@ function Shose() {
             console.log('aa');
 
             setend(false)
-            axios.get(`http://localhost:3001/uplode/Shirtsproduct/${users.length}`, {
+            axios.get(`http://localhost:3001/cards/Shirtsproduct/${users.length}`, {
             }).then((response) => {
                 setend(true)
                 if (response.data.length < 1) {
@@ -54,7 +55,7 @@ function Shose() {
                 <meta name="keywords" content="חולצות, טי, פולו, חורף, אופנה, חנות, אינטרנט," />
             </Helmet>
             {loading === true && <Spiner />}
-            {users.length > 0 && <Cardlist h1='חולצות גבריים' users={users} />}
+            {users.length > 0 && <Cardlist h1='חולצות גבריים' users={users} categories='Shirtsproduct' />}
             {error && <div>{error}</div>}
 
         </>

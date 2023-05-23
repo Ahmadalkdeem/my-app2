@@ -3,11 +3,19 @@ import { useState, useEffect } from 'react'
 import MyCard from '../card/Card'
 import css from './css.module.scss'
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom'
 import { Container, Row, Col } from 'react-bootstrap';
 import { stylelableOption, brands, colourOptions, SizeOptions } from '../../arrays/list'
 import { optionstype } from '../../@types/Mytypes'
 import Spiner from '../Spiner/Spiner'
-function Cardlist(props: { h1: string, users: [] }) {
+import { useAppDispatch } from '../../app/hooks'
+import { addfindusers } from '../../features/cards/cardshirts'
+import { addfindusers2 } from '../../features/cards/cardPants'
+import { addfindusers3 } from '../../features/cards/cardshose'
+function Cardlist(props: { h1: string, users: [], categories: string }) {
+    const navigate = useNavigate();
+    const Dispatch = useAppDispatch();
+
     const [selectbrands, setselectbrands] = useState<any>([])
     const [selectcolors, setselectcolors] = useState<any>([])
     const [selectsizes, setselectsizes] = useState<any>([])
@@ -30,15 +38,21 @@ function Cardlist(props: { h1: string, users: [] }) {
         sizes: selectsizes
     };
 
-    let category = ''
-    if (afterSlash === 'Shirts') { category = 'Shirtsproduct' }
-    if (afterSlash === 'pants') { category = 'pantsproduct' }
-    if (afterSlash === 'shoes') { category = 'shoesproduct' }
     function getdata() {
-        axios.get(`http://localhost:3001/filtering/${category}/0`, { params: data }).then((response) => {
+        axios.get(`http://localhost:3001/filtering/${props.categories}/0`, { params: data }).then((response) => {
             console.log(response.data);
             setloding(true);
             setarr(response.data)
+            if (props.categories === 'pantsproduct') {
+                Dispatch(addfindusers2(response.data))
+            }
+            if (props.categories === 'Shirtsproduct') {
+                Dispatch(addfindusers(response.data))
+            }
+            if (props.categories === 'shoesproduct') {
+                Dispatch(addfindusers3(response.data))
+            }
+            // navigate('/pants/search')
         }).catch(e => {
             console.log(e);
         })
@@ -153,10 +167,12 @@ function Cardlist(props: { h1: string, users: [] }) {
                     className={mylist === 'SizeOptions3' ? `${css.selest}` : `${css.selest2}`}
                     placeholder='צבעים'
                 />
-                <button onClick={() => {
+                <button disabled={selectsizes[0] === undefined && selectcolors[0] === undefined && selectbrands[0] === undefined ? true : false} onClick={() => {
+                    if (selectsizes[0] === undefined && selectcolors[0] === undefined && selectbrands[0] === undefined) { return }
                     setloding(false);
                     getdata();
-                }}>ahmad</button>
+
+                }}>Click</button>
             </div>
             {loding === true ? <Container className={`Container ${css.Container}`} fluid>
                 <Row xs={2} sm={3} lg={4} xxl={5}>
@@ -167,16 +183,7 @@ function Cardlist(props: { h1: string, users: [] }) {
                         </Col>)))}
                 </Row>
             </Container> : <Spiner />}
-            {/* <Container className={`Container ${css.Container}`} fluid>
-                <Row xs={2} sm={3} lg={4} xxl={5}>
 
-                    {arr.map(((product: any, i: number) => (
-                        <Col key={i} className="mt-2 p-1">
-                            <MyCard key={i}
-                                {...product} />
-                        </Col>)))}
-                </Row>
-            </Container> */}
         </>
     )
 }

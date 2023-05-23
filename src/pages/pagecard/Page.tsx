@@ -28,7 +28,7 @@ let fitem = {
     _id: '64160b7969fc817052a517d0'
 }
 function Page() {
-    let { id, scategory, fcategory } = useParams()
+    let { id, fcategory } = useParams()//scategory
     const [Theitem, setTheitem] = useState<any>(fitem)
     const [arr, setarr] = useState<any>([])
     const Navigate = useNavigate()
@@ -41,7 +41,7 @@ function Page() {
 
 
     const getData = async (e: { category: string, id: string }) => {
-        await axios.get(`http://localhost:3001/uplode/findOne/${e.category}/${e.id}`).then((e) => {
+        await axios.get(`http://localhost:3001/cards/findOne/${e.category}/${e.id}`).then((e) => {
             console.log(e);
 
             setTheitem(e.data)
@@ -55,49 +55,14 @@ function Page() {
 
     };
     const item = () => {
-        if (fcategory !== 'shoes' && fcategory !== 'Shirts' && fcategory !== 'pants') { Navigate('/') }
-        if (fcategory === 'shoes') {
-            let x = users3.find((e: any) => e._id === id)
-            if (x === undefined) {
-                console.log('aa');
-
-                getData({ category: 'shoes', id: `${id}` })
-            } else {
-                console.log('bb');
-                setTheitem(x)
-                setState(x.stock[0].size)
-                setcolor(x.stock[0].colors[0].color)
-            }
-        }
-        if (fcategory === 'Shirts') {
-            let x = users.find((e: any) => e._id === id)
-
-            if (x === undefined) {
-                console.log('aa');
-
-                getData({ category: 'Shirts', id: `${id}` })
-            } else {
-                console.log('bb');
-
-                setTheitem(x)
-                setState(x.stock[0].size)
-                setcolor(x.stock[0].colors[0].color)
-            }
-        }
-        if (fcategory === 'pants') {
-            let x = users2.find((e: any) => e._id === id)
-
-            if (x === undefined) {
-                console.log('aa');
-
-                getData({ category: 'pants', id: `${id}` })
-            } else {
-                console.log('bb');
-
-                setTheitem(x)
-                setState(x.stock[0].size)
-                setcolor(x.stock[0].colors[0].color)
-            }
+        // if (fcategory !== 'shoes' && fcategory !== 'Shirts' && fcategory !== 'pants') { Navigate('/') }
+        let x: any = [...users3, ...users2, ...users].find((e: any) => e._id === id)
+        if (x !== undefined) {
+            setTheitem(x)
+            setState(x.stock[0].size)
+            setcolor(x.stock[0].colors[0].color)
+        } else {
+            getData({ category: `${fcategory}`, id: `${id}` })
         }
     }
 
@@ -119,7 +84,7 @@ function Page() {
         window.scrollTo(0, 0)
         setarr([...users, ...users2, ...users3].sort(() => Math.random() - 0.5).slice(-8))
 
-    }, [id, scategory, fcategory]);
+    }, [id, fcategory]);
     useEffect(() => {
         if (arr[0] === undefined || arr.length < 8) {
             setarr([...users, ...users2, ...users3].sort(() => Math.random() - 0.5).slice(-8))

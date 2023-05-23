@@ -70,7 +70,7 @@ function MyCard(props: Cardtype) {
                     <Carousel.Item key={i} interval={100000000000000} >
                         <img
                             onClick={() => {
-                                navigate(`/${props.category}/${props.category2}/${props._id}`);
+                                navigate(`/${props.category}/${props._id}`);
                             }}
                             className={css.Img}
                             src={`${e}`}
@@ -82,7 +82,7 @@ function MyCard(props: Cardtype) {
 
 
             <Card.Body onClick={() => {
-                navigate(`/${props.category}/${props.category2}/${props._id}`);
+                navigate(`/${props.category}/${props._id}`);
             }} className={css.bodycard}>
                 <Card.Title className={css.titel}>{props.name}</Card.Title>
                 <Card.Title className={css.brand}>{props.brand}</Card.Title>

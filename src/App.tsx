@@ -84,11 +84,15 @@ function App() {
           <Route path='Restartpassword' element={<Restartpassword />} />
         </Route>
         <Route path='/about' element={<About />} />
-        <Route path='/shoes' element={<Shose />} />
         <Route path='/Mycard' element={<Mycart />} />
+        <Route path='/shoes' element={<Shose />} />
         <Route path='/Shirts' element={<Shirt />} />
+        <Route path='/pants/search' element={<Pants />} />
+        <Route path='/shoes/search' element={<Shose />} />
+        <Route path='/Shirts/search' element={<Shirt />} />
         <Route path='/pants' element={<Pants />} />
-        <Route path='/:fcategory/:scategory/:id' element={<Page />} />
+        <Route path='/:fcategory/:id' element={<Page />} />
+        {/* scategory */}
         {roles[0] === 'admin' && <>
           <Route path='/addproduct' element={<Editpage />} />
           <Route path='/data' element={<Data />} />

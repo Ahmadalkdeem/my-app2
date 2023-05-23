@@ -15,7 +15,7 @@ function Shose() {
     const getData = async () => {
         if (end === true) {
             setend(false)
-            axios.get(`http://localhost:3001/uplode/pantsproduct/${x}`, {
+            axios.get(`http://localhost:3001/cards/pantsproduct/${x}`, {
             }).then((response) => {
                 setend(true)
                 if (response.data.length < 1) {
@@ -49,12 +49,11 @@ function Shose() {
             <Helmet>
                 <title> מגוון רחב של מכנסיים לגברים | חנות האופנה המובילה באינטרנט
                 </title>
-                <meta name="description" content="גלו את המגוון הרחב שלנו של מכנסיים לגברים ונשים, כולל מכנסי ג'ינס, טייץ, שורטים ועוד. הזמינו עכשיו וקבלו משלוח חינם!
-" />
+                <meta name="description" content="גלו את המגוון הרחב שלנו של מכנסיים לגברים ונשים, כולל מכנסי ג'ינס, טייץ, שורטים ועוד. הזמינו עכשיו וקבלו משלוח חינם!" />
                 <meta name="keywords" content="מכנסיים, ג'ינס, טייץ, שורטים, אופנה, חנות, אינטרנט, קניות" />
             </Helmet>
             {loading2 && <Spiner />}
-            {users2.length > 0 && <Cardlist h1='מכנסיים גבריים' users={users2} />}
+            {users2.length > 0 && <Cardlist h1='מכנסיים גבריים' users={users2} categories='pantsproduct' />}
             {error2 && <div>{error2}</div>}
 
         </>

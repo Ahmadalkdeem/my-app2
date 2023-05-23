@@ -162,13 +162,11 @@ export const Data = () => {
                     <Row xs={2} sm={3} lg={4} xxl={5}>
 
                         {data3.map((e: any, index: number) =>
-                            <>
-                                <Col key={index} className="mt-2 p-1">
-                                    {e.shoes_product === undefined ? '' : <Card {...e.shoes_product} key={index} />}
-                                    {e.pants_product === undefined ? '' : <Card {...e.pants_product} key={index} />}
-                                    {e.shirts_product === undefined ? '' : <Card {...e.shirts_product} key={index} />}
-                                </Col>
-                            </>
+                            <Col key={index} className="mt-2 p-1">
+                                {e.shoes_product !== undefined && <Card {...e.shoes_product} key={index} />}
+                                {e.pants_product !== undefined && <Card {...e.pants_product} key={index} />}
+                                {e.shirts_product !== undefined && <Card {...e.shirts_product} key={index} />}
+                            </Col>
                         )}
 
                     </Row>

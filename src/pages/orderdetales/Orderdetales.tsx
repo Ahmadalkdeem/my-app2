@@ -6,20 +6,22 @@ import css from './css.module.scss'
 import Card from 'react-bootstrap/Card';
 import axios from 'axios';
 import Spiner from '../../components/Spiner/Spiner'
-
+import { useAppDispatch } from '../../app/hooks';
+import { updateitem } from '../../features/cards/orderdetales';
 const Orderdetales = () => {
+    let Dispatch = useAppDispatch()
     let { id2 } = useParams()
     const { users4 } = useAppSelector((s) => s.orders)
+    const { accessToken } = useAppSelector((s) => s.user)
     const [users, setusers] = useState<any>()
     const [index, setindex] = useState<number>()
 
     function getorder() {
 
-        axios.get(`http://localhost:3001/carts/getoneorder/${id2}`, {
+        axios.get(`http://localhost:3001/carts/getoneorder/${accessToken}/${id2}`, {
         }).then((response) => {
             console.log(response);
-
-            setusers(response.data)
+            setusers(response.data[0])
         }).catch((err: any) => {
             console.log(err);
             console.log(err.response.data.error);
@@ -38,7 +40,17 @@ const Orderdetales = () => {
             {users === undefined || null ? <Spiner /> :
                 <>
                     <div className={css.Div}>
+                        <input onClick={() => {
+                            axios.put(`http://localhost:3001/carts/putoneorder/${accessToken}/${id2}`, {
+                            }).then((response) => {
+                                console.log(response);
+                                Dispatch(updateitem(id2))
+                            }).catch((err: any) => {
+                                console.log(err);
+                                console.log(err.response.data.error);
+                            })
 
+                        }} className='btn btn-primary' type="button" value='ההזמנה בוצעה' />
                         <MDBTable className={css.table}>
                             <MDBTableHead>
                                 <tr>

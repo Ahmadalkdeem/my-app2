@@ -18,14 +18,16 @@ const orders = createSlice({
                     arr.push(element)
                 }
             });
-
-
             state.users4 = [...state.users4, ...arr];
-        }
+        },
+        updateitem: (state, action) => {
+            const index = state.users4.findIndex((c: any) => c._id === action.payload);
+            state.users4[index].status = true
+        },
     }
 });
 // also exported fetchUsers at the top
-export const { addItem2 } = orders.actions;
+export const { addItem2, updateitem } = orders.actions;
 
 //export the reducer
 export default orders.reducer

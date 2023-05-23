@@ -13,12 +13,10 @@ const Users = () => {
 
     let Dispatch = useAppDispatch()
     const { users } = useAppSelector((s) => s.users);
-    console.log(users);
-
     const { accessToken } = useAppSelector((s) => s.user);
 
     function getdata() {
-        axios.get(`http://localhost:3001/api/auth/users/${accessToken}/${users.length}`, {
+        axios.get(`http://localhost:3001/users/${accessToken}/${users.length}`, {
         }).then((response) => {
             Dispatch(addItems(response.data))
             console.log(response.data);
@@ -59,7 +57,7 @@ const Users = () => {
                                             confirmButtonText: 'Save',
                                         }).then((result) => {
                                             if (result.isConfirmed) {
-                                                axios.delete(`http://localhost:3001/api/auth/users/${user._id}/${accessToken}`, {
+                                                axios.delete(`http://localhost:3001/users/${user._id}/${accessToken}`, {
                                                 }).then((response) => {
                                                     console.log(response);
 
@@ -91,7 +89,7 @@ const Users = () => {
                                                 confirmButtonText: 'Save',
                                             }).then((result) => {
                                                 if (result.isConfirmed) {
-                                                    axios.put(`http://localhost:3001/api/auth/users/user/${user._id}/${accessToken}`, {
+                                                    axios.put(`http://localhost:3001/users/user/${user._id}/${accessToken}`, {
                                                     }).then((response) => {
 
                                                         if (response.data.Message === 'susces') {
@@ -122,7 +120,7 @@ const Users = () => {
                                                 confirmButtonText: 'Save',
                                             }).then((result) => {
                                                 if (result.isConfirmed) {
-                                                    axios.put(`http://localhost:3001/api/auth/users/admin/${user._id}/${accessToken}`, {
+                                                    axios.put(`http://localhost:3001/users/admin/${user._id}/${accessToken}`, {
                                                     }).then((response) => {
                                                         if (response.data.Message === 'susces') {
                                                             console.log(response);

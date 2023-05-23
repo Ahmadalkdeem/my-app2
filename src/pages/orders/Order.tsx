@@ -11,14 +11,12 @@ const Order = () => {
     const { users4 } = useAppSelector((s) => s.orders);
     const { accessToken } = useAppSelector((s) => s.user);
     console.log(users4.length);
+    // console.log(users4);
 
     const navigate = useNavigate();
     function getdata() {
-        console.log(users4.length);
-        axios.get(`http://localhost:3001/carts/getorders/${accessToken}/${users4.length}`, {
+        axios.get(`http://localhost:3001/carts/getorders/${accessToken}/0`, {
         }).then((response) => {
-            console.log(response);
-
             Dispatch(addItem2(response.data))
         }).catch((err: any) => {
             console.log(err);
@@ -27,6 +25,7 @@ const Order = () => {
     }
     useEffect(() => {
         window.scrollTo(0, 0)
+        // getdata()
         if (users4.length < 1) { getdata() }
     }, []);
 
@@ -48,7 +47,7 @@ const Order = () => {
                             {users4.map((number: any, i: number) =>
                                 <tr onClick={() => {
                                     navigate(`/orders/detales/${number._id}`)
-                                }} key={i}>
+                                }} className={number.status === true ? css.tr : ''} key={i}>
                                     <th scope='row'>{i + 1}</th>
                                     <td> {number._id}</td>
                                     <td> {number.fullname}</td>

@@ -14,7 +14,7 @@ function Shose() {
     const getData = async () => {
         if (end === true) {
             setend(false)
-            axios.get(`http://localhost:3001/uplode/shoesproduct/${x}`, {
+            axios.get(`http://localhost:3001/cards/shoesproduct/${x}`, {
             }).then((response) => {
                 setend(true)
 
@@ -50,7 +50,7 @@ function Shose() {
                 <meta name="keywords" content="נעליים, סניקרס, עקב, ספורט, אופנה, חנות, אינטרנט, קניות" />
             </Helmet>
             {loading3 && <Spiner />}
-            {users3.length > 0 && <Cardlist h1='נעליים גבריים' users={users3} />}
+            {users3.length > 0 && <Cardlist h1='נעליים גבריים' users={users3} categories='shoesproduct' />}
             {error3 && <div>{error3}</div>}
         </>
     )
