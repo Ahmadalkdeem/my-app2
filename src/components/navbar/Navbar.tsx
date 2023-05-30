@@ -53,7 +53,7 @@ function OffcanvasExample() {
                             <Nav className="d-flex w-100 justify-content-between">
                                 <div>
 
-                                    <NavLink onClick={() => { setshow(false) }} className={css.Mylink} to="/home">בית</NavLink>
+                                    <NavLink onClick={() => { setshow(false) }} className={css.Mylink} to="/">בית</NavLink>
                                     <NavLink onClick={() => { setshow(false) }} className={css.Mylink} to="/about">אודות</NavLink>
                                     <NavLink onClick={() => { setshow(false) }} className={css.Mylink} to="/connection/login">התחברות</NavLink>
                                     {roles[0] === 'admin' && <><NavLink onClick={() => { setshow(false) }} className={css.Mylink} to="/addproduct">הוספה מוצר</NavLink>

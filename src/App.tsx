@@ -9,9 +9,9 @@ import Cardlist from './pages/Homepage/Cardlist';
 import Page from './pages/pagecard/Page';
 import Editpage from './pages/Editpage/Editpage ';
 import Bootstrapform from './pages/logandsinin/Bootstrapform';
-import Shose from './pages/shoselist/Shose';
-import Pants from './pages/pantslist/Pants';
-import Shirt from './pages/Shirtslist/shirts';
+import Shose from './pages/Listarray/Shose';
+import Pants from './pages/Listarray/Pants';
+import Shirt from './pages/Listarray/shirts';
 import { useAppDispatch, useAppSelector } from './app/hooks';
 import { fetchUsers } from './features/cards/cardshirts';
 import { fetchUsers2 } from './features/cards/cardPants';
@@ -24,7 +24,6 @@ import Orderdetales from './pages/orderdetales/Orderdetales';
 import Login from './pages/logandsinin/Login';
 import Signup from './pages/logandsinin/Signup';
 import { updatedetalise } from './features/user/user';
-import OffcanvasExample from './components/navbar/Navbar';
 import Buttom from './components/buttom/Buttom';
 import Notfoud from './components/404/Notfoud';
 import { Data } from './pages/datadetsles/Data';
@@ -32,6 +31,11 @@ import Users from './pages/users/Users';
 import ForgotPassword from './pages/logandsinin/ForgotPassword';
 import { AddArr } from './features/cards/mycart';
 import Restartpassword from './pages/logandsinin/Restartpassword';
+import ChatComponent from './components/chatgbt/Chatgbt';
+import Changepasword2 from './pages/changepasword/Changepasword';
+import Brandss from './pages/brands/Brands';
+import { Link } from 'react-router-dom';
+import { brands } from './arrays/list';
 function App() {
   let { email, roles, username, accessToken } = useAppSelector(e => e.user)
   let Dispatch = useAppDispatch()
@@ -63,8 +67,15 @@ function App() {
 
   return (
     <>
-      <MyNavbar2 />
+
+      {/* <MyNavbar2 /> */}
       <MyNavbar />
+      {brands.map((e, i: number) =>
+        <div key={i}><Link to={`/Brands/${e.label}`}>{e.value}</Link></div>
+
+
+      )}
+      {/* <ChatComponent />
       <button onClick={() => {
         axios.get(`http://localhost:3001/email/ahmad`, {
         }).then((response) => {
@@ -73,26 +84,23 @@ function App() {
           console.log(e);
 
         })
-      }}>ahmad</button>
+      }}>ahmad</button> */}
       <Routes >
         <Route path='/' element={<Cardlist />} />
-        <Route path='/home' element={<Cardlist />} />
         <Route path='/connection' element={<Bootstrapform />} >
           <Route path='login' element={<Login />} />
           <Route path='signup' element={<Signup />} />
           <Route path='ForgotPassword' element={<ForgotPassword />} />
           <Route path='Restartpassword' element={<Restartpassword />} />
         </Route>
+        <Route path='/pasword/token/:token' element={<Changepasword2 />} />
+        <Route path='/Brands/:Brands' element={<Brandss />} />
         <Route path='/about' element={<About />} />
         <Route path='/Mycard' element={<Mycart />} />
         <Route path='/shoes' element={<Shose />} />
         <Route path='/Shirts' element={<Shirt />} />
-        <Route path='/pants/search' element={<Pants />} />
-        <Route path='/shoes/search' element={<Shose />} />
-        <Route path='/Shirts/search' element={<Shirt />} />
         <Route path='/pants' element={<Pants />} />
         <Route path='/:fcategory/:id' element={<Page />} />
-        {/* scategory */}
         {roles[0] === 'admin' && <>
           <Route path='/addproduct' element={<Editpage />} />
           <Route path='/data' element={<Data />} />

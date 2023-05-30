@@ -79,7 +79,7 @@ const Mycart = () => {
                     setAddress2('')
                     setCity('')
                     setZip('')
-                    Dispatch(deleteArr('aaa'))
+                    Dispatch(deleteArr())
                     Swal.fire({
                         icon: 'success',
                         title: ' ההזמנה בוצעה בהצלחה',

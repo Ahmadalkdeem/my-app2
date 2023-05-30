@@ -14,6 +14,8 @@ const Orderdetales = () => {
     const { users4 } = useAppSelector((s) => s.orders)
     const { accessToken } = useAppSelector((s) => s.user)
     const [users, setusers] = useState<any>()
+    console.log(users);
+
     const [index, setindex] = useState<number>()
 
     function getorder() {
@@ -94,7 +96,7 @@ const Orderdetales = () => {
                                             <MDBTableBody>
                                                 <tr >
                                                     <td> {number.name}</td>
-                                                    <td> {number.category2}</td>
+                                                    <td> {number.category}</td>
                                                 </tr>
 
                                             </MDBTableBody>

@@ -44,4 +44,4 @@ function Acording() {
     )
 }
 
-export default Acording
+// export default Acording

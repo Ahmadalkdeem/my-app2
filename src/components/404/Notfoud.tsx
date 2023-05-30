@@ -3,8 +3,6 @@ import css from './a404.module.scss'
 import { NavLink } from "react-router-dom";
 import { BiSad } from 'react-icons/bi';
 function Notfoud() {
-    // const navv = useNavigate();
-
     return (
         <div className={css.mybody}>
             <p className={css.myp}>

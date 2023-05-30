@@ -8,14 +8,14 @@ import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 import Carousel from 'react-bootstrap/Carousel';
 import { Fade } from "react-awesome-reveal";
 import { delteItem } from '../../features/cards/cardshirts';
-import { delteItem2 } from '../../features/cards/cardPants';
-import { delteItem3 } from '../../features/cards/cardshose';
+import { delteItem as delteItem2 } from '../../features/cards/cardPants';
+import { delteItem as delteItem3 } from '../../features/cards/cardshose';
 import { useAppDispatch } from '../../app/hooks';
 import axios from 'axios';
 import { useAppSelector } from '../../app/hooks';
 
 function MyCard(props: Cardtype) {
-    let { id, email, roles, username, accessToken } = useAppSelector(e => e.user)
+    let { email, roles, username, accessToken } = useAppSelector(e => e.user)
 
     const Dispatch = useAppDispatch()
     const getData = async () => {

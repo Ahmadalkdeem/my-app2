@@ -7,7 +7,7 @@ import css from './css.module.scss'
 import Card from './../../components/card/Card'
 import { Container, Row, Col } from 'react-bootstrap';
 import { limet, sort, stylelableOption } from '../../arrays/list'
-//name
+import { eachDayOfInterval, format, isValid, isBefore, isAfter } from 'date-fns';
 import { addarr } from '../../features/user/Performence';
 export const Data = () => {
     let Dispatch = useAppDispatch()
@@ -20,10 +20,9 @@ export const Data = () => {
     const [startDate, setStartDate] = useState<any>(`${thirtyDaysAgo.getFullYear().toString()}-${(thirtyDaysAgo.getMonth() + 1).toString().padStart(2, '0')}-${thirtyDaysAgo.getDate().toString().padStart(2, '0')}`);
     const [endDate, setEndDate] = useState<any>(`${today.getFullYear().toString()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`);
     console.log(startDate, endDate);
+    const dates = eachDayOfInterval({ start: new Date(startDate), end: new Date(endDate) });
     const [sort1, setsort1] = useState('-1');
     const [limet1, setlimet1] = useState('10');
-
-
     useEffect(() => {
         window.scrollTo(0, 0)
         if (data1.length < 1) {
@@ -35,7 +34,18 @@ export const Data = () => {
     function getdata() {
         axios.get(`http://localhost:3001/Performence/getorders/detales/${accessToken}/${startDate}/${endDate}`, {
         }).then((response) => {
-            Dispatch(addarr({ name: 'data1', arr: response.data }))
+            let arr: any = []
+            dates.map((date) => {
+                console.log(format(date, 'dd-MM-yyyy'));
+
+                let item = response.data.find((e: any) => e._id.date === format(date, 'dd-MM-yyyy'))
+                if (item === undefined) {
+                    arr.push({ _id: { date: format(date, 'dd-MM-yyyy') }, totalPrice: 0, count: 0, avg: 0 })
+                } else {
+                    arr.push(item)
+                }
+            })
+            Dispatch(addarr({ name: 'data1', arr: arr }))
         }).catch((err: any) => {
             console.log(err);
             console.log(err.response.data.error);
@@ -94,31 +104,31 @@ export const Data = () => {
                 </LineChart>
             </div>
             <div>
-                {/* <input value={totle} onChange={(e: any) => {
-                    if (e.target.value > 0 && 1000 > e.target.value) {
-                        settotle(e.target.value)
-                    }
-                }} min='1' max='1000' type="number" /> */}
                 <form >
                     <label>
                         Start Date:
-                        <input type="date" value={startDate} onChange={(e) => setStartDate(e.target.value)} />
+                        <input value={startDate} type="date" onChange={(e) => {
+                            let date = new Date(e.target.value)
+                            if (isValid(date) && isBefore(date, new Date(endDate))) {
+                                setStartDate(e.target.value)
+                            }
+                        }} />
                     </label>
                     <label>
                         End Date:
-                        <input type="date" value={endDate} onChange={(e) => setEndDate(e.target.value)} />
+                        <input type="date" value={endDate} onChange={(e) => {
+                            let date = new Date(e.target.value)
+                            if (isValid(date) && !isBefore(date, new Date(startDate))) {
+                                setEndDate(e.target.value)
+                            }
+                        }} />
                     </label>
                     <input type="button" value="click" onClick={getdata} />
                 </form>
-                {/* <div>totle2:{totle2.total}</div> */}
-                {/* <div>
-                    <h1>Today's Date: {today.toDateString()}</h1>
-                    <h1>Date 30 Days Ago: {thirtyDaysAgo.toDateString()}</h1>
-                </div> */}
+
                 <div className='d-flex flex-wrap'>
                     <Select
                         id='SizeOptions2'
-                        // closeMenuOnSelect={false}
                         options={sort}
                         onChange={(e: any) => {
                             console.log(e.value);
@@ -138,7 +148,6 @@ export const Data = () => {
                     />
                     <Select
                         id='SizeOptions2'
-                        // closeMenuOnSelect={false}
                         options={limet}
                         onChange={(e: any) => {
                             console.log(e.value);

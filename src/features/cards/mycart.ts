@@ -1,11 +1,9 @@
-// import { initialUserState, User } from "./user";
 import { createSlice } from "@reduxjs/toolkit";
+import { cart } from "../../@types/Mytypes";
 
-const initialState: any = {
+const initialState: cart = {
     cart: []
 };
-
-//quantity  
 
 const cardpants = createSlice({
     name: "cart",
@@ -46,7 +44,7 @@ const cardpants = createSlice({
             localStorage.setItem('cart', JSON.stringify(state.cart));
 
         },
-        deleteArr: (state, action) => {
+        deleteArr: (state) => {
             state.cart = []
             localStorage.setItem('cart', JSON.stringify(state.cart));
         },

@@ -25,7 +25,6 @@ const Order = () => {
     }
     useEffect(() => {
         window.scrollTo(0, 0)
-        // getdata()
         if (users4.length < 1) { getdata() }
     }, []);
 

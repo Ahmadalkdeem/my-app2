@@ -10,7 +10,7 @@ import { TfiShoppingCartFull } from "react-icons/tfi";
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function MyNavbar() {
-    let { id, email, roles, username, accessToken } = useAppSelector(e => e.user)
+    let { email, roles, username, accessToken } = useAppSelector(e => e.user)
     const [count, setCount] = useState(false);
     const [color, setcolor] = useState(false);
     const [display, setdisplay] = useState(false);
@@ -50,10 +50,11 @@ function MyNavbar() {
                                 <div>
                                     <NavLink onClick={closenavbar} onMouseEnter={() => {
                                         console.log('aaa');
-                                    }} onMouseOut={() => { }} className={css.Mylink} to="/home">בית</NavLink>
+                                    }} onMouseOut={() => { }} className={css.Mylink} to="/">בית</NavLink>
                                     <NavLink onClick={closenavbar} className={css.Mylink} to="/about">אודות</NavLink>
                                     <NavLink onClick={closenavbar} className={css.Mylink} to="/connection/login">התחברות</NavLink>
-                                    {roles[0] === 'admin' && <><NavLink onClick={closenavbar} className={css.Mylink} to="/addproduct">הוספה מוצר</NavLink>
+                                    {roles[0] === 'admin' && <>
+                                        <NavLink onClick={closenavbar} className={css.Mylink} to="/addproduct">הוספה מוצר</NavLink>
                                         <NavLink onClick={closenavbar} className={css.Mylink} to="/data">ביצועים</NavLink>
                                         <NavLink onClick={closenavbar} className={css.Mylink} to="/orders">הזמנות</NavLink>
                                         <NavLink onClick={closenavbar} className={css.Mylink} to="/users">משתמשים</NavLink>

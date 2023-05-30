@@ -1,57 +1,75 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
-const initialState: any = {
-    loading3: false,
-    error3: "",
-    users3: [],
-    findusers3: [],
+import { sliCecatgre, Cardtype } from "../../@types/Mytypes";
+const initialState: sliCecatgre = {
+    loading: false,
+    error: "",
+    users: [],
+    findusers: [],
+    search: false,
+    value: { size: [], colors: [], brands: [], stopfindusers: false, stopusers: false },
 };
 
 export const fetchUsers3 = createAsyncThunk<any[]>("user3/fetchUsers3", (length1: any) =>
-    fetch(`http://localhost:3001/cards/shoesproduct/0`).then((res) => res.json())
+    fetch(`http://localhost:3001/cards/filtering/shoesproduct/0`).then((res) => res.json())
 );
 
-// fetch user from api
 const cardpants = createSlice({
     name: "user3",
     initialState,
     reducers: {
-        addItem3: (state, action) => {
-            let arr: any = []
-            action.payload.forEach((element: any) => {
-                const index = state.users3.findIndex((c: any) => c._id === element._id);
-                if (index === -1) {
-                    arr.push(element)
-                }
-            });
-            state.users3 = [...state.users3, ...arr];
-        }, delteItem3: (state, action) => {
-            const index = state.users3.findIndex((c: any) => c._id === action.payload);
-            state.users3.splice(index, 1);
-        }, addfindusers3: (state, action) => {
-            state.findusers3 = action.payload
+        addItem: (state, action) => {
+            let arr: Cardtype[] = []
+            if (state.search === false) {
+                action.payload.forEach((element: Cardtype) => {
+                    const index = state.users.findIndex((c: Cardtype) => c._id === element._id);
+                    if (index === -1) {
+                        arr.push(element)
+                    }
+                });
+                state.users = [...state.users, ...arr]
+            }
+            else {
+                action.payload.forEach((element: Cardtype) => {
+                    const index = state.findusers.findIndex((c: Cardtype) => c._id === element._id);
+                    if (index === -1) {
+                        arr.push(element)
+                    }
+                });
+                state.findusers = [...state.findusers, ...arr]
+            }
+        }, delteItem: (state, action) => {
+            const index = state.users.findIndex((c: Cardtype) => c._id === action.payload);
+            state.users.splice(index, 1);
+        }, addfindusers: (state, action) => {
+            state.findusers = action.payload
+            state.search = true
+            state.value.stopfindusers = false
+        }, search: (state) => {
+            state.search = false
+        }, onchange: (state, action) => {
+            state.value = action.payload
         }
     },
     extraReducers: (builder) => {
         builder
             .addCase(fetchUsers3.pending, (state, action) => {
-                state.loading3 = true
-                state.error3 = ''
+                state.loading = true
+                state.error = ''
             })
             .addCase(fetchUsers3.fulfilled, (state, action) => {
-                state.loading3 = false
-                state.users3 = [...action.payload]
+                state.loading = false
+                state.users = [...action.payload]
 
             })
             .addCase(fetchUsers3.rejected, (state, action) => {
-                state.loading3 = false
-                state.users3 = []
-                state.error3 = action.error.message ?? 'Something went wrong'
+                state.loading = false
+                state.users = []
+                state.error = action.error.message ?? 'Something went wrong'
             })
     },
 });
 // also exported fetchUsers at the top
-export const { addItem3, delteItem3, addfindusers3 } = cardpants.actions;
+export const { addItem, delteItem, addfindusers, search, onchange } = cardpants.actions;
 
 //export the reducer
 export default cardpants.reducer

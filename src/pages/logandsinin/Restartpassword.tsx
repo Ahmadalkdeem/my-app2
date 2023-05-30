@@ -86,7 +86,7 @@ const Restartpassword = () => {
                 }} className={css.input} type="text" id='email' />
                 <p className={css.P}>{errusername === '' ? '' : errusername}</p>
 
-                <label className={css.lable} htmlFor="pasword">הקוד הסודי:</label>
+                {/* <label className={css.lable} htmlFor="pasword">הקוד הסודי:</label>
                 <input onChange={(e) => {
                     setnumber(`${e.target.value}`)
                 }} className={css.input} type="number" id='pasword' />
@@ -95,9 +95,9 @@ const Restartpassword = () => {
                 <input value={password} onChange={(e) => {
                     setpassword(e.target.value)
                 }} className={css.input} type="password" id='pasword1' />
-                <p className={css.P}>{errpassword === '' ? '' : errpassword}</p>
+                <p className={css.P}>{errpassword === '' ? '' : errpassword}</p> */}
 
-                <input className={css.btn} type="button" value="כניסה" onClick={Restartpassword2} />
+                <input className={css.btn} type="button" value="כניסה" onClick={Restartpassword} />
             </form></>
     )
 }

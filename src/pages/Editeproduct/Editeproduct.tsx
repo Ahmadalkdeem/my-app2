@@ -13,9 +13,11 @@ import { SizeOptions, brands, categorys2, categorys3, categorys4, stylelableOpti
 function Editeproduct() {
     let Navigate = useNavigate()
     const getData = async (e: { category: string, id: string }) => {
-        const { data } = await axios.get(`http://localhost:3001/uplode/findOne/${e.category}/${e.id}`);
-        console.log(data);
-        update(data)
+        await axios.get(`http://localhost:3001/cards/findOne/${e.category}/${e.id}`).then((response) => {
+            if (response.data !== null && response.data !== undefined) update(response.data)
+            else Navigate('/')
+        });
+
 
     };
     useEffect(() => {
@@ -24,7 +26,6 @@ function Editeproduct() {
     const [opsions, setopsions] = useState<any>([])
     const [photo7, setphoto7] = useState<any>([])
     const [photodelte, setphotodelte] = useState<any>([])
-
     const [photos, setphotos] = useState<any>([])
     const [description, setdescription] = useState('')
     const [titel, settitel] = useState('')
@@ -37,10 +38,10 @@ function Editeproduct() {
     const [fcolourOptions, setfcolourOptions] = useState<optionstype[]>([])
     const [fSizeOptions2, setSizeOptions2] = useState<any>([])
     const { id, category } = useParams()
-    const { loading3, users3, error3 } = useAppSelector((s) => s.cardshose);
+    const users3 = useAppSelector((s) => s.cardshose.users);
+    const users2 = useAppSelector((s) => s.cardPants.users);
+    const users = useAppSelector((s) => s.cardshirts.users);
     const { accessToken } = useAppSelector((s) => s.user);
-    const { loading2, users2, error2 } = useAppSelector((s) => s.cardPants);
-    const { loading, users, error } = useAppSelector((s) => s.cardshirts);
     const update = (x: Cardtype) => {
         setphotos(x.src)
         setdescription(x.description)
@@ -54,31 +55,13 @@ function Editeproduct() {
         setSizeOptions2(x.stock)
     }
     const item = () => {
-        if (category === 'shoes') {
-            let x = users3.find((e: any) => e._id === id)
-            if (x === undefined) {
-                getData({ category: 'shoes', id: `${id}` })
-            } else {
-                update(x)
-            }
-        }
-        if (category === 'Shirts') {
-            let x = users.find((e: any) => e._id === id)
-            if (x === undefined) {
-                getData({ category: 'Shirts', id: `${id}` })
-
-            } else {
-                update(x)
-            }
-        }
-        if (category === 'pants') {
-            let x = users2.find((e: any) => e._id === id)
-            if (x === undefined) {
-                getData({ category: 'pants', id: `${id}` })
-
-            } else {
-                update(x)
-            }
+        let x = [...users3, ...users, ...users2].find((e: any) => e._id === id)
+        if (x !== undefined) {
+            update(x)
+        } else {
+            if (category === 'shoes') return getData({ category: 'shoes', id: `${id}` })
+            if (category === 'Shirts') return getData({ category: 'Shirts', id: `${id}` })
+            if (category === 'pants') return getData({ category: 'pants', id: `${id}` })
         }
     }
     useEffect(() => {
@@ -155,7 +138,7 @@ function Editeproduct() {
                     timer: 1500
                 })
                 setTimeout(() => {
-                    Navigate('/')
+                    Navigate(-1)
                 }, 1500);
             }
         }).catch((err: any) => {
@@ -187,7 +170,7 @@ function Editeproduct() {
     }, [Permissivecategory])
     return (
         <div className={css.myfdiv}>
-            <h3>הוספת מוצר:</h3>
+            <h3>עריכת המוצר:</h3>
             <div className="label-input d-flex flex-column">
                 <Select
                     options={categorys}

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { user } from "../../@types/Mytypes";
 
-const initialState: any = {
+const initialState: user = {
     accessToken: '',
     email: '',
     roles: ['user'],

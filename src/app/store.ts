@@ -4,6 +4,7 @@ import productSlice2 from '../features/cards/cardPants'
 import productSlice3 from '../features/cards/cardshose'
 import orders from '../features/cards/orderdetales'
 import cart from '../features/cards/mycart'
+import arrays from '../features/cards/arrays'
 import user from '../features/user/user'
 import users from '../features/cards/users';
 import Performence from '../features/user/Performence';
@@ -14,6 +15,7 @@ export const store = configureStore({
     cardPants: productSlice2,
     cardshose: productSlice3,
     orders: orders,
+    arrays: arrays,
     mycart: cart,
     user: user,
     users: users,

@@ -4,8 +4,8 @@ import css from './css.module.scss'
 const Spiner = () => {
     return (
         <div className={css.div}>
-
-            <Oval
+            <div className={css.spinner}></div>
+            {/* <Oval
                 height={80}
                 width={80}
                 color="#4fa94d"
@@ -17,7 +17,7 @@ const Spiner = () => {
                 strokeWidth={2}
                 strokeWidthSecondary={2}
 
-            />
+            /> */}
         </div>
     )
 }

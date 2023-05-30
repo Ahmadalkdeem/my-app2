@@ -8,6 +8,7 @@ import { AiOutlineUpload } from "react-icons/ai";
 import { optionstype } from '../../@types/Mytypes';
 import { SizeOptions, brands, SizeOptions2, categorys3, categorys4, stylelableOption, categorys2, categorys, colourOptions, } from '../../arrays/list'
 import { useAppSelector } from '../../app/hooks';
+//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
 import Swal from 'sweetalert2';
 function Editpage() {
     let Navigate = useNavigate()
@@ -95,20 +96,13 @@ function Editpage() {
 
 
                 setTimeout(() => {
-                    Navigate('/')
+                    Navigate(-1)
                 }, 1500);
             }
 
         }).catch((err: any) => {
             console.log(err);
             console.log(err.response.data.error);
-            // const term = err.response.data
-            // const regex = /Only .png, .jpg and .jpeg format allowed!/g
-            // const regex2 = /File too large/g
-            // const isExist = term.match(regex)
-            // const isExist2 = term.match(regex2)
-            // if (isExist) console.log("Image must be one of type jpg...");
-            // if (isExist2) console.log("File too large");
         })
     }
 

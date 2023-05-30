@@ -1,0 +1,83 @@
+.form {
+    margin: 0 0 20px 0;
+}
+
+.input {
+    width: 70%;
+    outline: none;
+    border: 1px solid #ced4da;
+    padding: 0 10px;
+    height: 40px;
+    border-radius: 7px;
+    margin: 5px 0;
+
+}
+
+.lable {
+    width: 70%;
+    margin: 0 0 0 0;
+}
+
+.h5 {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.btn {
+    height: 40px;
+    font-size: 18px;
+    width: 70%;
+    background-color: rgba(255, 255, 0, 0.668);
+    border: none;
+    border-radius: 7px;
+}
+
+.btn:hover {
+    background-color: yellow;
+}
+
+.P {
+    width: 70%;
+    padding: 0 4px;
+    font-size: 12px;
+    color: red;
+    font-weight: 500;
+    margin: 2px 0;
+}
+
+
+@media only screen and (max-width: 600px) {
+    .input {
+        width: 85%;
+    }
+
+    .lable {
+        width: 85%;
+    }
+
+    .btn {
+        width: 85%;
+    }
+
+    .P {
+        width: 85%;
+    }
+}
+
+@media only screen and (max-width: 300px) {
+    .input {
+        width: 95%;
+    }
+
+    .P {
+        width: 95%;
+    }
+
+    .lable {
+        width: 95%;
+    }
+
+    .btn {
+        width: 95%;
+    }
+}

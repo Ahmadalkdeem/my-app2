@@ -1,23 +1,19 @@
 import React, { useEffect } from 'react'
-import MyCard from '../../components/card/Card'
 import css from './css.module.scss'
 import { useNavigate } from "react-router-dom";
-import { Container, Row, Col } from 'react-bootstrap';
 import { useAppSelector } from '../../app/hooks'
 import Myslider from '../../components/slider/Slider';
 import MYCarousel from '../../components/corsla/Carousel';
-import img from './Red Modern New Arrival Shoes Instagram Post.png'
-import img2 from './White Modern T-shirts Giveaway (A4 Document).png'
-import img3 from './Blue Minimalist Fashion Denim Facebook Post.png'
 import { Helmet } from "react-helmet";
-
+import List from '../../components/List/List';
+import { divcomponts } from '../../arrays/list';
 
 function Cardlist() {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
-    const { loading, users, error } = useAppSelector((s) => s.cardshirts);
-    const { loading3, users3, error3 } = useAppSelector((s) => s.cardshose);
+    const { users } = useAppSelector((s) => s.cardshirts);
+    let item = useAppSelector((e) => e.cardshose.users)
     const navigate = useNavigate();
     return (
         <>
@@ -29,54 +25,20 @@ function Cardlist() {
             <MYCarousel />
             <Myslider />
             <h2 className={css.h2}>המוצרים החמים</h2>
-            <Container className={`Container ${css.Container}`} fluid>
-                <Row xs={2} sm={3} lg={4} xxl={5}>
-                    {users.slice(0, 10).map((product: any, index: number) => (
-                        <Col key={index} className="mt-2 p-1">
-                            <MyCard key={index}
-                                {...product} />
-                        </Col>
-                    ))}
-                    {users3.slice(0, 10).map((product: any, index: number) => (
-                        <Col key={index} className="mt-2 p-1">
-                            <MyCard key={index}
-                                {...product} />
-                        </Col>
-                    ))}
-                </Row>
-            </Container>
-
+            <List arr={[...users.slice(0, 10), ...item.slice(0, 10)]} />
             <div className={css.Div}>
-                <div onClick={() => {
-                    navigate(`/Shirts`);
-                }} className={`${css.divlink}`}>
-                    <img className={css.Img} src={img2} alt="" />
+                {divcomponts.map((e, index: number) =>
+                    <div key={index} onClick={() => {
+                        navigate(e.navigate);
+                    }} className={`${css.divlink}`}>
+                        <img className={css.Img} src={`${e.src}`} alt="" />
 
-                    <div className='d-flex justify-content-center'>
+                        <div className='d-flex justify-content-center'>
 
-                        <button className={css.btn}>חולצות</button>
+                            <button className={css.btn}>{e.btn}</button>
+                        </div>
                     </div>
-                </div>
-                <div onClick={() => {
-                    navigate(`/pants`);
-                }} className={`${css.divlink}`}>
-                    <img className={css.Img} src={img3} alt="" />
-                    <div className='d-flex justify-content-center'>
-
-                        <button className={css.btn}>מכנסיים</button>
-                    </div>
-
-                </div>
-                <div onClick={() => {
-                    navigate(`/shoes`);
-                }} className={`${css.divlink}`}>
-                    <img className={css.Img} src={img} alt="" />
-                    <div className='d-flex justify-content-center'>
-
-                        <button className={css.btn}>נעליים</button>
-                    </div>
-
-                </div>
+                )}
             </div>
         </>
     )
