@@ -8,15 +8,15 @@ import { addItems, delteItem, updateItem } from '../../features/cards/users';
 import { FiDelete, FiChevronsDown } from "react-icons/fi";
 import { GiUpgrade } from "react-icons/gi";
 import Swal from 'sweetalert2';
-import User from '../../components/user/User';
+import User from '../../components/item/User';
 const Users = () => {
 
     let Dispatch = useAppDispatch()
-    const { users } = useAppSelector((s) => s.users);
+    const { arr } = useAppSelector((s) => s.users);
     const { accessToken } = useAppSelector((s) => s.user);
 
     function getdata() {
-        axios.get(`http://localhost:3001/users/${accessToken}/${users.length}`, {
+        axios.get(`http://localhost:3001/users/${accessToken}/${arr.length}`, {
         }).then((response) => {
             Dispatch(addItems(response.data))
             console.log(response.data);
@@ -33,7 +33,7 @@ const Users = () => {
     return (
         <>
             <User />
-            {users.length === 0 ? <Spiner /> :
+            {arr.length === 0 ? <Spiner /> :
                 <div className={css.Div}>
 
                     <MDBTable className={css.table}>
@@ -47,7 +47,7 @@ const Users = () => {
                             </tr>
                         </MDBTableHead>
                         <MDBTableBody>
-                            {users.map((user: any, i: number) =>
+                            {arr.map((user, i: number) =>
                                 <tr key={i}>
                                     <th scope='row'>{i + 1}</th>
                                     <td className='d-flex'><FiDelete onClick={() => {

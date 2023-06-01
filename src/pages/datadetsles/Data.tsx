@@ -9,16 +9,23 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { limet, sort, stylelableOption } from '../../arrays/list'
 import { eachDayOfInterval, format, isValid, isBefore, isAfter } from 'date-fns';
 import { addarr } from '../../features/user/Performence';
+import Spiner from '../../components/Spiner/Spiner';
 export const Data = () => {
+    const [Loading, setloding] = useState(false)
+    const [Loading2, setloding2] = useState(false)
     let Dispatch = useAppDispatch()
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
     const today = new Date();
     const { accessToken } = useAppSelector((s) => s.user);
     const { data1, data2, data3 } = useAppSelector((s) => s.Performence);
+    console.log(data1);
+    console.log(data2);
+    console.log(data3);
+
     const [mylist, setmylist] = useState('');
-    const [startDate, setStartDate] = useState<any>(`${thirtyDaysAgo.getFullYear().toString()}-${(thirtyDaysAgo.getMonth() + 1).toString().padStart(2, '0')}-${thirtyDaysAgo.getDate().toString().padStart(2, '0')}`);
-    const [endDate, setEndDate] = useState<any>(`${today.getFullYear().toString()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`);
+    const [startDate, setStartDate] = useState<string>(`${thirtyDaysAgo.getFullYear().toString()}-${(thirtyDaysAgo.getMonth() + 1).toString().padStart(2, '0')}-${thirtyDaysAgo.getDate().toString().padStart(2, '0')}`);
+    const [endDate, setEndDate] = useState<string>(`${today.getFullYear().toString()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`);
     console.log(startDate, endDate);
     const dates = eachDayOfInterval({ start: new Date(startDate), end: new Date(endDate) });
     const [sort1, setsort1] = useState('-1');
@@ -26,6 +33,8 @@ export const Data = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
         if (data1.length < 1) {
+            setloding(true)
+            setloding2(true)
             getdata()
             topproduct()
         }
@@ -34,9 +43,10 @@ export const Data = () => {
     function getdata() {
         axios.get(`http://localhost:3001/Performence/getorders/detales/${accessToken}/${startDate}/${endDate}`, {
         }).then((response) => {
+            setloding(false)
             let arr: any = []
             dates.map((date) => {
-                console.log(format(date, 'dd-MM-yyyy'));
+
 
                 let item = response.data.find((e: any) => e._id.date === format(date, 'dd-MM-yyyy'))
                 if (item === undefined) {
@@ -47,62 +57,71 @@ export const Data = () => {
             })
             Dispatch(addarr({ name: 'data1', arr: arr }))
         }).catch((err: any) => {
+            setloding(false)
+
             console.log(err);
             console.log(err.response.data.error);
         })
 
         axios.get(`http://localhost:3001/Performence/getorders/count/${accessToken}/${startDate}/${endDate}`, {
         }).then((response) => {
+            setloding(false)
             if (response.data.result[0] !== undefined) {
                 Dispatch(addarr({ name: 'data2', arr: response.data.result[0] }))
             }
 
         }).catch((err: any) => {
+            setloding(false)
+
             console.log(err);
         })
     }
     function topproduct() {
         axios.get(`http://localhost:3001/Performence/detales/${accessToken}/${limet1}/${sort1}`, {
         }).then((response) => {
+            setloding2(false)
             Dispatch(addarr({ name: 'data3', arr: response.data }))
         }).catch((err: any) => {
+            setloding2(false)
             console.log(err);
         })
     }
 
     return (
-        <div className='d-flex justify-content-center align-items-center flex-wrap overflow-auto'>
-            <div className='m-3'>
-                <h5 className={css.h1}> מחיר הזמנות : {data2.total}</h5>
-                <LineChart width={400} height={250} data={data1}>
-                    <XAxis dataKey="_id.date" />
-                    <YAxis />
-                    <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-                    <Line type="monotone" dataKey="totalPrice" stroke="#000" />
-                    <Tooltip />
-                </LineChart>
-            </div>
-            <div>
-                <h5 className={css.h1}>ממוצע מחיר ההזמנות : {data2.avg}</h5>
+        <>
+            {Loading === true ? <Spiner /> : <div className='d-flex justify-content-center align-items-center flex-wrap overflow-auto'>
+                <div className='m-3'>
+                    <h5 className={css.h1}> מחיר הזמנות : {data2.total}</h5>
+                    <LineChart width={400} height={250} data={data1}>
+                        <XAxis dataKey="_id.date" />
+                        <YAxis />
+                        <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+                        <Line type="monotone" dataKey="totalPrice" stroke="#000" />
+                        <Tooltip />
+                    </LineChart>
+                </div>
+                <div>
+                    <h5 className={css.h1}>ממוצע מחיר ההזמנות : {data2.avg}</h5>
 
-                <LineChart width={400} height={250} data={data1}>
-                    <XAxis dataKey="_id.date" />
-                    <YAxis />
-                    <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-                    <Line type="monotone" dataKey="avg" stroke="#000" />
-                    <Tooltip />
-                </LineChart>
-            </div>
-            <div>
-                <h5 className={css.h1}>מספר ההזמנות : {data2.count}</h5>
-                <LineChart width={400} height={250} data={data1}>
-                    <XAxis dataKey="_id.date" />
-                    <YAxis />
-                    <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
-                    <Line type="monotone" dataKey="count" stroke="#000" />
-                    <Tooltip />
-                </LineChart>
-            </div>
+                    <LineChart width={400} height={250} data={data1}>
+                        <XAxis dataKey="_id.date" />
+                        <YAxis />
+                        <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+                        <Line type="monotone" dataKey="avg" stroke="#000" />
+                        <Tooltip />
+                    </LineChart>
+                </div>
+                <div>
+                    <h5 className={css.h1}>מספר ההזמנות : {data2.count}</h5>
+                    <LineChart width={400} height={250} data={data1}>
+                        <XAxis dataKey="_id.date" />
+                        <YAxis />
+                        <CartesianGrid stroke="#eee" strokeDasharray="5 5" />
+                        <Line type="monotone" dataKey="count" stroke="#000" />
+                        <Tooltip />
+                    </LineChart>
+                </div>
+            </div>}
             <div>
                 <form >
                     <label>
@@ -123,66 +142,73 @@ export const Data = () => {
                             }
                         }} />
                     </label>
-                    <input type="button" value="click" onClick={getdata} />
+                    <input type="button" value="click" onClick={() => {
+                        getdata()
+                        setloding(true)
+                    }} />
                 </form>
-
-                <div className='d-flex flex-wrap'>
-                    <Select
-                        id='SizeOptions2'
-                        options={sort}
-                        onChange={(e: any) => {
-                            console.log(e.value);
-
-                            setsort1(e.value)
-                        }}
-                        styles={stylelableOption}
-                        onMenuOpen={() => {
-                            setmylist('SizeOptions2')
-                        }}
-
-                        onMenuClose={() => {
-                            setmylist('')
-                        }}
-                        className={mylist === 'SizeOptions2' ? `${css.selest}` : `${css.selest2}`}
-                        placeholder='מותגים'
-                    />
-                    <Select
-                        id='SizeOptions2'
-                        options={limet}
-                        onChange={(e: any) => {
-                            console.log(e.value);
-
-                            setlimet1(e.value)
-                        }}
-                        styles={stylelableOption}
-                        onMenuOpen={() => {
-                            setmylist('SizeOptions')
-                        }}
-
-                        onMenuClose={() => {
-                            setmylist('')
-                        }}
-                        className={mylist === 'SizeOptions' ? `${css.selest}` : `${css.selest2}`}
-                        placeholder='מותגים'
-                    />
-                    <input onClick={topproduct} className='btn btn-primary' type="button" value="click" />
-                </div>
-                <Container fluid>
-                    <Row xs={2} sm={3} lg={4} xxl={5}>
-
-                        {data3.map((e: any, index: number) =>
-                            <Col key={index} className="mt-2 p-1">
-                                {e.shoes_product !== undefined && <Card {...e.shoes_product} key={index} />}
-                                {e.pants_product !== undefined && <Card {...e.pants_product} key={index} />}
-                                {e.shirts_product !== undefined && <Card {...e.shirts_product} key={index} />}
-                            </Col>
-                        )}
-
-                    </Row>
-                </Container>
-
-
             </div>
-        </div>
+            <div className='d-flex flex-wrap'>
+                <Select
+                    id='SizeOptions2'
+                    options={sort}
+                    onChange={(e: any) => {
+                        console.log(e.value);
+
+                        setsort1(e.value)
+                    }}
+                    styles={stylelableOption}
+                    onMenuOpen={() => {
+                        setmylist('SizeOptions2')
+                    }}
+
+                    onMenuClose={() => {
+                        setmylist('')
+                    }}
+                    className={mylist === 'SizeOptions2' ? `${css.selest}` : `${css.selest2}`}
+                    placeholder='מותגים'
+                />
+                <Select
+                    id='SizeOptions2'
+                    options={limet}
+                    onChange={(e: any) => {
+                        console.log(e.value);
+
+                        setlimet1(e.value)
+                    }}
+                    styles={stylelableOption}
+                    onMenuOpen={() => {
+                        setmylist('SizeOptions')
+                    }}
+
+                    onMenuClose={() => {
+                        setmylist('')
+                    }}
+                    className={mylist === 'SizeOptions' ? `${css.selest}` : `${css.selest2}`}
+                    placeholder='מותגים'
+                />
+                <input onClick={() => {
+                    setloding2(true)
+                    topproduct()
+                }} className='btn btn-primary' type="button" value="click" />
+            </div>
+            {Loading2 ? <Spiner /> :
+                <>
+
+                    <Container fluid>
+                        <Row xs={2} sm={3} lg={4} xxl={5}>
+
+                            {data3.map((e: any, index: number) =>
+                                <Col key={index} className="mt-2 p-1">
+                                    {e.shoes_product !== undefined && <Card {...e.shoes_product} key={index} />}
+                                    {e.pants_product !== undefined && <Card {...e.pants_product} key={index} />}
+                                    {e.shirts_product !== undefined && <Card {...e.shirts_product} key={index} />}
+                                </Col>
+                            )}
+
+                        </Row>
+                    </Container></>}
+
+        </>
     )
 }

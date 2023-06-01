@@ -7,7 +7,7 @@ import { useAppDispatch } from '../../app/hooks';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom';
-
+import Swal from 'sweetalert2';
 const Login = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -37,6 +37,12 @@ const Login = () => {
 
                 Dispatch(updatedetalise(response.data))
                 Navigate('/')
+                Swal.fire({
+                    icon: 'success',
+                    title: 'הכניסה בוצעה בהצלחה',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
                 seterrusername('')
                 setusername('')
                 seterrpassword('')

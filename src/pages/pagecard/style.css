@@ -2,3 +2,8 @@
   position: relative;
   background-color: black !important;
 }
+html {
+  /* margin: 0 auto; */
+  scroll-behavior: auto !important;
+  /* max-width: 1500px; */
+}

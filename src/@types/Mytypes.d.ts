@@ -12,7 +12,7 @@ export interface Cardtype {
 }
 export interface Cardforcart {
     _id: string,
-    src: any,
+    src: string[],
     description: string,
     brand: string,
     name: string,
@@ -25,9 +25,42 @@ export interface Cardforcart {
     color: string,
     sizeselect: string,
 }
+
+export interface prouctorderdetales {
+    sizeselect: string,
+    id: string,
+    color: string,
+    quantity: number,
+}
+export interface prouctorder {
+    _id: string,
+    name: string,
+    category: string,
+    brand: number,
+    src: string[],
+}
+export interface order {
+    _id: string,
+    Email: string,
+    City: string,
+    Address2: string,
+    Address: string,
+    Zip: string,
+    date: string,
+    fullname: string,
+    pricecart: number,
+    status: boolean,
+    arr: prouctorderdetales[],
+    products: [prouctorder[]],
+
+}
 export interface optionstype {
     value: string,
     label: string
+}
+export interface brandstype {
+    value: string,
+    src: string,
 }
 
 export interface sliCecatgre {
@@ -51,6 +84,7 @@ export interface cart {
     cart: Cardforcart[],
 }
 export interface user {
+    id: string,
     accessToken: string,
     email: string,
     roles: [string],

@@ -7,6 +7,9 @@ import { addItem } from '../../features/cards/users';
 import { useAppSelector } from '../../app/hooks';
 const User = () => {
     const { accessToken } = useAppSelector((s) => s.user);
+    const { arr } = useAppSelector((s) => s.users);
+    console.log(arr);
+
     let Dispatch = useAppDispatch()
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -16,7 +19,15 @@ const User = () => {
 
     const login = () => {
         if (valMail.test(username)) {
+            let find = arr.find((e) => e.email === username)
+            if (find !== undefined) {
+                setusername('')
+                seterrusername('')
+                return Dispatch(addItem(find))
+            }
             axios.post(`http://localhost:3001/users/getuser/${accessToken}`, { email: username }).then((response) => {
+                console.log(response);
+
                 setusername('')
                 seterrusername('')
 

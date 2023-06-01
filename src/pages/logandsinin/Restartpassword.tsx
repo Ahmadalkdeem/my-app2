@@ -38,39 +38,7 @@ const Restartpassword = () => {
         }
 
     }
-    const Restartpassword2 = () => {
-        if (valMail.test(username) && valpassword.test(password)) {
-            axios.post('http://localhost:3001/api/auth/Restartpassword2', { email: username, password: password, number: number }).then((response) => {
-                // Dispatch(updatedetalise(response.data))
-                console.log(response);
-                if (response.data.good === 'good') {
-                    console.log(true);
 
-                }
-            }).catch(e => {
-                console.log(e);
-            })
-        }
-        if (!valMail.test(username)) {
-            seterrusername('המייל לא תקין')
-
-        } else {
-            seterrusername('')
-        }
-        if (!valpassword.test(username)) {
-            seterrpassword('הסיסמה לא תקינה')
-
-        } else {
-            seterrpassword('')
-        }
-        if (errnumber === '') {
-            seterrnumber('תקליד את הקוד')
-
-        } else {
-            seterrnumber('')
-        }
-
-    }
     return (
         <>
             <Helmet>
@@ -85,18 +53,6 @@ const Restartpassword = () => {
                     setusername(e.target.value)
                 }} className={css.input} type="text" id='email' />
                 <p className={css.P}>{errusername === '' ? '' : errusername}</p>
-
-                {/* <label className={css.lable} htmlFor="pasword">הקוד הסודי:</label>
-                <input onChange={(e) => {
-                    setnumber(`${e.target.value}`)
-                }} className={css.input} type="number" id='pasword' />
-                <p className={css.P}>{errnumber === '' ? '' : errnumber}</p>
-                <label className={css.lable} htmlFor="pasword1">הסיסמה החדשה:</label>
-                <input value={password} onChange={(e) => {
-                    setpassword(e.target.value)
-                }} className={css.input} type="password" id='pasword1' />
-                <p className={css.P}>{errpassword === '' ? '' : errpassword}</p> */}
-
                 <input className={css.btn} type="button" value="כניסה" onClick={Restartpassword} />
             </form></>
     )

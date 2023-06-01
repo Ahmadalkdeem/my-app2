@@ -70,6 +70,12 @@ function Editpage() {
         }
     }
     const handleSaveStudentClicked2 = async () => {
+        // Swal.fire({
+        //     icon: 'error',
+        //     title: 'Oops...',
+        //     text: 'Something went wrong!',
+        //     footer: '<a href="">Why do I have this issue?</a>'
+        // })
         const formData = new FormData()
         for (let i = 0; i < 8; i++) {
             formData.append('profileImg', photo7[i])

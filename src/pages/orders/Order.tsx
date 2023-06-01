@@ -5,19 +5,19 @@ import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import Spiner from '../../components/Spiner/Spiner'
-import { addItem2 } from '../../features/cards/orderdetales';
+import { addItem, delateitem } from '../../features/cards/orderdetales';
+import { FiDelete, FiChevronsDown } from "react-icons/fi";
+import Swal from 'sweetalert2';
+import FindOrder from '../../components/item/Order';
+import Items from './Item';
 const Order = () => {
     let Dispatch = useAppDispatch()
-    const { users4 } = useAppSelector((s) => s.orders);
+    const { arr, arr2 } = useAppSelector((s) => s.orders);
     const { accessToken } = useAppSelector((s) => s.user);
-    console.log(users4.length);
-    // console.log(users4);
-
     const navigate = useNavigate();
-    function getdata() {
-        axios.get(`http://localhost:3001/carts/getorders/${accessToken}/0`, {
-        }).then((response) => {
-            Dispatch(addItem2(response.data))
+    function getdata() {//{ params: data }
+        axios.get(`http://localhost:3001/carts/getorders/${accessToken}/${arr.length}`, { params: { order: 'all' } }).then((response) => {
+            Dispatch(addItem(response.data))
         }).catch((err: any) => {
             console.log(err);
             console.log(err.response.data.error);
@@ -25,14 +25,15 @@ const Order = () => {
     }
     useEffect(() => {
         window.scrollTo(0, 0)
-        if (users4.length < 1) { getdata() }
+        if (arr.length < 1) { getdata() }
     }, []);
 
     return (
         <>
-            {users4.length === 0 ? <Spiner /> :
-                <div className={css.Div}>
 
+            {arr.length === 0 ? <Spiner /> :
+                <div className={css.Div}>
+                    <FindOrder />
                     <MDBTable className={css.table}>
                         <MDBTableHead>
                             <tr>
@@ -40,20 +41,14 @@ const Order = () => {
                                 <th scope='col'>orderId</th>
                                 <th scope='col'>fullname</th>
                                 <th scope='col'>email</th>
+                                <th scope='col'>delate</th>
+                                {/* <th scope='col'>update</th> */}
                             </tr>
                         </MDBTableHead>
-                        <MDBTableBody>
-                            {users4.map((number: any, i: number) =>
-                                <tr onClick={() => {
-                                    navigate(`/orders/detales/${number._id}`)
-                                }} className={number.status === true ? css.tr : ''} key={i}>
-                                    <th scope='row'>{i + 1}</th>
-                                    <td> {number._id}</td>
-                                    <td> {number.fullname}</td>
-                                    <td> {number.Email}</td>
-                                </tr>
-                            )}
-                        </MDBTableBody>
+                        {arr2.length === 0 ? '' : <>
+                            <Items arr={arr2} /></>}
+                        <Items arr={arr} />
+
                     </MDBTable>
                 </div>
             }

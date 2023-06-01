@@ -8,11 +8,16 @@
     background-color: whitesmoke;
 }
 
+.corsla {
+    width: 400px;
+}
+
 .Img {
     width: 400px;
     min-height: 300px;
     object-fit: fill;
     vertical-align: middle;
+
 }
 
 .price {
@@ -42,7 +47,6 @@
 .divsizes {
     display: flex;
     justify-content: center;
-    // justify-content: start;
     align-items: center;
     overflow: auto;
     gap: 5px;
@@ -158,11 +162,12 @@
     .Img {
         min-height: 250px;
         max-height: 650px;
-        width: 100%;
+        width: 100% !important;
     }
 
     .corsla {
         margin: 0;
+        width: 100% !important;
     }
 
 

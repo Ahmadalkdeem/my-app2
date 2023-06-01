@@ -1,5 +1,6 @@
 .mybody {
-    min-height: 80vh;
+    // min-height: 80vh;
+    padding: 10px 0;
     width: 100%;
     display: flex;
     justify-content: center;
@@ -32,7 +33,7 @@
     color: #FFFFFF;
     letter-spacing: 1px;
     background-color: black;
-    width: 280px;
+    width: 260px;
     height: 40px;
     text-align: center;
     padding-top: 11px;
@@ -49,6 +50,6 @@
     }
 
     .myp2 {
-        font-size: 25px;
+        font-size: 20px;
     }
 }

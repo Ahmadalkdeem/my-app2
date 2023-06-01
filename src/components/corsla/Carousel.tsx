@@ -11,7 +11,7 @@ const MYCarousel = () => {
             <Carousel.Item>
                 <img
                     className={css.Imgcorsla}
-                    src={img}
+                    src={`https://media.terminalx.com/pub/media/banners/2023May28500/MEN_DESK_280523_A1.jpg`}
                     alt="First slide"
                 />
                 <Carousel.Caption className={css.Caption}>

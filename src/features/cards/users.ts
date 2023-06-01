@@ -1,7 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
+interface user {
+    _id: string,
+    email: string,
+    roles: [string],
+    username: string
+}
+interface initialStatetype {
+    arr: user[],
 
-const initialState: any = {
-    users: []
+}
+const initialState: initialStatetype = {
+    arr: []
 };
 
 
@@ -13,37 +22,37 @@ const users = createSlice({
         addItems: (state, action) => {
             let arr: any = []
             action.payload.forEach((element: any) => {
-                const index = state.users.findIndex((c: any) => c._id === element._id);
+                const index = state.arr.findIndex((c: any) => c._id === element._id);
                 if (index === -1) {
                     arr.push(element)
                 }
             });
-            state.users = [...state.users, ...arr];
+            state.arr = [...state.arr, ...arr];
         }, addItem: (state, action) => {
 
-            const index = state.users.findIndex((c: any) => c._id === action.payload._id);
+            const index = state.arr.findIndex((c: any) => c._id === action.payload._id);
             if (index < 0) {
-                state.users = [action.payload, ...state.users];
+                state.arr = [action.payload, ...state.arr];
             } else {
-                let arr = state.users
+                let arr = state.arr
                 arr.splice(index, 1)
-                state.users = [action.payload, ...arr];
+                state.arr = [action.payload, ...arr];
 
             }
         }, delteItem: (state, action) => {
-            const index = state.users.findIndex((c: any) => c._id === action.payload);
-            state.users.splice(index, 1);
+            const index = state.arr.findIndex((c: any) => c._id === action.payload);
+            state.arr.splice(index, 1);
         }
         , updateItem: (state, action) => {
-            const index = state.users.findIndex((c: any) => c._id === action.payload._id);
-            state.users[index].roles = action.payload.roles
+            const index = state.arr.findIndex((c: any) => c._id === action.payload._id);
+            state.arr[index].roles = action.payload.roles
         }
     },
     extraReducers: (builder) => {
 
     },
 });
-// also exported fetchUsers at the top
+// also exported fetcharr at the top
 export const { addItem, addItems, delteItem, updateItem } = users.actions;
 
 //export the reducer

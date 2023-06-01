@@ -138,8 +138,10 @@ function Pants() {
                             isMulti
                             value={value.brands}
                             closeMenuOnSelect={false}
-                            options={brands}
-                            onChange={(e: any) => {
+                            options={brands}//optionstype
+                            onChange={(e) => {
+                                console.log(e);
+
                                 Dispatch(onchange({ size: value.size, colors: value.colors, brands: e, stopfindusers: value.stopfindusers, stopusers: value.stopusers }))
                             }}
                             styles={stylelableOption}
@@ -158,7 +160,7 @@ function Pants() {
                             value={value.size}
                             closeMenuOnSelect={false}
                             options={SizeOptions}
-                            onChange={(e: any) => {
+                            onChange={(e) => {
                                 Dispatch(onchange({ size: e, colors: value.colors, brands: value.brands, stopfindusers: value.stopfindusers, stopusers: value.stopusers }))
                             }}
                             styles={stylelableOption}
@@ -177,7 +179,7 @@ function Pants() {
                             closeMenuOnSelect={false}
                             options={colourOptions}
                             value={value.colors}
-                            onChange={(e: any) => {
+                            onChange={(e) => {
                                 return Dispatch(onchange({ size: value.size, colors: e, brands: value.brands, stopfindusers: value.stopfindusers, stopusers: value.stopusers }))
 
                             }}

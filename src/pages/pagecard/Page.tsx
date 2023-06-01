@@ -14,6 +14,7 @@ import Spiner from '../../components/Spiner/Spiner';
 import { Helmet } from "react-helmet";
 import { Cardtype } from '../../@types/Mytypes';
 import List from '../../components/List/List';
+
 function Page() {
     let { id, fcategory } = useParams()
     const [Theitem, setTheitem] = useState<Cardtype>()

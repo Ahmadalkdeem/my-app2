@@ -12,30 +12,20 @@ const initialState: initialStatetype = {
 
 // fetch user from api
 const arrays = createSlice({
-    name: "arrays",
+    name: "arrayss",
     initialState,
     reducers: {
         addItem: (state, action) => {
             let index = state.arr.findIndex((e: item) => e.name === action.payload.name)
             let arr: Cardtype[] = []
-            if (state.arr[index].search === false) {
-                action.payload.arr.forEach((element: Cardtype) => {
-                    const i = state.arr[index].users.findIndex((c: Cardtype) => c._id === element._id);
-                    if (i === -1) {
-                        arr.push(element)
-                    }
-                });
-                state.arr[index].users = [...state.arr[index].users, ...arr]
-            }
-            else {
-                action.payload.forEach((element: Cardtype) => {
-                    const i = state.arr[index].findusers.findIndex((c: Cardtype) => c._id === element._id);
-                    if (i === -1) {
-                        arr.push(element)
-                    }
-                });
-                state.arr[index].findusers = [...state.arr[index].findusers, ...arr]
-            }
+            action.payload.arr.forEach((element: Cardtype) => {
+                const i = state.arr[index].users.findIndex((c: Cardtype) => c._id === element._id);
+                if (i === -1) {
+                    arr.push(element)
+                }
+            });
+            state.arr[index].users = [...state.arr[index].users, ...arr]
+
         },
         delteItem: (state, action) => {
             //const index = state.users.findIndex((c: Cardtype) => c._id === action.payload);
@@ -52,17 +42,14 @@ const arrays = createSlice({
         },
         addfindusers: (state, action) => {
             let index = state.arr.findIndex((e: item) => e.name === action.payload.name)
-
-            state.arr[index].findusers = action.payload
+            state.arr[index].findusers = action.payload.arr
             state.arr[index].search = true
-            state.arr[index].value.stopfindusers = false
-
         }, search: (state, action) => {
             let index = state.arr.findIndex((e: item) => e.name === action.payload.name)
             state.arr[index].search = false
         }, onchange: (state, action) => {
             let index = state.arr.findIndex((e: item) => e.name === action.payload.name)
-            state.arr[index].value = action.payload
+            state.arr[index].value = action.payload.slice
         }
     },
     extraReducers: (builder) => {

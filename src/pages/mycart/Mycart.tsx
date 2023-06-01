@@ -22,16 +22,13 @@ import { valMail, fullNameRegex, addressRegex, cityRegex, isZipRegex } from '../
 import css from './css.module.scss'
 import Cartitem from './Cartitem';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
-//deleteArr
 import { deleteArr } from '../../features/cards/mycart';
+import { Cardforcart, prouctorderdetales } from '../../@types/Mytypes';
 const Mycart = () => {
     let { cart } = useAppSelector((s) => s.mycart)
-
-    console.log(cart);
     let Dispatch = useAppDispatch()
-
     let pricecart = 0
-    cart.map((e: any) => {
+    cart.map((e) => {
         pricecart = pricecart + e.price * e.quantity
     })
     useEffect(() => {
@@ -60,8 +57,8 @@ const Mycart = () => {
 
             }
             else {
-                let cart2: any[] = []
-                cart.map((e: any) => {
+                let cart2: prouctorderdetales[] = []
+                cart.map((e) => {
                     let item = { id: e._id, color: e.color, sizeselect: e.sizeselect, quantity: e.quantity }
                     cart2.push(item)
                 })
@@ -107,7 +104,7 @@ const Mycart = () => {
                 <MDBContainer className="py-1 h-100">
                     <MDBRow className="justify-content-center my-4">
                         <MDBCol md="8">
-                            {cart.map((item: any, i: number) =>
+                            {cart.map((item, i: number) =>
                                 <Cartitem key={i} {...item} />)
                             }
                             <MDBCard className="mb-2">

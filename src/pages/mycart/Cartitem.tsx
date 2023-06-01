@@ -10,8 +10,9 @@ import { deleteCard, editCard } from '../../features/cards/mycart';
 
 import { BsTrash3 } from "react-icons/bs";
 import { useAppDispatch } from '../../app/hooks';
-
-const Cartitem = (props: any) => {
+//prouctorderdetales
+import { prouctorderdetales, Cardforcart } from '../../@types/Mytypes';
+const Cartitem = (props: Cardforcart) => {
     let Dispatch = useAppDispatch()
 
     return (
@@ -40,7 +41,7 @@ const Cartitem = (props: any) => {
                             <p>Color: {props.color}</p>
                             <p>Size: {props.sizeselect}</p>
                             <BsTrash3 onClick={() => {
-                                Dispatch(deleteCard(props.id))
+                                Dispatch(deleteCard(props._id))
                             }} size={34} className={css.icon} />
                         </MDBCol>
                         <MDBCol lg="4" md="6" className="mb-lg-0">

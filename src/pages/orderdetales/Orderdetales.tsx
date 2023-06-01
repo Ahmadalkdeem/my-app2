@@ -8,19 +8,20 @@ import axios from 'axios';
 import Spiner from '../../components/Spiner/Spiner'
 import { useAppDispatch } from '../../app/hooks';
 import { updateitem } from '../../features/cards/orderdetales';
+import { order } from '../../@types/Mytypes';
 const Orderdetales = () => {
     let Dispatch = useAppDispatch()
     let { id2 } = useParams()
-    const { users4 } = useAppSelector((s) => s.orders)
+    const { arr, arr2 } = useAppSelector((s) => s.orders)
     const { accessToken } = useAppSelector((s) => s.user)
-    const [users, setusers] = useState<any>()
+    const [users, setusers] = useState<order>()
     console.log(users);
 
     const [index, setindex] = useState<number>()
 
     function getorder() {
 
-        axios.get(`http://localhost:3001/carts/getoneorder/${accessToken}/${id2}`, {
+        axios.get(`http://localhost:3001/carts/getoneorder2/${accessToken}/${id2}`, {
         }).then((response) => {
             console.log(response);
             setusers(response.data[0])
@@ -31,11 +32,13 @@ const Orderdetales = () => {
 
     }
     useEffect(() => {
-        window.scrollTo(0, 0)
-        let order: any = users4.find((e: any) => e._id === id2)
-        setindex(users4.findIndex((e: any) => e._id === id2) + 1)
-        if (order === undefined) { getorder() }
-        else { setusers(order) }
+        window.scrollTo(0, 0)//...arr, 
+        let item = [...arr2].find((e) => e._id === id2)
+        if (item === undefined) { getorder() }
+        else {
+            setindex(arr.findIndex((e) => e._id === id2) + 1)
+            setusers(item)
+        }
     }, [id2]);
     return (
         <>
@@ -80,10 +83,10 @@ const Orderdetales = () => {
                         </MDBTable>
                     </div>
                     <div className={css.Divcards}>
-                        {users.products[0].map((number: any, i: number) =>
+                        {users.arr.map((number: any, i: number) =>
 
                             <Card key={i} style={{ width: '18rem' }}>
-                                <Card.Img className={css.Img} variant="top" src={number.src[0]} />
+                                <Card.Img className={css.Img} variant="top" src={users.products[0].find((e) => e._id === number.id)?.src[0]} />
                                 <Card.Body>
                                     <div>
                                         <MDBTable className={css.table}>
@@ -95,8 +98,8 @@ const Orderdetales = () => {
                                             </MDBTableHead>
                                             <MDBTableBody>
                                                 <tr >
-                                                    <td> {number.name}</td>
-                                                    <td> {number.category}</td>
+                                                    <td> {users.products[0].find((e) => e._id === number.id)?.brand}</td>
+                                                    <td> {users.products[0].find((e) => e._id === number.id)?.category}</td>
                                                 </tr>
 
                                             </MDBTableBody>
@@ -113,9 +116,9 @@ const Orderdetales = () => {
                                             </MDBTableHead>
                                             <MDBTableBody>
                                                 <tr >
-                                                    <td> {users.arr.find((e: any) => e.id === number._id).quantity}</td>
-                                                    <td> {users.arr.find((e: any) => e.id === number._id).sizeselect}</td>
-                                                    <td> {users.arr.find((e: any) => e.id === number._id).color}</td>
+                                                    <td>{number.quantity}</td>
+                                                    <td>{number.sizeselect}</td>
+                                                    <td>{number.color}</td>
                                                 </tr>
 
                                             </MDBTableBody>

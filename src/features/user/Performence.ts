@@ -1,6 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-const initialState: any = {
+interface typedate1 {
+    avg: number,
+    count: number,
+    totalPrice: number,
+    _id: { date: string }
+}
+interface initialStatetype {
+    data1: typedate1[],
+    data2: { _id: null, total: number, count: number, avg: number },
+    data3: any,
+}
+const initialState: initialStatetype = {
     data1: [],
     data2: { _id: null, total: 0, count: 0, avg: 0 },
     data3: []

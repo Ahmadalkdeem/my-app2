@@ -1,33 +1,50 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-const initialState: any = {
-    loading4: false,
-    error4: "",
-    users4: [],
+import { order } from "../../@types/Mytypes";
+interface initialStatetype {
+    arr: order[]
+    arr2: order[]
+}
+const initialState: initialStatetype = {
+    arr: [],
+    arr2: [],
 };
 
 const orders = createSlice({
     name: "orders",
     initialState,
     reducers: {
-        addItem2: (state, action) => {
+        addItem: (state, action) => {
             let arr: any = []
             action.payload.forEach((element: any) => {
-                const index = state.users4.findIndex((c: any) => c._id === element._id);
+                const index = state.arr.findIndex((c: any) => c._id === element._id);
                 if (index === -1) {
                     arr.push(element)
                 }
             });
-            state.users4 = [...state.users4, ...arr];
+            state.arr = [...state.arr, ...arr];
+        }, addItems: (state, action) => {
+            let arr: any = []
+            state.arr.forEach((element) => {
+                const index = action.payload.findIndex((c: any) => c._id === element._id);
+                if (index === -1) {
+                    arr.push(element)
+                }
+            });
+            state.arr = arr;
+            state.arr2 = action.payload;
+
         },
         updateitem: (state, action) => {
-            const index = state.users4.findIndex((c: any) => c._id === action.payload);
-            state.users4[index].status = true
-        },
+            const index = state.arr.findIndex((c: any) => c._id === action.payload);
+            state.arr[index].status = true
+        }, delateitem: (state, action) => {
+            const index = state.arr.findIndex((c: any) => c._id === action.payload);
+            state.arr.splice(index, 1)
+        }
     }
 });
 // also exported fetchUsers at the top
-export const { addItem2, updateitem } = orders.actions;
+export const { addItem, updateitem, addItems, delateitem } = orders.actions;
 
 //export the reducer
 export default orders.reducer

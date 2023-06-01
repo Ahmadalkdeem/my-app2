@@ -3,7 +3,8 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import css from './css.module.scss'
-
+import { Link } from 'react-router-dom';
+import { brands2 } from '../../arrays/list';
 const Myslider = () => {
     const settings = {
         dots: true,
@@ -44,32 +45,11 @@ const Myslider = () => {
         ]
     };
     return (
-        <Slider className={css.slider} {...settings}>
-            {/* {images.map((image, index) => ( */}
-            <div>
-                <img className={css.img} src={`https://st3.depositphotos.com/1050070/13243/i/450/depositphotos_132435338-stock-photo-logo-of-the-brand-nike.jpg`} alt={`product-`} />
-            </div>
-            <div>
-                <img className={css.img} src={`https://cdn.britannica.com/94/193794-050-0FB7060D/Adidas-logo.jpg`} alt={`product-`} />
-            </div>
-            <div>
-                <img className={css.img} src={`https://pbs.twimg.com/profile_images/1542757725985292288/P981nqTn_400x400.jpg`} alt={`product-`} />
-            </div>
-            <div>
-                <img className={css.img} src={`https://logowik.com/content/uploads/images/522_lacoste.jpg`} alt={`product-`} />
-            </div>
-            <div>
-                <img className={css.img} src={`https://logos-world.net/wp-content/uploads/2020/04/Ralph-Lauren-sign.png`} alt={`product-`} />
-            </div>
-            <div>
-                <img className={css.img} src={`https://cdn.logojoy.com/wp-content/uploads/2018/05/30143419/95.png`} alt={`product-`} />
-            </div>
-            <div>
-                <img className={css.img} src={`https://cdn.logojoy.com/wp-content/uploads/2018/05/30143419/95.png`} alt={`product-`} />
-            </div>
-            <div>
-                <img className={css.img} src={`https://img.freepik.com/free-vector/illustration-boutique-shop-logo-stamp-banner_53876-3743.jpg`} alt={`product-`} />
-            </div>
+        <Slider className={css.slider} {...settings} dots={false}>
+            {brands2.map((e, i: number) =>
+
+                <Link to={`/Brands/${e.value}`} key={i} > <img className={css.img} src={e.src} alt={e.value} /></Link>
+            )}
         </Slider>
     );
 };

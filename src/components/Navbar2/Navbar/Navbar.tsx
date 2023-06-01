@@ -51,6 +51,7 @@ function MyNavbar() {
                                     <NavLink onClick={closenavbar} onMouseEnter={() => {
                                         console.log('aaa');
                                     }} onMouseOut={() => { }} className={css.Mylink} to="/">בית</NavLink>
+                                    <NavLink onClick={closenavbar} className={css.Mylink} to="/Brands">מותגים</NavLink>
                                     <NavLink onClick={closenavbar} className={css.Mylink} to="/about">אודות</NavLink>
                                     <NavLink onClick={closenavbar} className={css.Mylink} to="/connection/login">התחברות</NavLink>
                                     {roles[0] === 'admin' && <>

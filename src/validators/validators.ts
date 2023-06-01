@@ -1,5 +1,6 @@
 export const fullNameRegex = /^[\p{L}\p{M}\p{Zs}'-]+([\p{Zs}'-][\p{L}\p{M}\p{Zs}'-]+)*$/u;
 export const valMail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
+export const objectid = /^[0-9a-fA-F]{24}$/
 export const addressRegex = /^[\p{L}\p{M}\p{Zs}0-9]+$/u;
 export const cityRegex = /^[\p{L}\p{M}\p{Zs}]+$/u;
 export const isZipRegex = /^\d{7}(?:[-\s]\d{4})?$/;

@@ -7,7 +7,7 @@ import { Route, Routes } from 'react-router-dom';
 import Mycart from './pages/mycart/Mycart';
 import Cardlist from './pages/Homepage/Cardlist';
 import Page from './pages/pagecard/Page';
-import Editpage from './pages/Editpage/Editpage ';
+import Editpage from './pages/addproduct/Addproduct';
 import Bootstrapform from './pages/logandsinin/Bootstrapform';
 import Shose from './pages/Listarray/Shose';
 import Pants from './pages/Listarray/Pants';
@@ -33,30 +33,40 @@ import { AddArr } from './features/cards/mycart';
 import Restartpassword from './pages/logandsinin/Restartpassword';
 import ChatComponent from './components/chatgbt/Chatgbt';
 import Changepasword2 from './pages/changepasword/Changepasword';
-import Brandss from './pages/brands/Brands';
+import Brandslist from './pages/Brandslist/Brandslist';
 import { Link } from 'react-router-dom';
 import { brands } from './arrays/list';
+import Brands from './pages/brands/Brands';
 function App() {
-  let { email, roles, username, accessToken } = useAppSelector(e => e.user)
+  let { roles } = useAppSelector(e => e.user)
   let Dispatch = useAppDispatch()
 
   async function start() {
     const myData: any = localStorage.getItem("userdetalis");
     const cart: any = localStorage.getItem("cart");
+    const cart2: any = JSON.parse(myData);
     Dispatch(AddArr(JSON.parse(cart)))
     Dispatch(fetchUsers())
     Dispatch(fetchUsers2())
     Dispatch(fetchUsers3())
+    console.log(cart2);
 
     if (myData !== null && myData !== undefined) {
+      Dispatch(updatedetalise(cart2))
       axios.post(`http://localhost:3001/api/auth/valtoken`, {
-        token: myData
+        token: cart2.accessToken
       }).then((response) => {
         console.log(response);
-
         Dispatch(updatedetalise(response.data))
       }).catch(e => {
         console.log(e);
+        Dispatch(updatedetalise({
+          accessToken: cart2.accessToken,
+          email: cart2.email,
+          id: cart2.id,
+          roles: ['user'],
+          username: cart2.username
+        }))
 
       })
     }
@@ -70,11 +80,6 @@ function App() {
 
       {/* <MyNavbar2 /> */}
       <MyNavbar />
-      {brands.map((e, i: number) =>
-        <div key={i}><Link to={`/Brands/${e.label}`}>{e.value}</Link></div>
-
-
-      )}
       {/* <ChatComponent />
       <button onClick={() => {
         axios.get(`http://localhost:3001/email/ahmad`, {
@@ -94,7 +99,8 @@ function App() {
           <Route path='Restartpassword' element={<Restartpassword />} />
         </Route>
         <Route path='/pasword/token/:token' element={<Changepasword2 />} />
-        <Route path='/Brands/:Brands' element={<Brandss />} />
+        <Route path='/Brands' element={<Brands />} />
+        <Route path='/Brands/:Brands' element={<Brandslist />} />
         <Route path='/about' element={<About />} />
         <Route path='/Mycard' element={<Mycart />} />
         <Route path='/shoes' element={<Shose />} />

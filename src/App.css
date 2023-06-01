@@ -6,5 +6,7 @@
   box-sizing: border-box;
 }
 html {
-  scroll-behavior: auto !important;
+  margin: 0 auto;
+  /* scroll-behavior: auto !important; */
+  max-width: 1500px;
 }

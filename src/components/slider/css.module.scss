@@ -1,6 +1,6 @@
 .img {
     display: block !important;
-    height: 70px;
+    max-height: 60px;
     width: 80%;
 }
 
@@ -8,4 +8,7 @@
     margin: 0 auto;
     max-width: 1500px;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

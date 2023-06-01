@@ -7,7 +7,7 @@ function List(props: { arr: Cardtype[] }) {
         <>
             <Container className={`Container ${css.Container}`} fluid>
                 <Row xs={2} sm={3} lg={4} xxl={5}>
-                    {props.arr.map(((product: any, i: number) => (
+                    {props.arr.map(((product, i: number) => (
                         <Col key={i} className="mt-2 p-1">
                             <MyCard key={i}
                                 {...product} />
