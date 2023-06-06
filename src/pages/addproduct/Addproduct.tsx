@@ -8,8 +8,8 @@ import { AiOutlineUpload } from "react-icons/ai";
 import { optionstype } from '../../@types/Mytypes';
 import { SizeOptions, brands, SizeOptions2, categorys3, categorys4, stylelableOption, categorys2, categorys, colourOptions, } from '../../arrays/list'
 import { useAppSelector } from '../../app/hooks';
-//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
-import Swal from 'sweetalert2';
+import Swall from '../../components/swal/Swal';
+
 function Editpage() {
     let Navigate = useNavigate()
     useEffect(() => {
@@ -70,12 +70,6 @@ function Editpage() {
         }
     }
     const handleSaveStudentClicked2 = async () => {
-        // Swal.fire({
-        //     icon: 'error',
-        //     title: 'Oops...',
-        //     text: 'Something went wrong!',
-        //     footer: '<a href="">Why do I have this issue?</a>'
-        // })
         const formData = new FormData()
         for (let i = 0; i < 8; i++) {
             formData.append('profileImg', photo7[i])
@@ -93,14 +87,7 @@ function Editpage() {
         }).then((res: any) => {
             console.log(res.data)
             if (res.data.message === 'good') {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'המוצר הוסף בהצלחה',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-
-
+                Swall({ titel: 'המוצר הוסף בהצלחה', timer: 1000 })
                 setTimeout(() => {
                     Navigate(-1)
                 }, 1500);

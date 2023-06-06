@@ -65,7 +65,7 @@ const Login = () => {
             </Helmet>
             <h5 className={css.h5}>כניסה :</h5>
             <form className={`d-flex flex-column justify-content-center align-items-center p-2 ${css.form}`} action="">
-                <label className={css.lable} htmlFor="username1">שם משתמש:</label>
+                <label className={css.lable} htmlFor="username1">המייל:</label>
                 <input value={username} onChange={(e) => {
                     setusername(e.target.value)
                 }} className={css.input} type="text" id='username1' />
@@ -77,8 +77,6 @@ const Login = () => {
                 <p className={css.P}>{errpassword === '' ? '' : errpassword}</p>
                 <input className={css.btn} type="button" value="כניסה" onClick={login} />
                 <div className={css.div2}>
-                    {/* <Link to='/connection/ForgotPassword' className={css.BtnForgotPassword} >שינוי סיסמה</Link>
-                    <br /> */}
                     <Link to='/connection/Restartpassword' className={css.BtnForgotPassword} >שינוי סיסמה</Link>
                 </div>
             </form></>

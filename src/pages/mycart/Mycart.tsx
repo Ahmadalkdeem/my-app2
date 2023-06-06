@@ -24,6 +24,7 @@ import Cartitem from './Cartitem';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { deleteArr } from '../../features/cards/mycart';
 import { Cardforcart, prouctorderdetales } from '../../@types/Mytypes';
+import Swall from '../../components/swal/Swal';
 const Mycart = () => {
     let { cart } = useAppSelector((s) => s.mycart)
     let Dispatch = useAppDispatch()
@@ -77,12 +78,7 @@ const Mycart = () => {
                     setCity('')
                     setZip('')
                     Dispatch(deleteArr())
-                    Swal.fire({
-                        icon: 'success',
-                        title: ' ההזמנה בוצעה בהצלחה',
-                        showConfirmButton: false,
-                        timer: 1500
-                    })
+                    Swall({ titel: 'ההזמנה בוצעה בהצלחה', timer: 1000 })
                 }).catch((err: any) => {
                     console.log(err);
 

@@ -4,7 +4,7 @@ import { brands } from "../../arrays/list";
 let array: item[] = []
 
 brands.map((e) => {
-    array.push({ name: e.label, loading: false, error: "", users: [], findusers: [], search: false, value: { size: [], colors: [], brands: [], stopfindusers: false, stopusers: false } })
+    array.push({ name: e.label, loading: false, error: "", users: [], findusers: [], search: false, value: { size: [], colors: [], brands: [], categorys: [], categorys2: [], stopfindusers: false, stopusers: false } })
 })
 const initialState: initialStatetype = {
     arr: array

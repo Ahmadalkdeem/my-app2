@@ -30,7 +30,7 @@ const orders = createSlice({
                     arr.push(element)
                 }
             });
-            state.arr = arr;
+            state.arr = [...state.arr2, ...arr];
             state.arr2 = action.payload;
 
         },

@@ -17,7 +17,10 @@ const Order = () => {
     const navigate = useNavigate();
     function getdata() {//{ params: data }
         axios.get(`http://localhost:3001/carts/getorders/${accessToken}/${arr.length}`, { params: { order: 'all' } }).then((response) => {
+            console.log(response);
+
             Dispatch(addItem(response.data))
+            if (response.data.length === 0) alert('אין יותר הזמנות')
         }).catch((err: any) => {
             console.log(err);
             console.log(err.response.data.error);
@@ -25,7 +28,7 @@ const Order = () => {
     }
     useEffect(() => {
         window.scrollTo(0, 0)
-        if (arr.length < 1) { getdata() }
+        if (arr.length === 0) { getdata() }
     }, []);
 
     return (

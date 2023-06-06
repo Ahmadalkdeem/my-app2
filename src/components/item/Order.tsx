@@ -22,7 +22,6 @@ const Order = () => {
                 if (response.data.length === 0) { return seterremail('אין הזמנות להמייל הזה') }
                 setemail('')
                 seterremail('')
-                console.log(response);
                 Dispatch(addItems(response.data))
             }).catch(e => {
                 if (e.response.data.message === 'No Such User') {

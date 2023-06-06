@@ -103,7 +103,7 @@ export interface item {
     users: Cardtype[],
     findusers: Cardtype[],
     search: boolean,
-    value: { size: optionstype[], colors: optionstype[], brands: optionstype[], stopusers: boolean, stopfindusers: boolean },
+    value: { size: optionstype[], colors: optionstype[], brands: optionstype[], categorys: optionstype[], categorys2: optionstype[], stopusers: boolean, stopfindusers: boolean },
 
 
 }

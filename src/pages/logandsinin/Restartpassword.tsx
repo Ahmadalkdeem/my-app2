@@ -14,17 +14,11 @@ const Restartpassword = () => {
     let Dispatch = useAppDispatch()
     const [username, setusername] = useState('');
     const [errusername, seterrusername] = useState('');
-    const [number, setnumber] = useState('');
-    const [errnumber, seterrnumber] = useState('');
-    const [password, setpassword] = useState('');
-    const [errpassword, seterrpassword] = useState('');
-    console.log(number);
+
 
     const Restartpassword = () => {
         if (valMail.test(username)) {
             axios.post('http://localhost:3001/api/auth/Restartpassword', { email: username }).then((response) => {
-                // Dispatch(updatedetalise(response.data))
-                console.log(response);
                 if (response.data.good === 'good') { }
             }).catch(e => {
                 console.log(e);

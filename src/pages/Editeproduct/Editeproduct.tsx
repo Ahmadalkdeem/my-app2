@@ -3,6 +3,7 @@ import Select from 'react-select'
 import { useState } from 'react'
 import axios from 'axios';
 import css from './css.module.scss'
+import Swall from '../../components/swal/Swal';
 import { AiOutlineUpload, AiFillDelete } from "react-icons/ai";
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { Cardtype } from '../../@types/Mytypes';
@@ -69,9 +70,6 @@ function Editeproduct() {
     }, []);
 
 
-
-
-    let x: any[] = []
     function poo(eq: any) {
         eq.forEach((ee: any) => {
             let zxc = fSizeOptions2.find((e: any) => e.size === ee.value)
@@ -80,12 +78,7 @@ function Editeproduct() {
                 fcolourOptions.forEach((cc) => {
                     colors.push({ color: cc.value })
                 })
-
-                console.log(fSizeOptions2.find((e: any) => e.size === ee.value));
-                console.log(fSizeOptions2.findIndex((e: any) => e.size === ee.value));
-
                 setSizeOptions2((err: any) => [...err, { size: ee.value, colors: colors }])
-
             } else {
             }
         })
@@ -131,12 +124,7 @@ function Editeproduct() {
         axios.put(`http://localhost:3001/update/${id}/${accessToken}`, formData, {
         }).then((res: any) => {
             if (res.data.message === 'good') {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'השיניום נשמרו בהצלחה',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                Swall({ titel: 'השיניום נשמרו בהצלחה', timer: 1500 })
                 setTimeout(() => {
                     Navigate(-1)
                 }, 1500);
@@ -152,9 +140,6 @@ function Editeproduct() {
             // const isExist2 = term.match(regex2)
             // if (isExist) console.log("Image must be one of type jpg...");
             // if (isExist2) console.log("File too large");
-
-
-
         })
     }
     useEffect(() => {
@@ -315,7 +300,7 @@ function Editeproduct() {
                     </div>
                 )}
             </div>
-            <button className={css.mybtn} onClick={handleSaveStudentClicked}>uplode</button>
+            <button className={css.mybtn} onClick={handleSaveStudentClicked}>update</button>
         </div>
     )
 }

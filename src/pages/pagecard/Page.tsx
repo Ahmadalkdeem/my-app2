@@ -10,6 +10,7 @@ import axios from 'axios';
 import { addCard } from '../../features/cards/mycart';
 import './style.css'
 import Swal from 'sweetalert2';
+import Swall from '../../components/swal/Swal';
 import Spiner from '../../components/Spiner/Spiner';
 import { Helmet } from "react-helmet";
 import { Cardtype } from '../../@types/Mytypes';
@@ -42,8 +43,6 @@ function Page() {
     const item = () => {
         let arr: Cardtype[] = [...users22, ...users11, ...users33, ...users1, ...users2, ...users3]
         let x = arr.find((e: Cardtype) => e._id === id)
-        console.log(x);
-
         if (x !== undefined) {
             setTheitem(x)
             setState(x.stock[0].size)
@@ -69,7 +68,9 @@ function Page() {
         if (arr[0] === undefined || arr.length < 8) {
             let arr: Cardtype[] = [...users22, ...users11, ...users33, ...users1, ...users2, ...users3]
             setarr(arr.sort(() => Math.random() - 0.5).slice(-8))
+            window.scrollTo(0, 0)
         }
+
     }, [users1, users2, users3, users11, users22, users33]);
     return (
         <>
@@ -104,7 +105,7 @@ function Page() {
                         )}
 
                     </Carousel>
-                    <div className='p-3'>
+                    <div className='p-3 w-100'>
                         <h3 className={`${css.h3} text-center mt-2`}>{Theitem?.name}</h3>
                         <h5 className={`text-center d-flex justify-content-center align-items-center ${css.price}`}>{Theitem?.price}₪ <span className={css.delateprice}>{Theitem?.price2}₪</span></h5>
                         <h5 className={css.h5}>מידות:</h5>
@@ -155,12 +156,7 @@ function Page() {
                         </div>
                         <button className={css.Btn} onClick={() => {
                             Dispatch(addCard({ id: `${cart.length}`, ...Theitem, ...{ sizeselect: state, color: color, quantity: state2 } }))
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'המוצר הוסף בהצלחה',
-                                showConfirmButton: false,
-                                timer: 800
-                            })
+                            Swall({ titel: 'המוצר הוסף בהצלחה', timer: 800 })
                         }}>הוספה לסל קניות</button>
                         <Acording aa={`${Theitem?.description}`} />
                     </div>

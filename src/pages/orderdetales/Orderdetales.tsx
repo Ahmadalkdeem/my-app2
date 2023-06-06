@@ -8,14 +8,16 @@ import axios from 'axios';
 import Spiner from '../../components/Spiner/Spiner'
 import { useAppDispatch } from '../../app/hooks';
 import { updateitem } from '../../features/cards/orderdetales';
+import { useNavigate } from 'react-router-dom';
 import { order } from '../../@types/Mytypes';
+import Swall from '../../components/swal/Swal';
 const Orderdetales = () => {
+    let Navigate = useNavigate()
     let Dispatch = useAppDispatch()
     let { id2 } = useParams()
     const { arr, arr2 } = useAppSelector((s) => s.orders)
     const { accessToken } = useAppSelector((s) => s.user)
     const [users, setusers] = useState<order>()
-    console.log(users);
 
     const [index, setindex] = useState<number>()
 
@@ -23,8 +25,9 @@ const Orderdetales = () => {
 
         axios.get(`http://localhost:3001/carts/getoneorder2/${accessToken}/${id2}`, {
         }).then((response) => {
-            console.log(response);
             setusers(response.data[0])
+            console.log(response);
+
         }).catch((err: any) => {
             console.log(err);
             console.log(err.response.data.error);
@@ -33,7 +36,7 @@ const Orderdetales = () => {
     }
     useEffect(() => {
         window.scrollTo(0, 0)//...arr, 
-        let item = [...arr2].find((e) => e._id === id2)
+        let item = [...arr2, ...arr].find((e) => e._id === id2)
         if (item === undefined) { getorder() }
         else {
             setindex(arr.findIndex((e) => e._id === id2) + 1)
@@ -48,8 +51,9 @@ const Orderdetales = () => {
                         <input onClick={() => {
                             axios.put(`http://localhost:3001/carts/putoneorder/${accessToken}/${id2}`, {
                             }).then((response) => {
-                                console.log(response);
                                 Dispatch(updateitem(id2))
+                                Swall({ titel: 'ההזמנה בוצעה בהצלחה', timer: 1000 })
+                                Navigate(-1)
                             }).catch((err: any) => {
                                 console.log(err);
                                 console.log(err.response.data.error);

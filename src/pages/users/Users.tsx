@@ -19,7 +19,7 @@ const Users = () => {
         axios.get(`http://localhost:3001/users/${accessToken}/${arr.length}`, {
         }).then((response) => {
             Dispatch(addItems(response.data))
-            console.log(response.data);
+            if (response.data.length === 0) { alert('אין יותר משתמשים') }
         }).catch((err: any) => {
             console.log(err);
             console.log(err.response.data.error);
@@ -28,7 +28,8 @@ const Users = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        getdata()
+        if (arr.length === 0) getdata()
+
     }, []);
     return (
         <>
@@ -59,7 +60,6 @@ const Users = () => {
                                             if (result.isConfirmed) {
                                                 axios.delete(`http://localhost:3001/users/${user._id}/${accessToken}`, {
                                                 }).then((response) => {
-                                                    console.log(response);
 
                                                     if (response.data.Message === "susces") {
                                                         Dispatch(delteItem(user._id))
@@ -93,7 +93,6 @@ const Users = () => {
                                                     }).then((response) => {
 
                                                         if (response.data.Message === 'susces') {
-                                                            console.log(response);
                                                             Dispatch(updateItem({ _id: user._id, roles: ['user'] }))
                                                             Swal.fire({
                                                                 icon: 'success',
@@ -123,7 +122,6 @@ const Users = () => {
                                                     axios.put(`http://localhost:3001/users/admin/${user._id}/${accessToken}`, {
                                                     }).then((response) => {
                                                         if (response.data.Message === 'susces') {
-                                                            console.log(response);
                                                             Dispatch(updateItem({ _id: user._id, roles: ['admin'] }))
                                                             Swal.fire({
                                                                 icon: 'success',

@@ -4,7 +4,6 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import css from "./css.module.scss"
-import Acording2 from '../acording2/Acording';
 import { NavLink } from "react-router-dom";
 import { TfiShoppingCartFull } from "react-icons/tfi";
 import { useAppSelector } from '../../app/hooks';
@@ -63,7 +62,6 @@ function OffcanvasExample() {
                                     </>}
                                 </div>
                                 <Topnav />
-                                {categres < 991.5 && <Acording2 />}
                             </Nav>
 
                         </Offcanvas.Body>

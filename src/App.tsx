@@ -31,11 +31,8 @@ import Users from './pages/users/Users';
 import ForgotPassword from './pages/logandsinin/ForgotPassword';
 import { AddArr } from './features/cards/mycart';
 import Restartpassword from './pages/logandsinin/Restartpassword';
-import ChatComponent from './components/chatgbt/Chatgbt';
 import Changepasword2 from './pages/changepasword/Changepasword';
 import Brandslist from './pages/Brandslist/Brandslist';
-import { Link } from 'react-router-dom';
-import { brands } from './arrays/list';
 import Brands from './pages/brands/Brands';
 function App() {
   let { roles } = useAppSelector(e => e.user)
@@ -44,19 +41,19 @@ function App() {
   async function start() {
     const myData: any = localStorage.getItem("userdetalis");
     const cart: any = localStorage.getItem("cart");
+    if (cart !== null && cart !== undefined) {
+      Dispatch(AddArr(JSON.parse(cart)))
+    }
     const cart2: any = JSON.parse(myData);
-    Dispatch(AddArr(JSON.parse(cart)))
     Dispatch(fetchUsers())
     Dispatch(fetchUsers2())
     Dispatch(fetchUsers3())
-    console.log(cart2);
 
     if (myData !== null && myData !== undefined) {
       Dispatch(updatedetalise(cart2))
       axios.post(`http://localhost:3001/api/auth/valtoken`, {
         token: cart2.accessToken
       }).then((response) => {
-        console.log(response);
         Dispatch(updatedetalise(response.data))
       }).catch(e => {
         console.log(e);
@@ -80,16 +77,16 @@ function App() {
 
       {/* <MyNavbar2 /> */}
       <MyNavbar />
-      {/* <ChatComponent />
+      {/* <ChatComponent /> */}
       <button onClick={() => {
         axios.get(`http://localhost:3001/email/ahmad`, {
         }).then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
         }).catch(e => {
           console.log(e);
 
         })
-      }}>ahmad</button> */}
+      }}>ahmad</button>
       <Routes >
         <Route path='/' element={<Cardlist />} />
         <Route path='/connection' element={<Bootstrapform />} >

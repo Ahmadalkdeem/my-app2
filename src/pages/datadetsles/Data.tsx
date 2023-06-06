@@ -19,14 +19,10 @@ export const Data = () => {
     const today = new Date();
     const { accessToken } = useAppSelector((s) => s.user);
     const { data1, data2, data3 } = useAppSelector((s) => s.Performence);
-    console.log(data1);
-    console.log(data2);
-    console.log(data3);
 
     const [mylist, setmylist] = useState('');
     const [startDate, setStartDate] = useState<string>(`${thirtyDaysAgo.getFullYear().toString()}-${(thirtyDaysAgo.getMonth() + 1).toString().padStart(2, '0')}-${thirtyDaysAgo.getDate().toString().padStart(2, '0')}`);
     const [endDate, setEndDate] = useState<string>(`${today.getFullYear().toString()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`);
-    console.log(startDate, endDate);
     const dates = eachDayOfInterval({ start: new Date(startDate), end: new Date(endDate) });
     const [sort1, setsort1] = useState('-1');
     const [limet1, setlimet1] = useState('10');
@@ -41,8 +37,7 @@ export const Data = () => {
     }, []);
 
     function getdata() {
-        axios.get(`http://localhost:3001/Performence/getorders/detales/${accessToken}/${startDate}/${endDate}`, {
-        }).then((response) => {
+        axios.get(`http://localhost:3001/Performence/getorders/detales/${accessToken}`, { params: { str: startDate, end: endDate } }).then((response) => {
             setloding(false)
             let arr: any = []
             dates.map((date) => {
@@ -63,8 +58,7 @@ export const Data = () => {
             console.log(err.response.data.error);
         })
 
-        axios.get(`http://localhost:3001/Performence/getorders/count/${accessToken}/${startDate}/${endDate}`, {
-        }).then((response) => {
+        axios.get(`http://localhost:3001/Performence/getorders/count/${accessToken}`, { params: { str: startDate, end: endDate } }).then((response) => {
             setloding(false)
             if (response.data.result[0] !== undefined) {
                 Dispatch(addarr({ name: 'data2', arr: response.data.result[0] }))
@@ -77,8 +71,9 @@ export const Data = () => {
         })
     }
     function topproduct() {
-        axios.get(`http://localhost:3001/Performence/detales/${accessToken}/${limet1}/${sort1}`, {
-        }).then((response) => {
+        axios.get(`http://localhost:3001/Performence/detales/${accessToken}/${limet1}/${sort1}`, { params: { str: startDate, end: endDate } }).then((response) => {
+            console.log(response);
+
             setloding2(false)
             Dispatch(addarr({ name: 'data3', arr: response.data }))
         }).catch((err: any) => {

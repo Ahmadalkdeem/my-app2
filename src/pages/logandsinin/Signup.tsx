@@ -7,6 +7,7 @@ import { useAppDispatch } from '../../app/hooks';
 import { updatedetalise } from '../../features/user/user';
 import { Helmet } from "react-helmet";
 import Swal from 'sweetalert2';
+import Swall from '../../components/swal/Swal';
 const Signup = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -37,12 +38,8 @@ const Signup = () => {
                 console.log(response.data);
                 Dispatch(updatedetalise(response.data.id))
                 Navigate('/')
-                Swal.fire({
-                    icon: 'success',
-                    title: 'ההרשמה בוצעה בהצלחה',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
+                Swall({ titel: 'ההרשמה בוצעה בהצלחה', timer: 1500 })
+
             }).catch((e) => {
                 if (e.response.data.message === 'Email already exists') {
                     seterrpassword('המייל רשום')
@@ -64,7 +61,7 @@ const Signup = () => {
             </Helmet>
             <h5 className={css.h5}>הרשמה :</h5>
             <form className={`d-flex flex-column justify-content-center align-items-center p-2 ${css.form}`} action="">
-                <label className={css.lable} htmlFor="username">שם משתמש:</label>
+                <label className={css.lable} htmlFor="username">השם המלא:</label>
                 <input onChange={(e) => {
                     setusername(e.target.value)
                 }} value={username} className={css.input} type="text" id='username' />
