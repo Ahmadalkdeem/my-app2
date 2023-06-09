@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { sliCecatgre, Cardtype } from "../../@types/Mytypes";
+import axios from "axios";
 const initialState: sliCecatgre = {
     loading: false,
     error: "",
@@ -9,12 +10,12 @@ const initialState: sliCecatgre = {
     value: { size: [], colors: [], brands: [], stopfindusers: false, stopusers: false },
 };
 
-export const fetchUsers3 = createAsyncThunk<any[]>("user3/fetchUsers3", (length1: any) =>
-    fetch(`http://localhost:3001/cards/filtering/shoesproduct/0`).then((res) => res.json())
+export const fetchUsers3 = createAsyncThunk<any[]>("user3/fetchUsers3", () =>
+    axios.get(`http://localhost:3001/cards/filtering/shoesproduct`, { params: { skip: 0 } }).then((res) => res.data)
 );
 
 const cardpants = createSlice({
-    name: "user3",
+    name: "card3",
     initialState,
     reducers: {
         addItem: (state, action) => {
@@ -37,9 +38,6 @@ const cardpants = createSlice({
                 });
                 state.findusers = [...state.findusers, ...arr]
             }
-        }, delteItem: (state, action) => {
-            const index = state.users.findIndex((c: Cardtype) => c._id === action.payload);
-            state.users.splice(index, 1);
         }, addfindusers: (state, action) => {
             state.findusers = action.payload
             state.search = true
@@ -69,7 +67,7 @@ const cardpants = createSlice({
     },
 });
 // also exported fetchUsers at the top
-export const { addItem, delteItem, addfindusers, search, onchange } = cardpants.actions;
+export const { addItem, addfindusers, search, onchange } = cardpants.actions;
 
 //export the reducer
 export default cardpants.reducer

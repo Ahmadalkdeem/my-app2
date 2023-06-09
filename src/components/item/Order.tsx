@@ -3,7 +3,7 @@ import css from './css.module.scss'
 import axios from 'axios';
 import { valMail } from '../../validators/validators';
 import { useAppDispatch } from '../../app/hooks';
-import { addItems } from '../../features/cards/orderdetales';
+import { addfindItems, addItems } from '../../features/cards/orderdetales';
 import { useAppSelector } from '../../app/hooks';
 const Order = () => {
     const { accessToken } = useAppSelector((s) => s.user);
@@ -18,11 +18,12 @@ const Order = () => {
     const login = () => {
         if (valMail.test(email)) {
 
-            axios.get(`http://localhost:3001/carts/getoneorder/${accessToken}/${email}`).then((response) => {
+            axios.get(`http://localhost:3001/carts/getoneorder`, { params: { email: email, accessToken: accessToken } }).then((response) => {
                 if (response.data.length === 0) { return seterremail('אין הזמנות להמייל הזה') }
                 setemail('')
                 seterremail('')
-                Dispatch(addItems(response.data))
+                // Dispatch(addItems(response.data))
+                Dispatch(addfindItems(response.data))
             }).catch(e => {
                 if (e.response.data.message === 'No Such User') {
                     seterremail('המזה לא קיים')

@@ -7,7 +7,9 @@ import cart from '../features/cards/mycart'
 import arrays from '../features/cards/arrays'
 import user from '../features/user/user'
 import users from '../features/cards/users';
+import updates from '../features/cards/updates';
 import Performence from '../features/user/Performence';
+import Favorites from '../features/cards/favorites';
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +22,8 @@ export const store = configureStore({
     user: user,
     users: users,
     Performence: Performence,
+    updates: updates,
+    Favorites: Favorites,
   },
 });
 

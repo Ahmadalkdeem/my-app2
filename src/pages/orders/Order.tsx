@@ -5,7 +5,7 @@ import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import Spiner from '../../components/Spiner/Spiner'
-import { addItem, delateitem } from '../../features/cards/orderdetales';
+import { addItems, delateitem } from '../../features/cards/orderdetales';
 import { FiDelete, FiChevronsDown } from "react-icons/fi";
 import Swal from 'sweetalert2';
 import FindOrder from '../../components/item/Order';
@@ -15,11 +15,9 @@ const Order = () => {
     const { arr, arr2 } = useAppSelector((s) => s.orders);
     const { accessToken } = useAppSelector((s) => s.user);
     const navigate = useNavigate();
-    function getdata() {//{ params: data }
-        axios.get(`http://localhost:3001/carts/getorders/${accessToken}/${arr.length}`, { params: { order: 'all' } }).then((response) => {
-            console.log(response);
-
-            Dispatch(addItem(response.data))
+    function getdata() {
+        axios.get(`http://localhost:3001/carts/getorders`, { params: { order: 'all', skip: arr.length, accessToken: accessToken } }).then((response) => {
+            Dispatch(addItems(response.data))
             if (response.data.length === 0) alert('אין יותר הזמנות')
         }).catch((err: any) => {
             console.log(err);
@@ -48,8 +46,10 @@ const Order = () => {
                                 {/* <th scope='col'>update</th> */}
                             </tr>
                         </MDBTableHead>
-                        {arr2.length === 0 ? '' : <>
-                            <Items arr={arr2} /></>}
+                        {arr2.length !== 0 && <><Items arr={arr2} />
+                            <br />
+                            <br />
+                        </>}
                         <Items arr={arr} />
 
                     </MDBTable>

@@ -37,7 +37,7 @@ export const Data = () => {
     }, []);
 
     function getdata() {
-        axios.get(`http://localhost:3001/Performence/getorders/detales/${accessToken}`, { params: { str: startDate, end: endDate } }).then((response) => {
+        axios.get(`http://localhost:3001/Performence/getorders/detales`, { params: { str: startDate, end: endDate, accessToken: accessToken } }).then((response) => {
             setloding(false)
             let arr: any = []
             dates.map((date) => {
@@ -58,7 +58,7 @@ export const Data = () => {
             console.log(err.response.data.error);
         })
 
-        axios.get(`http://localhost:3001/Performence/getorders/count/${accessToken}`, { params: { str: startDate, end: endDate } }).then((response) => {
+        axios.get(`http://localhost:3001/Performence/getorders/count`, { params: { str: startDate, end: endDate, accessToken: accessToken } }).then((response) => {
             setloding(false)
             if (response.data.result[0] !== undefined) {
                 Dispatch(addarr({ name: 'data2', arr: response.data.result[0] }))
@@ -71,9 +71,7 @@ export const Data = () => {
         })
     }
     function topproduct() {
-        axios.get(`http://localhost:3001/Performence/detales/${accessToken}/${limet1}/${sort1}`, { params: { str: startDate, end: endDate } }).then((response) => {
-            console.log(response);
-
+        axios.get(`http://localhost:3001/Performence/detales`, { params: { str: startDate, end: endDate, accessToken: accessToken, limet: limet1, sort: sort1 } }).then((response) => {
             setloding2(false)
             Dispatch(addarr({ name: 'data3', arr: response.data }))
         }).catch((err: any) => {

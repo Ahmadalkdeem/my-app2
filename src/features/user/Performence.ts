@@ -18,7 +18,7 @@ const initialState: initialStatetype = {
 
 
 const Performence = createSlice({
-    name: "Performence2",
+    name: "Performence",
     initialState,
     reducers: {
         addarr: (state, action) => {

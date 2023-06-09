@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import Select from 'react-select'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
-import { addItem, delteItem, search, onchange, addfindusers } from '../../features/cards/arrays'
+import { addItems, delteItem, search, onchange, addfindItems, addfindItems2 } from '../../features/cards/arrays'
 import axios from 'axios'
 import css from './css.module.scss'
 import List from '../../components/List/List'
@@ -12,15 +12,38 @@ import { brands, colourOptions, SizeOptions, SizeOptions2, stylelableOption, cat
 import { optionstype } from '../../@types/Mytypes'
 import Ops from '../../components/404/Ops'
 const Brandslist = () => {
-    const listInnerRef = useRef();
     const [loding, setloding] = useState<Boolean>(false)
+    const [lodingfind, setlodingfind] = useState<Boolean>(false)
     const [mylist, setmylist] = useState('');
 
     let Dispatch = useAppDispatch()
     let Navigate = useNavigate()
     let { Brands } = useParams()
     let item = useAppSelector((e) => e.arrays.arr.find((e) => e.name === Brands))
-    let arr = item?.search === false ? item.users : item?.findusers
+    let arr: any = item?.search === false ? item.users : item?.findusers
+
+    function getdata() {
+        axios.get(`http://localhost:3001/cards/brands`, {
+            params: {
+                brands: [Brands], skip: item?.users.length
+            }
+        }).then((response) => {
+            console.log(response);
+
+            setloding(false)
+            setlodingfind(false)
+
+
+            Dispatch(addItems({ name: Brands, arr: response.data }))
+            if (response.data[0] === undefined) {
+                Dispatch(onchange({ name: item?.name, slice: { size: item?.value.size, colors: item?.value.colors, brands: item?.value.brands, stopfindusers: item?.value.stopfindusers, stopusers: true, categorys: item?.value.categorys, categorys2: item?.value.categorys2 } }))
+            }
+        }).catch(e => {
+            console.log(e);
+            setloding(false)
+        })
+    }
+
     function getdata2() {
         setloding(true)
         let arr2: any = []
@@ -44,11 +67,51 @@ const Brandslist = () => {
             colors: arr2,
             sizes: arr3,
             categorys: arr4,
-            categorys2: arr5
+            categorys2: arr5,
+            skip: 0
         };
-        axios.get(`http://localhost:3001/cards/brands/filtering/0`, { params: data }).then((response) => {
+        axios.get(`http://localhost:3001/cards/brands/filtering`, { params: data }).then((response) => {
             setloding(false)
-            Dispatch(addfindusers({ name: Brands, arr: response.data }))
+            setlodingfind(false)
+            Dispatch(addfindItems({ name: Brands, arr: response.data }))
+            if (response.data[0] === undefined) {
+                Dispatch(onchange({ name: item?.name, slice: { size: item?.value.size, colors: item?.value.colors, brands: item?.value.brands, stopfindusers: true, stopusers: item?.value.stopusers, categorys: item?.value.categorys, categorys2: item?.value.categorys2 } }))
+            }
+
+        }).catch(e => {
+            console.log(e);
+
+        })
+    }
+    function getdata3() {
+        let arr2: any = []
+        item?.value.colors.map((e: optionstype) => {
+            arr2.push(e.value)
+        })
+        let arr3: any = []
+        item?.value.size.map((e: optionstype) => {
+            arr3.push(e.value)
+        })
+        let arr4: any = []
+        item?.value.categorys.map((e: optionstype) => {
+            arr4.push(e.value)
+        })
+        let arr5: any = []
+        item?.value.categorys2.map((e: optionstype) => {
+            arr5.push(e.value)
+        })
+        const data = {
+            brands: [Brands],
+            colors: arr2,
+            sizes: arr3,
+            categorys: arr4,
+            categorys2: arr5,
+            skip: item?.findusers.length
+        };
+        axios.get(`http://localhost:3001/cards/brands/filtering`, { params: data }).then((response) => {
+            console.log(response);
+            setlodingfind(false)
+            Dispatch(addfindItems2({ name: Brands, arr: response.data }))
             if (response.data[0] === undefined) {
                 Dispatch(onchange({ name: item?.name, slice: { size: item?.value.size, colors: item?.value.colors, brands: item?.value.brands, stopfindusers: true, stopusers: item?.value.stopusers, categorys: item?.value.categorys, categorys2: item?.value.categorys2 } }))
             }
@@ -60,22 +123,6 @@ const Brandslist = () => {
     }
 
 
-    function getdata() {
-        if (loding === false) {
-            setloding(true)
-            axios.get(`http://localhost:3001/cards/brands/${item?.users.length}`, { params: { brands: [Brands] } }).then((response) => {
-                setloding(false)
-                Dispatch(addItem({ name: Brands, arr: response.data }))
-                if (response.data[0] === undefined) {
-                    console.log('ahmad');
-
-                    Dispatch(onchange({ name: item?.name, slice: { size: item?.value.size, colors: item?.value.colors, brands: item?.value.brands, stopfindusers: item?.value.stopfindusers, stopusers: true, categorys: item?.value.categorys, categorys2: item?.value.categorys2 } }))
-                }
-            }).catch(e => {
-                console.log(e); setloding(false)
-            })
-        }
-    }
     window.onscroll = () => {
         const scrollPosition = window.scrollY;
         const windowHeight = window.innerHeight;
@@ -83,8 +130,11 @@ const Brandslist = () => {
         const scrollPercentage = (scrollPosition / (bodyHeight - windowHeight)) * 100;
 
         if (scrollPercentage > 65 && scrollPercentage <= 100) {
-            // if (item?.search === false) { if (item.value.stopfindusers === false) { getdata() } }
-            // else { if (item?.value.stopfindusers === false) { getdata3() } }
+            if (lodingfind === false && loding === false) {
+                setlodingfind(true)
+                if (item?.search === false) { if (item.value.stopusers === false) { getdata() } }
+                else { if (item?.value.stopfindusers === false) { getdata3() } }
+            }
         }
     }
     useEffect(() => {
@@ -201,11 +251,7 @@ const Brandslist = () => {
                                 <button>ahmas</button>
                             </>}
                     </>
-                    :
-                    <div>
-                        <List arr={arr} />
-                    </div>
-                }
+                    : <List arr={arr} />}
             </>
             }
         </>

@@ -16,8 +16,7 @@ const Users = () => {
     const { accessToken } = useAppSelector((s) => s.user);
 
     function getdata() {
-        axios.get(`http://localhost:3001/users/${accessToken}/${arr.length}`, {
-        }).then((response) => {
+        axios.get(`http://localhost:3001/users`, { params: { skip: arr.length, accessToken: accessToken } }).then((response) => {
             Dispatch(addItems(response.data))
             if (response.data.length === 0) { alert('אין יותר משתמשים') }
         }).catch((err: any) => {
@@ -58,8 +57,7 @@ const Users = () => {
                                             confirmButtonText: 'Save',
                                         }).then((result) => {
                                             if (result.isConfirmed) {
-                                                axios.delete(`http://localhost:3001/users/${user._id}/${accessToken}`, {
-                                                }).then((response) => {
+                                                axios.delete(`http://localhost:3001/users`, { params: { id: user._id, accessToken: accessToken } }).then((response) => {
 
                                                     if (response.data.Message === "susces") {
                                                         Dispatch(delteItem(user._id))
@@ -89,8 +87,7 @@ const Users = () => {
                                                 confirmButtonText: 'Save',
                                             }).then((result) => {
                                                 if (result.isConfirmed) {
-                                                    axios.put(`http://localhost:3001/users/user/${user._id}/${accessToken}`, {
-                                                    }).then((response) => {
+                                                    axios.put(`http://localhost:3001/users/user`, { params: { id: user._id, accessToken: accessToken } }).then((response) => {
 
                                                         if (response.data.Message === 'susces') {
                                                             Dispatch(updateItem({ _id: user._id, roles: ['user'] }))
@@ -119,8 +116,7 @@ const Users = () => {
                                                 confirmButtonText: 'Save',
                                             }).then((result) => {
                                                 if (result.isConfirmed) {
-                                                    axios.put(`http://localhost:3001/users/admin/${user._id}/${accessToken}`, {
-                                                    }).then((response) => {
+                                                    axios.put(`http://localhost:3001/users/admin`, { params: { id: user._id, accessToken: accessToken } }).then((response) => {
                                                         if (response.data.Message === 'susces') {
                                                             Dispatch(updateItem({ _id: user._id, roles: ['admin'] }))
                                                             Swal.fire({

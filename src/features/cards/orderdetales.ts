@@ -13,7 +13,7 @@ const orders = createSlice({
     name: "orders",
     initialState,
     reducers: {
-        addItem: (state, action) => {
+        addItems: (state, action) => {
             let arr: any = []
             action.payload.forEach((element: any) => {
                 const index = state.arr.findIndex((c: any) => c._id === element._id);
@@ -22,29 +22,24 @@ const orders = createSlice({
                 }
             });
             state.arr = [...state.arr, ...arr];
-        }, addItems: (state, action) => {
-            let arr: any = []
-            state.arr.forEach((element) => {
-                const index = action.payload.findIndex((c: any) => c._id === element._id);
-                if (index === -1) {
-                    arr.push(element)
-                }
-            });
-            state.arr = [...state.arr2, ...arr];
+        }, addfindItems: (state, action) => {
             state.arr2 = action.payload;
-
         },
         updateitem: (state, action) => {
-            const index = state.arr.findIndex((c: any) => c._id === action.payload);
-            state.arr[index].status = true
+            const indexarr = state.arr.findIndex((c) => c._id === action.payload);
+            if (indexarr !== -1) { state.arr[indexarr].status = true }
+            const indexarr2 = state.arr2.findIndex((c) => c._id === action.payload);
+            if (indexarr2 !== -1) { state.arr2[indexarr2].status = true }
         }, delateitem: (state, action) => {
-            const index = state.arr.findIndex((c: any) => c._id === action.payload);
-            state.arr.splice(index, 1)
+            const indexarr = state.arr.findIndex((c) => c._id === action.payload);
+            if (indexarr !== -1) { state.arr.splice(indexarr, 1) }
+            const indexarr2 = state.arr2.findIndex((c) => c._id === action.payload);
+            if (indexarr2 !== -1) { state.arr2.splice(indexarr2, 1) }
         }
     }
 });
 // also exported fetchUsers at the top
-export const { addItem, updateitem, addItems, delateitem } = orders.actions;
+export const { addItems, updateitem, addfindItems, delateitem } = orders.actions;
 
 //export the reducer
 export default orders.reducer

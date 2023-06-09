@@ -22,16 +22,17 @@ function Page() {
     const [arr, setarr] = useState<Cardtype[]>([])
     const Navigate = useNavigate()
     let Dispatch = useAppDispatch()
-    const users22 = useAppSelector((s) => s.cardPants).users;
-    const users33 = useAppSelector((s) => s.cardshose).users;
-    const users11 = useAppSelector((s) => s.cardshirts).users;
-    const users2 = useAppSelector((s) => s.cardPants).findusers;
-    const users3 = useAppSelector((s) => s.cardshose).findusers;
-    const users1 = useAppSelector((s) => s.cardshirts).findusers;
+    const users22 = useAppSelector((s) => s.cardPants.users);
+    const users33 = useAppSelector((s) => s.cardshose.users);
+    const users11 = useAppSelector((s) => s.cardshirts.users);
+    const users2 = useAppSelector((s) => s.cardPants.findusers);
+    const users3 = useAppSelector((s) => s.cardshose.findusers);
+    const users1 = useAppSelector((s) => s.cardshirts.findusers);
+    const users12 = useAppSelector((s) => s.arrays.arrproduct);
     const { cart } = useAppSelector((s) => s.mycart);
 
     const getData = async (e: { category: string, id: string }) => {
-        await axios.get(`http://localhost:3001/cards/findOne/${e.category}/${e.id}`).then((e) => {
+        await axios.get(`http://localhost:3001/cards/findOne/${e.category}`, { params: { id: e.id } }).then((e) => {
             setTheitem(e.data)
             setState(e.data.stock[0].size)
             setcolor(e.data.stock[0].colors[0].color)
@@ -41,8 +42,8 @@ function Page() {
         });
     };
     const item = () => {
-        let arr: Cardtype[] = [...users22, ...users11, ...users33, ...users1, ...users2, ...users3]
-        let x = arr.find((e: Cardtype) => e._id === id)
+        let arr: Cardtype[] = [...users22, ...users11, ...users33, ...users1, ...users2, ...users3, ...users12]
+        let x = arr.find((e) => e._id === id)
         if (x !== undefined) {
             setTheitem(x)
             setState(x.stock[0].size)

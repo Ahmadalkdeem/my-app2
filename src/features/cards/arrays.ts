@@ -7,7 +7,8 @@ brands.map((e) => {
     array.push({ name: e.label, loading: false, error: "", users: [], findusers: [], search: false, value: { size: [], colors: [], brands: [], categorys: [], categorys2: [], stopfindusers: false, stopusers: false } })
 })
 const initialState: initialStatetype = {
-    arr: array
+    arr: array,
+    arrproduct: [],
 };
 
 // fetch user from api
@@ -15,7 +16,7 @@ const arrays = createSlice({
     name: "arrayss",
     initialState,
     reducers: {
-        addItem: (state, action) => {
+        addItems: (state, action) => {
             let index = state.arr.findIndex((e: item) => e.name === action.payload.name)
             let arr: Cardtype[] = []
             action.payload.arr.forEach((element: Cardtype) => {
@@ -25,6 +26,25 @@ const arrays = createSlice({
                 }
             });
             state.arr[index].users = [...state.arr[index].users, ...arr]
+            state.arrproduct = [...state.arrproduct, ...action.payload.arr]
+
+        }, addfindItems: (state, action) => {
+            let index = state.arr.findIndex((e: item) => e.name === action.payload.name)
+            state.arr[index].findusers = action.payload.arr
+            state.arrproduct = [...state.arrproduct, ...action.payload.arr]
+            state.arr[index].search = true
+            state.arr[index].value.stopfindusers = false
+        }, addfindItems2: (state, action) => {
+            let index = state.arr.findIndex((e: item) => e.name === action.payload.name)
+            let arr: Cardtype[] = []
+            action.payload.arr.forEach((element: Cardtype) => {
+                const i = state.arr[index].findusers.findIndex((c: Cardtype) => c._id === element._id);
+                if (i === -1) {
+                    arr.push(element)
+                }
+            });
+            state.arr[index].findusers = [...state.arr[index].findusers, ...arr]
+            state.arrproduct = [...state.arrproduct, ...action.payload.arr]
 
         },
         delteItem: (state, action) => {
@@ -39,14 +59,10 @@ const arrays = createSlice({
             // let index2 = state.arr.findIndex((e: any) => e.name === action.payload.name)
             // if (index2 !== undefined) return state.arr[index].users.splice(index, 1);
             // state.arr[index].users.splice(index, 1);
-        },
-        addfindusers: (state, action) => {
-            let index = state.arr.findIndex((e: item) => e.name === action.payload.name)
-            state.arr[index].findusers = action.payload.arr
-            state.arr[index].search = true
         }, search: (state, action) => {
             let index = state.arr.findIndex((e: item) => e.name === action.payload.name)
             state.arr[index].search = false
+            state.arr[index].value.stopfindusers = false
         }, onchange: (state, action) => {
             let index = state.arr.findIndex((e: item) => e.name === action.payload.name)
             state.arr[index].value = action.payload.slice
@@ -57,7 +73,7 @@ const arrays = createSlice({
     }
 });
 // also exported fetchUsers at the top
-export const { addItem, delteItem, search, onchange, addfindusers } = arrays.actions;
+export const { addItems, delteItem, search, onchange, addfindItems, addfindItems2 } = arrays.actions;
 
 //export the reducer
 export default arrays.reducer

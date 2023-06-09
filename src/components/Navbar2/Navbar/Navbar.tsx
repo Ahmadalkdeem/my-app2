@@ -7,6 +7,7 @@ import { Sling as Hamburger } from 'hamburger-react'
 import { useAppSelector } from '../../../app/hooks';
 import { NavLink } from "react-router-dom";
 import { TfiShoppingCartFull } from "react-icons/tfi";
+import { MdOutlineFavoriteBorder } from "react-icons/md";
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function MyNavbar() {
@@ -32,12 +33,15 @@ function MyNavbar() {
             <p className={css.p}>شحن مجاني حتى باب المنزل لكل طلبية فوق ₪349</p>
             <header className={color === true ? css.MyHeader : `${css.MyHeader} ${css.MyHeader2}`}>
                 <>
-                    <Navbar className={`${css.MyNavbar}`} expand="lg" onToggle={() => setNavbarExpanded(!navbarExpanded)} expanded={navbarExpanded}>
+                    <Navbar className={`${css.MyNavbar}`} expand="xl" onToggle={() => setNavbarExpanded(!navbarExpanded)} expanded={navbarExpanded}>
                         <div>
 
                             <img className={css.logo} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwzV_u0UjwQds2dccWrlW8TOF3RoJDRZ0-3Gv-7FUxIA&s" alt="logo" />
                             <NavLink className={css.icon} to='/Mycard'>
                                 <TfiShoppingCartFull size={33} />
+                            </NavLink>
+                            <NavLink className={css.icon} to='/Favorites'>
+                                <MdOutlineFavoriteBorder size={33} />
                             </NavLink>
                         </div>
                         <Navbar.Toggle onClick={() => {
@@ -67,7 +71,6 @@ function MyNavbar() {
                     </Navbar>
                 </>
                 {display === false ? '' : <div onMouseEnter={() => {
-                    console.log('aaa');
                     setdisplay(true)
                 }} onMouseOut={() => { setdisplay(false) }} className={css.divcatgres}></div>}
             </header>

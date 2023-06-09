@@ -11,10 +11,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { optionstype } from '../../@types/Mytypes';
 import { SizeOptions, brands, categorys2, categorys3, categorys4, stylelableOption, categorys, colourOptions, } from '../../arrays/list'
+import { addUpdate } from '../../features/cards/updates';
 function Editeproduct() {
+    let Dispatch = useAppDispatch()
     let Navigate = useNavigate()
     const getData = async (e: { category: string, id: string }) => {
-        await axios.get(`http://localhost:3001/cards/findOne/${e.category}/${e.id}`).then((response) => {
+        await axios.get(`http://localhost:3001/cards/findOne/${e.category}`, { params: { id: e.id } }).then((response) => {
             if (response.data !== null && response.data !== undefined) update(response.data)
             else Navigate('/')
         });
@@ -25,9 +27,10 @@ function Editeproduct() {
         window.scrollTo(0, 0)
     }, [])
     const [opsions, setopsions] = useState<any>([])
-    const [photo7, setphoto7] = useState<any>([])
+    const [error, seterror] = useState<string[]>([])
     const [photodelte, setphotodelte] = useState<any>([])
     const [photos, setphotos] = useState<any>([])
+    const [photo7, setphoto7] = useState<any>([])
     const [description, setdescription] = useState('')
     const [titel, settitel] = useState('')
     const [brand, setbrand] = useState('')
@@ -42,6 +45,7 @@ function Editeproduct() {
     const users3 = useAppSelector((s) => s.cardshose.users);
     const users2 = useAppSelector((s) => s.cardPants.users);
     const users = useAppSelector((s) => s.cardshirts.users);
+    const users4 = useAppSelector((s) => s.updates.update);
     const { accessToken } = useAppSelector((s) => s.user);
     const update = (x: Cardtype) => {
         setphotos(x.src)
@@ -56,9 +60,11 @@ function Editeproduct() {
         setSizeOptions2(x.stock)
     }
     const item = () => {
-        let x = [...users3, ...users, ...users2].find((e: any) => e._id === id)
-        if (x !== undefined) {
-            update(x)
+        let item = [...users3, ...users, ...users2].find((e: any) => e._id === id)
+        let updateItem = users4.find((e: any) => e._id === id)
+        if (item !== undefined) {
+            if (updateItem !== undefined) { return update(updateItem) }
+            update(item)
         } else {
             if (category === 'shoes') return getData({ category: 'shoes', id: `${id}` })
             if (category === 'Shirts') return getData({ category: 'Shirts', id: `${id}` })
@@ -85,23 +91,22 @@ function Editeproduct() {
     }
 
     const handleSaveStudentClicked = async () => {
-        if (description.length < 1500) console.log(true);
-        else { console.log(false); }
-        if (titel.length < 100) console.log(true);
-        else { console.log(false); }
+        let errors: string[] = []
+        if (Permissivecategory.length === 0) errors.push('תבחר כתוגרי ראשית')
+        if (secondarycategory.length === 0) errors.push('תבחר כתוגרי משנית')
+        if (brand.length === 0) errors.push('תבחר חברה')
+        if (titel.length === 0) errors.push('תכתוב כותרת')
+        if (saleprice.length === 0) errors.push('תכתוב מחיר מכירה')
+        if (regularprice.length === 0) errors.push('תכתוב מחיר רגיל')
+        if (fSizeOptions2.length === 0) errors.push('תבחר מידות ו צבעים')
+        if (description.length < 11) errors.push('תכתוב תיאור')
+        if (photo7.length === 0 || photos.length > 0) errors.push('תעלה תמונות')
+        seterror(errors)
+
         if (description.length > 0 && titel.length > 0 && brand.length > 0 && Permissivecategory.length > 0 && secondarycategory.length > 0 && saleprice > 0 && regularprice > 0 && fSizeOptions2.length > 0) {
             if (photo7.length > 0 || photos.length > 0) {
                 handleSaveStudentClicked2()
-            } else {
-                console.log('aaaa');
-
             }
-        }
-        else {
-            console.log(description.length, titel.length, brand.length, Permissivecategory.length, secondarycategory.length, saleprice, regularprice, fSizeOptions2.length);
-
-            console.log(false, false);
-
         }
     }
 
@@ -121,14 +126,14 @@ function Editeproduct() {
         formData.append('fcategory', fcategory)
         formData.append('photos', JSON.stringify(photos))
         formData.append('fSizeOptions2', JSON.stringify(fSizeOptions2))
-        axios.put(`http://localhost:3001/update/${id}/${accessToken}`, formData, {
-        }).then((res: any) => {
-            if (res.data.message === 'good') {
-                Swall({ titel: 'השיניום נשמרו בהצלחה', timer: 1500 })
-                setTimeout(() => {
-                    Navigate(-1)
-                }, 1500);
-            }
+        formData.append('id', `${id}`)
+        axios.put(`http://localhost:3001/update/${accessToken}`, formData, {
+        }).then((res) => {
+            Dispatch(addUpdate({ _id: id, ...res.data }))
+            Swall({ titel: 'השיניום נשמרו בהצלחה', timer: 1500 })
+            setTimeout(() => {
+                Navigate(-1)
+            }, 1500);
         }).catch((err: any) => {
             console.log(err);
             // console.log(err.response.data.error);
@@ -156,6 +161,12 @@ function Editeproduct() {
     return (
         <div className={css.myfdiv}>
             <h3>עריכת המוצר:</h3>
+            {error.length !== 0 && <>
+                {error.map((e, i) =>
+                    <p className='m-1' key={i}>{e}</p>
+                )}
+
+            </>}
             <div className="label-input d-flex flex-column">
                 <Select
                     options={categorys}

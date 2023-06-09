@@ -20,7 +20,6 @@ const cardpants = createSlice({
                         else {
                             state.cart[index].quantity = e.quantity + action.payload.quantity
                         }
-                        console.log('aaaaaaa');
 
                         x = true
                     }

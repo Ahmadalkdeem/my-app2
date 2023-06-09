@@ -108,7 +108,8 @@ export interface item {
 
 }
 export interface initialStatetype {
-    arr: item[]
+    arr: item[],
+    arrproduct: Cardtype[]
 
 }
 

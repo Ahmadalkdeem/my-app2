@@ -21,7 +21,7 @@ const User = () => {
                 seterrusername('')
                 return Dispatch(addItem(find))
             }
-            axios.post(`http://localhost:3001/users/getuser/${accessToken}`, { email: username }).then((response) => {
+            axios.get(`http://localhost:3001/users/getuser`, { params: { email: username, accessToken: accessToken } }).then((response) => {
                 setusername('')
                 seterrusername('')
 

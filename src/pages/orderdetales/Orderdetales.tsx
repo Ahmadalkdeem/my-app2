@@ -14,19 +14,22 @@ import Swall from '../../components/swal/Swal';
 const Orderdetales = () => {
     let Navigate = useNavigate()
     let Dispatch = useAppDispatch()
-    let { id2 } = useParams()
+    let { id } = useParams()
+    console.log(id);
+
     const { arr, arr2 } = useAppSelector((s) => s.orders)
     const { accessToken } = useAppSelector((s) => s.user)
     const [users, setusers] = useState<order>()
+
 
     const [index, setindex] = useState<number>()
 
     function getorder() {
 
-        axios.get(`http://localhost:3001/carts/getoneorder2/${accessToken}/${id2}`, {
+        axios.get(`http://localhost:3001/carts/getoneorderId`, {
+            params: { accessToken: accessToken, id: id }
         }).then((response) => {
             setusers(response.data[0])
-            console.log(response);
 
         }).catch((err: any) => {
             console.log(err);
@@ -35,23 +38,22 @@ const Orderdetales = () => {
 
     }
     useEffect(() => {
-        window.scrollTo(0, 0)//...arr, 
-        let item = [...arr2, ...arr].find((e) => e._id === id2)
+        window.scrollTo(0, 0)
+        let item = [...arr2, ...arr].find((e) => e._id === id)
         if (item === undefined) { getorder() }
         else {
-            setindex(arr.findIndex((e) => e._id === id2) + 1)
+            setindex(arr.findIndex((e) => e._id === id) + 1)
             setusers(item)
         }
-    }, [id2]);
+    }, [id]);
     return (
         <>
             {users === undefined || null ? <Spiner /> :
                 <>
                     <div className={css.Div}>
                         <input onClick={() => {
-                            axios.put(`http://localhost:3001/carts/putoneorder/${accessToken}/${id2}`, {
-                            }).then((response) => {
-                                Dispatch(updateitem(id2))
+                            axios.put(`http://localhost:3001/carts/putoneorder`, { params: { id: id, accessToken: accessToken } }).then((response) => {
+                                Dispatch(updateitem(id))
                                 Swall({ titel: 'ההזמנה בוצעה בהצלחה', timer: 1000 })
                                 Navigate(-1)
                             }).catch((err: any) => {

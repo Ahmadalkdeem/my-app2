@@ -29,9 +29,7 @@ const Items = (props: { arr: order[] }) => {
                             confirmButtonText: 'Save',
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                axios.delete(`http://localhost:3001/carts/delate/${accessToken}/${number._id}`, {
-                                }).then((response) => {
-                                    console.log(response);
+                                axios.delete(`http://localhost:3001/carts/delate`, { params: { id: number._id, accessToken: accessToken } }).then((response) => {
 
                                     if (response.data.Message === "susces") {
                                         Dispatch(delateitem(number._id))

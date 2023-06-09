@@ -34,6 +34,8 @@ import Restartpassword from './pages/logandsinin/Restartpassword';
 import Changepasword2 from './pages/changepasword/Changepasword';
 import Brandslist from './pages/Brandslist/Brandslist';
 import Brands from './pages/brands/Brands';
+import Favorites from './pages/favorites/Favorites';
+import { addItems } from './features/cards/favorites';
 function App() {
   let { roles } = useAppSelector(e => e.user)
   let Dispatch = useAppDispatch()
@@ -41,8 +43,14 @@ function App() {
   async function start() {
     const myData: any = localStorage.getItem("userdetalis");
     const cart: any = localStorage.getItem("cart");
+    const Favorites: any = localStorage.getItem("Favorites");
+    console.log(JSON.parse(Favorites));
+
     if (cart !== null && cart !== undefined) {
       Dispatch(AddArr(JSON.parse(cart)))
+    }
+    if (Favorites !== null && Favorites !== undefined) {
+      Dispatch(addItems(JSON.parse(Favorites)))
     }
     const cart2: any = JSON.parse(myData);
     Dispatch(fetchUsers())
@@ -51,9 +59,7 @@ function App() {
 
     if (myData !== null && myData !== undefined) {
       Dispatch(updatedetalise(cart2))
-      axios.post(`http://localhost:3001/api/auth/valtoken`, {
-        token: cart2.accessToken
-      }).then((response) => {
+      axios.post(`http://localhost:3001/api/auth/valtoken`, { params: { accessToken: cart2.accessToken } }).then((response) => {
         Dispatch(updatedetalise(response.data))
       }).catch(e => {
         console.log(e);
@@ -78,7 +84,7 @@ function App() {
       {/* <MyNavbar2 /> */}
       <MyNavbar />
       {/* <ChatComponent /> */}
-      <button onClick={() => {
+      {/* <button onClick={() => {
         axios.get(`http://localhost:3001/email/ahmad`, {
         }).then((response) => {
           // console.log(response.data);
@@ -86,7 +92,7 @@ function App() {
           console.log(e);
 
         })
-      }}>ahmad</button>
+      }}>ahmad</button> */}
       <Routes >
         <Route path='/' element={<Cardlist />} />
         <Route path='/connection' element={<Bootstrapform />} >
@@ -97,6 +103,7 @@ function App() {
         </Route>
         <Route path='/pasword/token/:token' element={<Changepasword2 />} />
         <Route path='/Brands' element={<Brands />} />
+        <Route path='/Favorites' element={<Favorites />} />
         <Route path='/Brands/:Brands' element={<Brandslist />} />
         <Route path='/about' element={<About />} />
         <Route path='/Mycard' element={<Mycart />} />
@@ -108,7 +115,7 @@ function App() {
           <Route path='/addproduct' element={<Editpage />} />
           <Route path='/data' element={<Data />} />
           <Route path='/orders' element={<Order />} />
-          <Route path='/orders/detales/:id2' element={<Orderdetales />} />
+          <Route path='/orders/detales/:id' element={<Orderdetales />} />
           <Route path='/Editeproduct/:category/:id' element={<Editeproduct />} />
           <Route path='/users' element={<Users />} />
         </>

@@ -38,9 +38,10 @@ function Shose() {
             const data = {
                 brands: arr,
                 colors: arr2,
-                sizes: arr3
+                sizes: arr3,
+                skip: 0
             };
-            axios.get(`http://localhost:3001/cards/filtering/shoesproduct/0`, { params: data }).then((response) => {
+            axios.get(`http://localhost:3001/cards/filtering/shoesproduct`, { params: data }).then((response) => {
                 setloding(true);
                 setdata(true)
                 return Dispatch(addfindusers(response.data))
@@ -72,9 +73,10 @@ function Shose() {
             const data = {
                 brands: arr,
                 colors: arr2,
-                sizes: arr3
+                sizes: arr3,
+                skip: findusers.length
             };
-            axios.get(`http://localhost:3001/cards/filtering/shoesproduct/${findusers.length}`, { params: data }).then((response) => {
+            axios.get(`http://localhost:3001/cards/filtering/shoesproduct`, { params: data }).then((response) => {
                 setdata(true)
                 Dispatch(addItem(response.data))
                 if (response.data.length === 0) {
@@ -92,7 +94,7 @@ function Shose() {
         if (data === true) {
 
             setdata(false)
-            axios.get(`http://localhost:3001/cards/filtering/shoesproduct/${users.length}`, {}).then((response) => {
+            axios.get(`http://localhost:3001/cards/filtering/shoesproduct`, { params: { skip: users.length } }).then((response) => {
                 setdata(true)
                 setloding(true);
                 Dispatch(addItem(response.data))

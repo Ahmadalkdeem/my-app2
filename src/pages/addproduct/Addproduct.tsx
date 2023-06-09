@@ -16,6 +16,7 @@ function Editpage() {
         window.scrollTo(0, 0)
     }, [])
     const [opsions, setopsions] = useState<any>([])
+    const [error, seterror] = useState<string[]>([])
     const [photo7, setphoto7] = useState<any>([])
     const [description, setdescription] = useState('')
     const [titel, settitel] = useState('')
@@ -57,16 +58,19 @@ function Editpage() {
 
 
     const handleSaveStudentClicked = async () => {
-        if (description.length < 1500) console.log(true);
-        else { console.log(false); }
-        if (titel.length < 100) console.log(true);
-        else { console.log(false); }
+        let errors: string[] = []
+        if (Permissivecategory.length === 0) errors.push('תבחר כתוגרי ראשית')
+        if (secondarycategory.length === 0) errors.push('תבחר כתוגרי משנית')
+        if (brand.length === 0) errors.push('תבחר חברה')
+        if (titel.length === 0) errors.push('תכתוב כותרת')
+        if (saleprice.length === 0) errors.push('תכתוב מחיר מכירה')
+        if (regularprice.length === 0) errors.push('תכתוב מחיר רגיל')
+        if (fSizeOptions2.length === 0) errors.push('תבחר מידות ו צבעים')
+        if (description.length < 11) errors.push('תכתוב תיאור')
+        if (photo7.length === 0) errors.push('תעלה תמונות')
+        seterror(errors)
         if (description.length > 0 && titel.length > 0 && brand.length > 0 && Permissivecategory.length > 0 && secondarycategory.length > 0 && saleprice.length > 0 && regularprice.length > 0 && fSizeOptions2.length > 0 && photo7.length > 0) {
             handleSaveStudentClicked2()
-        }
-        else {
-            console.log(false, false);
-
         }
     }
     const handleSaveStudentClicked2 = async () => {
@@ -102,6 +106,12 @@ function Editpage() {
     return (
         <div className={css.myfdiv}>
             <h3>הוספת מוצר:</h3>
+            {error.length !== 0 && <>
+                {error.map((e, i) =>
+                    <p className='m-1' key={i}>{e}</p>
+                )}
+
+            </>}
             <div className="label-input d-flex flex-column">
                 <Select
                     options={categorys}

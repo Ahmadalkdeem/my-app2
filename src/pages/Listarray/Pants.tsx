@@ -38,9 +38,10 @@ function Pants() {
             const data = {
                 brands: arr,
                 colors: arr2,
-                sizes: arr3
+                sizes: arr3,
+                skip: 0
             };
-            axios.get(`http://localhost:3001/cards/filtering/pantsproduct/0`, { params: data }).then((response) => {
+            axios.get(`http://localhost:3001/cards/filtering/pantsproduct`, { params: data }).then((response) => {
                 setloding(true);
                 setdata(true)
                 return Dispatch(addfindusers(response.data))
@@ -70,9 +71,11 @@ function Pants() {
             const data = {
                 brands: arr,
                 colors: arr2,
-                sizes: arr3
+                sizes: arr3,
+                skip: findusers.length
+
             };
-            axios.get(`http://localhost:3001/cards/filtering/pantsproduct/${findusers.length}`, { params: data }).then((response) => {
+            axios.get(`http://localhost:3001/cards/filtering/pantsproduct`, { params: data }).then((response) => {
                 setdata(true)
                 Dispatch(addItem(response.data))
                 if (response.data.length === 0) {
@@ -89,7 +92,7 @@ function Pants() {
     function getdata2() {
         if (data === true) {
             setdata(false)
-            axios.get(`http://localhost:3001/cards/filtering/pantsproduct/${users.length}`, {}).then((response) => {
+            axios.get(`http://localhost:3001/cards/filtering/pantsproduct`, { params: { skip: users.length } }).then((response) => {
                 setdata(true)
                 setloding(true);
                 Dispatch(addItem(response.data))
