@@ -58,7 +58,7 @@ const Users = () => {
                                             confirmButtonText: 'Save',
                                         }).then((result) => {
                                             if (result.isConfirmed) {
-                                                axios.delete(`http://localhost:3001/users`, { params: { id: user._id, accessToken: accessToken } }).then((response) => {
+                                                axios.delete(`${Url}users`, { params: { id: user._id, accessToken: accessToken } }).then((response) => {
 
                                                     if (response.data.Message === "susces") {
                                                         Dispatch(delteItem(user._id))
@@ -88,7 +88,7 @@ const Users = () => {
                                                 confirmButtonText: 'Save',
                                             }).then((result) => {
                                                 if (result.isConfirmed) {
-                                                    axios.put(`http://localhost:3001/users/user`, { params: { id: user._id, accessToken: accessToken } }).then((response) => {
+                                                    axios.put(`${Url}users/user`, { params: { id: user._id, accessToken: accessToken } }).then((response) => {
 
                                                         if (response.data.Message === 'susces') {
                                                             Dispatch(updateItem({ _id: user._id, roles: ['user'] }))
@@ -117,7 +117,7 @@ const Users = () => {
                                                 confirmButtonText: 'Save',
                                             }).then((result) => {
                                                 if (result.isConfirmed) {
-                                                    axios.put(`http://localhost:3001/users/admin`, { params: { id: user._id, accessToken: accessToken } }).then((response) => {
+                                                    axios.put(`${Url}users/admin`, { params: { id: user._id, accessToken: accessToken } }).then((response) => {
                                                         if (response.data.Message === 'susces') {
                                                             Dispatch(updateItem({ _id: user._id, roles: ['admin'] }))
                                                             Swal.fire({
