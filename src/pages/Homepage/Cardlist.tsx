@@ -7,6 +7,7 @@ import MYCarousel from '../../components/corsla/Carousel';
 import { Helmet } from "react-helmet";
 import List from '../../components/List/List';
 import { divcomponts } from '../../arrays/list';
+import H2 from '../../components/h2/H2';
 
 function Cardlist() {
     useEffect(() => {
@@ -24,7 +25,7 @@ function Cardlist() {
             </Helmet>
             <MYCarousel />
             <Myslider />
-            <h2 className={css.h2}>המוצרים החמים</h2>
+            <H2 h2='המוצרים החמים' />
             <List arr={[...users.slice(0, 10), ...item.slice(0, 10)]} />
             <div className={css.Div}>
                 {divcomponts.map((e, index: number) =>
