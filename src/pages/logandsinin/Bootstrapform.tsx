@@ -8,7 +8,6 @@ function Bootstrapform() {
     const [form, setform] = useState('כניסה');
     useEffect(() => {
         window.scrollTo(0, 0)
-        // Navigate('/connection/login')
     }, [])
 
     return (

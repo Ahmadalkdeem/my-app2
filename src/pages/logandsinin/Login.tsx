@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { addItems } from '../../features/cards/favorites';
+import { Url } from '../../arrays/list';
 const Login = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -32,9 +34,10 @@ const Login = () => {
             seterrusername('')
         }
         if (valpassword.test(password) && valMail.test(username)) {
-            axios.post('http://localhost:3001/api/auth/signin', { email: username, password: password }).then((response) => {
-                console.log(response.data);
-
+            axios.post(`${Url}api/auth/signin`, { email: username, password: password }).then((response) => {
+                if (response.data.favorite[0].products[0].length !== 0) {
+                    Dispatch(addItems(response.data.favorite[0].products[0]))
+                }
                 Dispatch(updatedetalise(response.data))
                 Navigate('/')
                 Swal.fire({

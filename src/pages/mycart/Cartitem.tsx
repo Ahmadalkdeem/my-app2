@@ -10,8 +10,7 @@ import { deleteCard, editCard } from '../../features/cards/mycart';
 
 import { BsTrash3 } from "react-icons/bs";
 import { useAppDispatch } from '../../app/hooks';
-//prouctorderdetales
-import { prouctorderdetales, Cardforcart } from '../../@types/Mytypes';
+import { Cardforcart } from '../../@types/Mytypes';
 const Cartitem = (props: Cardforcart) => {
     let Dispatch = useAppDispatch()
 

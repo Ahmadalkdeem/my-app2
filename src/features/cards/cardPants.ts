@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { Cardtype, sliCecatgre } from "../../@types/Mytypes";
 import axios from "axios";
+import { Url } from "../../arrays/list";
 const initialState: sliCecatgre = {
     loading: false,
     error: "",
@@ -11,11 +12,10 @@ const initialState: sliCecatgre = {
 };
 
 export const fetchUsers2 = createAsyncThunk<any[]>("user2/fetchUsers2", () =>
-    axios.get(`http://localhost:3001/cards/filtering/pantsproduct`, { params: { skip: 0 } }).then((res) => res.data)
+    axios.get(`${Url}cards/filtering/pantsproduct`, { params: { skip: 0 } }).then((res) => res.data)
 );
 
 
-// fetch user from api
 const cardpants = createSlice({
     name: "card2",
     initialState,

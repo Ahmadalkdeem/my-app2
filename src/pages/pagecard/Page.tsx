@@ -15,6 +15,7 @@ import Spiner from '../../components/Spiner/Spiner';
 import { Helmet } from "react-helmet";
 import { Cardtype } from '../../@types/Mytypes';
 import List from '../../components/List/List';
+import { Url } from '../../arrays/list';
 
 function Page() {
     let { id, fcategory } = useParams()
@@ -32,7 +33,7 @@ function Page() {
     const { cart } = useAppSelector((s) => s.mycart);
 
     const getData = async (e: { category: string, id: string }) => {
-        await axios.get(`http://localhost:3001/cards/findOne/${e.category}`, { params: { id: e.id } }).then((e) => {
+        await axios.get(`${Url}cards/findOne/${e.category}`, { params: { id: e.id } }).then((e) => {
             setTheitem(e.data)
             setState(e.data.stock[0].size)
             setcolor(e.data.stock[0].colors[0].color)

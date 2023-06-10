@@ -10,13 +10,13 @@ import { Cardtype } from '../../@types/Mytypes';
 import { useParams, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { optionstype } from '../../@types/Mytypes';
-import { SizeOptions, brands, categorys2, categorys3, categorys4, stylelableOption, categorys, colourOptions, } from '../../arrays/list'
+import { SizeOptions, brands, categorys2, categorys3, categorys4, stylelableOption, categorys, colourOptions, Url, } from '../../arrays/list'
 import { addUpdate } from '../../features/cards/updates';
 function Editeproduct() {
     let Dispatch = useAppDispatch()
     let Navigate = useNavigate()
     const getData = async (e: { category: string, id: string }) => {
-        await axios.get(`http://localhost:3001/cards/findOne/${e.category}`, { params: { id: e.id } }).then((response) => {
+        await axios.get(`${Url}cards/findOne/${e.category}`, { params: { id: e.id } }).then((response) => {
             if (response.data !== null && response.data !== undefined) update(response.data)
             else Navigate('/')
         });
@@ -127,7 +127,7 @@ function Editeproduct() {
         formData.append('photos', JSON.stringify(photos))
         formData.append('fSizeOptions2', JSON.stringify(fSizeOptions2))
         formData.append('id', `${id}`)
-        axios.put(`http://localhost:3001/update/${accessToken}`, formData, {
+        axios.put(`${Url}update/${accessToken}`, formData, {
         }).then((res) => {
             Dispatch(addUpdate({ _id: id, ...res.data }))
             Swall({ titel: 'השיניום נשמרו בהצלחה', timer: 1500 })

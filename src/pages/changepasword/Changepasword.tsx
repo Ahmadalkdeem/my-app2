@@ -5,6 +5,7 @@ import { valpassword } from '../../validators/validators';
 import { useAppDispatch } from '../../app/hooks';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Helmet } from "react-helmet";
+import { Url } from '../../arrays/list';
 const Changepasword = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -16,7 +17,7 @@ const Changepasword = () => {
     const [errpassword, seterrpassword] = useState('');
     const Restartpassword = () => {
         if (valpassword.test(password)) {
-            axios.post('http://localhost:3001/api/auth/Restartpassword2', { token: token, password: password }).then((response) => {
+            axios.post(`${Url}api/auth/Restartpassword2`, { token: token, password: password }).then((response) => {
                 if (response.data.good === 'good') {
                     console.log(true);
 

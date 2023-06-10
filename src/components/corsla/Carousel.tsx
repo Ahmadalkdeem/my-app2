@@ -4,12 +4,10 @@ import { AiFillBackward, AiFillForward } from "react-icons/ai";
 import css from './css.module.scss'
 import './mycss.css'
 import { useNavigate } from 'react-router-dom';
-import img from './Jeffries & Madison.png'
 const MYCarousel = () => {
     const Navigate = useNavigate()
     return (
         <Carousel interval={null} indicators={false} controls={false} nextIcon={<AiFillForward size={50} />} prevIcon={<AiFillBackward size={50} />} dir='ltr' className={`w-100 d-flex ${css.corsla}`}  >
-            {/* <Carousel.co className='border-1 bg-danger' /> */}
             <Carousel.Item>
                 <img
                     className={css.Imgcorsla}

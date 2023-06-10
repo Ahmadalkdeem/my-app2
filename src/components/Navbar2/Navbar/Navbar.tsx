@@ -8,10 +8,9 @@ import { useAppSelector } from '../../../app/hooks';
 import { NavLink } from "react-router-dom";
 import { TfiShoppingCartFull } from "react-icons/tfi";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
-import NavDropdown from 'react-bootstrap/NavDropdown';
 
 function MyNavbar() {
-    let { email, roles, username, accessToken } = useAppSelector(e => e.user)
+    let { roles } = useAppSelector(e => e.user)
     const [count, setCount] = useState(false);
     const [color, setcolor] = useState(false);
     const [display, setdisplay] = useState(false);

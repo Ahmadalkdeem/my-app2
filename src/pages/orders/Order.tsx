@@ -10,13 +10,14 @@ import { FiDelete, FiChevronsDown } from "react-icons/fi";
 import Swal from 'sweetalert2';
 import FindOrder from '../../components/item/Order';
 import Items from './Item';
+import { Url } from '../../arrays/list';
 const Order = () => {
     let Dispatch = useAppDispatch()
     const { arr, arr2 } = useAppSelector((s) => s.orders);
     const { accessToken } = useAppSelector((s) => s.user);
     const navigate = useNavigate();
     function getdata() {
-        axios.get(`http://localhost:3001/carts/getorders`, { params: { order: 'all', skip: arr.length, accessToken: accessToken } }).then((response) => {
+        axios.get(`${Url}carts/getorders`, { params: { order: 'all', skip: arr.length, accessToken: accessToken } }).then((response) => {
             Dispatch(addItems(response.data))
             if (response.data.length === 0) alert('אין יותר הזמנות')
         }).catch((err: any) => {

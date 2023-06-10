@@ -25,6 +25,7 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { deleteArr } from '../../features/cards/mycart';
 import { Cardforcart, prouctorderdetales } from '../../@types/Mytypes';
 import Swall from '../../components/swal/Swal';
+import { Url } from '../../arrays/list';
 const Mycart = () => {
     let { cart } = useAppSelector((s) => s.mycart)
     let Dispatch = useAppDispatch()
@@ -66,7 +67,7 @@ const Mycart = () => {
                 let Order = { fullname: fullname, Email: Email, Address: Address, Address2: Address2, City: City, Zip: Zip, pricecart: pricecart, cart: JSON.stringify(cart2) }
 
 
-                axios.post(`http://localhost:3001/carts/neworder`, {
+                axios.post(`${Url}carts/neworder`, {
                     ...Order
                 }).then((response) => {
                     console.log(response);

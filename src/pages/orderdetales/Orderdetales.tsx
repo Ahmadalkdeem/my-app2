@@ -11,6 +11,7 @@ import { updateitem } from '../../features/cards/orderdetales';
 import { useNavigate } from 'react-router-dom';
 import { order } from '../../@types/Mytypes';
 import Swall from '../../components/swal/Swal';
+import { Url } from '../../arrays/list';
 const Orderdetales = () => {
     let Navigate = useNavigate()
     let Dispatch = useAppDispatch()
@@ -26,7 +27,7 @@ const Orderdetales = () => {
 
     function getorder() {
 
-        axios.get(`http://localhost:3001/carts/getoneorderId`, {
+        axios.get(`${Url}carts/getoneorderId`, {
             params: { accessToken: accessToken, id: id }
         }).then((response) => {
             setusers(response.data[0])
@@ -52,7 +53,7 @@ const Orderdetales = () => {
                 <>
                     <div className={css.Div}>
                         <input onClick={() => {
-                            axios.put(`http://localhost:3001/carts/putoneorder`, { params: { id: id, accessToken: accessToken } }).then((response) => {
+                            axios.put(`${Url}carts/putoneorder`, { params: { id: id, accessToken: accessToken } }).then((response) => {
                                 Dispatch(updateitem(id))
                                 Swall({ titel: 'ההזמנה בוצעה בהצלחה', timer: 1000 })
                                 Navigate(-1)

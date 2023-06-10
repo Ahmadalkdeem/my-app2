@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
@@ -12,7 +11,7 @@ import Topnav from '../Navbar2/TopNav/Topnav';
 function OffcanvasExample() {
     const [categres, setcategres] = useState(window.innerWidth)
     const [show, setshow] = useState(false)
-    let { id, email, roles, username, accessToken } = useAppSelector(e => e.user)
+    let { roles } = useAppSelector(e => e.user)
 
     window.onresize = () => {
         setcategres(window.innerWidth)

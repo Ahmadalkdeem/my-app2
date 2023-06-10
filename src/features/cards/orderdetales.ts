@@ -38,7 +38,6 @@ const orders = createSlice({
         }
     }
 });
-// also exported fetchUsers at the top
 export const { addItems, updateitem, addfindItems, delateitem } = orders.actions;
 
 //export the reducer

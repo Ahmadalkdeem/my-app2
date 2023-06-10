@@ -8,6 +8,7 @@ import { updatedetalise } from '../../features/user/user';
 import { Helmet } from "react-helmet";
 import Swal from 'sweetalert2';
 import Swall from '../../components/swal/Swal';
+import { Url } from '../../arrays/list';
 const Signup = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -34,7 +35,7 @@ const Signup = () => {
         if (email === '') { seterremail('תקליד מייל') }
 
         if (valpassword.test(password) && valusername.test(username) && valMail.test(email)) {
-            axios.post('http://localhost:3001/api/auth/signup', { username: username, email: email, password: password }).then((response) => {
+            axios.post(`${Url}api/auth/signup`, { username: username, email: email, password: password }).then((response) => {
                 console.log(response.data);
                 Dispatch(updatedetalise(response.data.id))
                 Navigate('/')

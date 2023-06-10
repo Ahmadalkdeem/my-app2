@@ -2,7 +2,7 @@ import { optionstype, brandstype, div } from "../@types/Mytypes"
 import img from '../pages/Homepage/Red Modern New Arrival Shoes Instagram Post.png'
 import img2 from '../pages/Homepage/Blue Minimalist Fashion Denim Facebook Post.png'
 import img3 from '../pages/Homepage/White Modern T-shirts Giveaway (A4 Document).png'
-
+export const Url = 'http://localhost:3001/'
 export const brands: optionstype[] = [
     { value: 'Zara', label: 'Zara' },
     { value: 'H&M', label: 'H&M' },

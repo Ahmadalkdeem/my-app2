@@ -3,30 +3,28 @@ import Card from 'react-bootstrap/Card';
 import css from './card.module.scss'
 import Swal from "sweetalert2";
 import { Cardtype } from '../../@types/Mytypes';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { AiFillDelete, AiFillEdit } from "react-icons/ai";
-import { GiSelfLove } from "react-icons/gi";
-import { MdOutlineFavoriteBorder } from "react-icons/md";//GiSelfLove
-
+import { MdOutlineFavoriteBorder } from "react-icons/md";
+import { Url } from '../../arrays/list';
 import Carousel from 'react-bootstrap/Carousel';
-import { Fade } from "react-awesome-reveal";
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import axios from 'axios';
 import { addDelate } from '../../features/cards/updates';
 import { addItem } from '../../features/cards/favorites';
 function MyCard(props: Cardtype) {
     const [card, setcard] = useState<Cardtype>(props)
-    let { email, roles, username, accessToken } = useAppSelector(e => e.user)
+    let { roles, accessToken } = useAppSelector(e => e.user)
     let { delate, update } = useAppSelector(e => e.updates)
     let { arr } = useAppSelector(e => e.Favorites)
-    let isFavorites = arr.findIndex(e => e._id === props._id)
+    let isFavorites = arr.findIndex(e => e._id === card._id)
     let find = delate.findIndex(e => e === card._id)
 
     useEffect(() => {
         let item: any = update.find(e => e._id === props._id)
         if (item !== undefined || null) { setcard(item) }
         else { setcard(props) }
-    }, [props._id]); // Only re-run the ef
+    }, [props._id]);
 
     const Dispatch = useAppDispatch()
     const getData = async () => {
@@ -36,7 +34,7 @@ function MyCard(props: Cardtype) {
             confirmButtonText: 'Save',
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:3001/uplode/delete/${card.category}`, { params: { id: props._id, accessToken: accessToken } }).then((response) => {
+                axios.delete(`${Url}uplode/delete/${card.category}`, { params: { id: props._id, accessToken: accessToken } }).then((response) => {
                     if (response.data.Message === 'susces') {
                         Dispatch(addDelate(props._id))
                         Swal.fire({
@@ -66,7 +64,7 @@ function MyCard(props: Cardtype) {
                 <Card className={`${css.Card}`}>
                     <div className={`d-flex justify-content-between ${css.divicon}`}>
                         <MdOutlineFavoriteBorder color={isFavorites !== -1 ? 'red' : ''} size={35} onClick={() => {
-                            Dispatch(addItem(card))
+                            Dispatch(addItem({ card: card, accessToken: accessToken }))
                         }} />
                         {roles[0] === 'admin' && <>
                             <AiFillDelete onClick={getData} className={css.Icons} size={35} />

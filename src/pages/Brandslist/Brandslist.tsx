@@ -2,15 +2,16 @@ import React, { useState, useEffect, useRef } from 'react'
 import Select from 'react-select'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
-import { addItems, delteItem, search, onchange, addfindItems, addfindItems2 } from '../../features/cards/arrays'
+import { addItems, search, onchange, addfindItems, addfindItems2 } from '../../features/cards/arrays'
 import axios from 'axios'
 import css from './css.module.scss'
 import List from '../../components/List/List'
 import { item, Cardtype } from '../../@types/Mytypes'
 import Spiner from '../../components/Spiner/Spiner'
-import { brands, colourOptions, SizeOptions, SizeOptions2, stylelableOption, categorys4, categorys3, categorys2, categorys } from '../../arrays/list'
+import { brands, colourOptions, SizeOptions, SizeOptions2, stylelableOption, categorys4, categorys3, categorys2, categorys, Url } from '../../arrays/list'
 import { optionstype } from '../../@types/Mytypes'
 import Ops from '../../components/404/Ops'
+import H2 from '../../components/h2/H2'
 const Brandslist = () => {
     const [loding, setloding] = useState<Boolean>(false)
     const [lodingfind, setlodingfind] = useState<Boolean>(false)
@@ -23,7 +24,7 @@ const Brandslist = () => {
     let arr: any = item?.search === false ? item.users : item?.findusers
 
     function getdata() {
-        axios.get(`http://localhost:3001/cards/brands`, {
+        axios.get(`${Url}cards/brands`, {
             params: {
                 brands: [Brands], skip: item?.users.length
             }
@@ -70,7 +71,7 @@ const Brandslist = () => {
             categorys2: arr5,
             skip: 0
         };
-        axios.get(`http://localhost:3001/cards/brands/filtering`, { params: data }).then((response) => {
+        axios.get(`${Url}cards/brands/filtering`, { params: data }).then((response) => {
             setloding(false)
             setlodingfind(false)
             Dispatch(addfindItems({ name: Brands, arr: response.data }))
@@ -108,7 +109,7 @@ const Brandslist = () => {
             categorys2: arr5,
             skip: item?.findusers.length
         };
-        axios.get(`http://localhost:3001/cards/brands/filtering`, { params: data }).then((response) => {
+        axios.get(`${Url}cards/brands/filtering`, { params: data }).then((response) => {
             console.log(response);
             setlodingfind(false)
             Dispatch(addfindItems2({ name: Brands, arr: response.data }))
@@ -148,7 +149,7 @@ const Brandslist = () => {
 
     return (
         <>
-            <h2 className={css.h2}>{Brands}</h2>
+            <H2 h2={`${Brands}`} />
 
             <div className={css.selestdiv} >
                 <Select

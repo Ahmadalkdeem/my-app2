@@ -5,7 +5,7 @@ import Select from 'react-select'
 import { useState, useEffect } from 'react'
 import css from './css.module.scss'
 import axios from 'axios'
-import { stylelableOption, brands, colourOptions, SizeOptions } from '../../arrays/list'
+import { stylelableOption, brands, colourOptions, SizeOptions, Url } from '../../arrays/list'
 import { useAppDispatch } from '../../app/hooks'
 import { addfindusers, search as search22, onchange, addItem } from '../../features/cards/cardPants'
 import { optionstype } from '../../@types/Mytypes'
@@ -41,7 +41,7 @@ function Pants() {
                 sizes: arr3,
                 skip: 0
             };
-            axios.get(`http://localhost:3001/cards/filtering/pantsproduct`, { params: data }).then((response) => {
+            axios.get(`${Url}cards/filtering/pantsproduct`, { params: data }).then((response) => {
                 setloding(true);
                 setdata(true)
                 return Dispatch(addfindusers(response.data))
@@ -75,7 +75,7 @@ function Pants() {
                 skip: findusers.length
 
             };
-            axios.get(`http://localhost:3001/cards/filtering/pantsproduct`, { params: data }).then((response) => {
+            axios.get(`${Url}cards/filtering/pantsproduct`, { params: data }).then((response) => {
                 setdata(true)
                 Dispatch(addItem(response.data))
                 if (response.data.length === 0) {
@@ -92,7 +92,7 @@ function Pants() {
     function getdata2() {
         if (data === true) {
             setdata(false)
-            axios.get(`http://localhost:3001/cards/filtering/pantsproduct`, { params: { skip: users.length } }).then((response) => {
+            axios.get(`${Url}cards/filtering/pantsproduct`, { params: { skip: users.length } }).then((response) => {
                 setdata(true)
                 setloding(true);
                 Dispatch(addItem(response.data))

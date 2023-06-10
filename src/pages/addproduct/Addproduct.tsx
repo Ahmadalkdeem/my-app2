@@ -6,7 +6,7 @@ import css from './css.module.scss'
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineUpload } from "react-icons/ai";
 import { optionstype } from '../../@types/Mytypes';
-import { SizeOptions, brands, SizeOptions2, categorys3, categorys4, stylelableOption, categorys2, categorys, colourOptions, } from '../../arrays/list'
+import { SizeOptions, brands, SizeOptions2, categorys3, categorys4, stylelableOption, categorys2, categorys, colourOptions, Url, } from '../../arrays/list'
 import { useAppSelector } from '../../app/hooks';
 import Swall from '../../components/swal/Swal';
 
@@ -87,7 +87,7 @@ function Editpage() {
         formData.append('saleprice', saleprice)
         formData.append('regularprice', regularprice)
         formData.append('fSizeOptions2', JSON.stringify(fSizeOptions2))
-        axios.post(`http://localhost:3001/uplode/user-profile/${accessToken}`, formData, {
+        axios.post(`${Url}uplode/user-profile/${accessToken}`, formData, {
         }).then((res: any) => {
             console.log(res.data)
             if (res.data.message === 'good') {

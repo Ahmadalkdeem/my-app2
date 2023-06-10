@@ -6,6 +6,7 @@ import { useAppDispatch } from '../../app/hooks';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 import { updatedetalise } from '../../features/user/user';
+import { Url } from '../../arrays/list';
 const ForgotPassword = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -21,7 +22,7 @@ const ForgotPassword = () => {
 
     const login = () => {
         if (valMail.test(username) && valpassword.test(password) && valpassword.test(password2)) {
-            axios.post('http://localhost:3001/api/auth/ForgotPassword', { email: username, password: password, password2: password2 }).then((response) => {
+            axios.post(`${Url}api/auth/ForgotPassword`, { email: username, password: password, password2: password2 }).then((response) => {
                 Dispatch(updatedetalise(response.data))
             }).catch(e => {
                 console.log(e);

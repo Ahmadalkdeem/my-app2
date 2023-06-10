@@ -36,6 +36,7 @@ import Brandslist from './pages/Brandslist/Brandslist';
 import Brands from './pages/brands/Brands';
 import Favorites from './pages/favorites/Favorites';
 import { addItems } from './features/cards/favorites';
+import { Url } from './arrays/list';
 function App() {
   let { roles } = useAppSelector(e => e.user)
   let Dispatch = useAppDispatch()
@@ -44,7 +45,6 @@ function App() {
     const myData: any = localStorage.getItem("userdetalis");
     const cart: any = localStorage.getItem("cart");
     const Favorites: any = localStorage.getItem("Favorites");
-    console.log(JSON.parse(Favorites));
 
     if (cart !== null && cart !== undefined) {
       Dispatch(AddArr(JSON.parse(cart)))
@@ -59,8 +59,13 @@ function App() {
 
     if (myData !== null && myData !== undefined) {
       Dispatch(updatedetalise(cart2))
-      axios.post(`http://localhost:3001/api/auth/valtoken`, { params: { accessToken: cart2.accessToken } }).then((response) => {
+      axios.post(`${Url}api/auth/valtoken`, { params: { accessToken: cart2.accessToken } }).then((response) => {
+        console.log(response);
+
         Dispatch(updatedetalise(response.data))
+        if (response.data.favorite[0].products.length !== 0) {
+          Dispatch(addItems(response.data.favorite[0].products))
+        }
       }).catch(e => {
         console.log(e);
         Dispatch(updatedetalise({
@@ -85,7 +90,7 @@ function App() {
       <MyNavbar />
       {/* <ChatComponent /> */}
       {/* <button onClick={() => {
-        axios.get(`http://localhost:3001/email/ahmad`, {
+        axios.get(`${Url}email/ahmad`, {
         }).then((response) => {
           // console.log(response.data);
         }).catch(e => {

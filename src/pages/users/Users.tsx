@@ -9,6 +9,7 @@ import { FiDelete, FiChevronsDown } from "react-icons/fi";
 import { GiUpgrade } from "react-icons/gi";
 import Swal from 'sweetalert2';
 import User from '../../components/item/User';
+import { Url } from '../../arrays/list';
 const Users = () => {
 
     let Dispatch = useAppDispatch()
@@ -16,7 +17,7 @@ const Users = () => {
     const { accessToken } = useAppSelector((s) => s.user);
 
     function getdata() {
-        axios.get(`http://localhost:3001/users`, { params: { skip: arr.length, accessToken: accessToken } }).then((response) => {
+        axios.get(`${Url}users`, { params: { skip: arr.length, accessToken: accessToken } }).then((response) => {
             Dispatch(addItems(response.data))
             if (response.data.length === 0) { alert('אין יותר משתמשים') }
         }).catch((err: any) => {

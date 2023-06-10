@@ -5,6 +5,7 @@ import { valMail } from '../../validators/validators';
 import { useAppDispatch } from '../../app/hooks';
 import { addfindItems, addItems } from '../../features/cards/orderdetales';
 import { useAppSelector } from '../../app/hooks';
+import { Url } from '../../arrays/list';
 const Order = () => {
     const { accessToken } = useAppSelector((s) => s.user);
 
@@ -18,7 +19,7 @@ const Order = () => {
     const login = () => {
         if (valMail.test(email)) {
 
-            axios.get(`http://localhost:3001/carts/getoneorder`, { params: { email: email, accessToken: accessToken } }).then((response) => {
+            axios.get(`${Url}carts/getoneorder`, { params: { email: email, accessToken: accessToken } }).then((response) => {
                 if (response.data.length === 0) { return seterremail('אין הזמנות להמייל הזה') }
                 setemail('')
                 seterremail('')

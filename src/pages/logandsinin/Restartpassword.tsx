@@ -6,6 +6,7 @@ import { useAppDispatch } from '../../app/hooks';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 import { updatedetalise } from '../../features/user/user';
+import { Url } from '../../arrays/list';
 const Restartpassword = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -18,7 +19,7 @@ const Restartpassword = () => {
 
     const Restartpassword = () => {
         if (valMail.test(username)) {
-            axios.post('http://localhost:3001/api/auth/Restartpassword', { email: username }).then((response) => {
+            axios.post(`${Url}api/auth/Restartpassword`, { email: username }).then((response) => {
                 if (response.data.good === 'good') { }
             }).catch(e => {
                 console.log(e);

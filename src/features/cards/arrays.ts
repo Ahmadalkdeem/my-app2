@@ -11,7 +11,6 @@ const initialState: initialStatetype = {
     arrproduct: [],
 };
 
-// fetch user from api
 const arrays = createSlice({
     name: "arrayss",
     initialState,
@@ -46,19 +45,6 @@ const arrays = createSlice({
             state.arr[index].findusers = [...state.arr[index].findusers, ...arr]
             state.arrproduct = [...state.arrproduct, ...action.payload.arr]
 
-        },
-        delteItem: (state, action) => {
-            //const index = state.users.findIndex((c: Cardtype) => c._id === action.payload);
-
-            // let index = state.arr.findIndex((e: any) => e.name === action.payload.name)
-            // let index2 = state.arr.findIndex((e: any) => e.name === action.payload.name)
-            // let index3 = state.arr.findIndex((e: any) => e.name === action.payload.name)
-            // if (index !== undefined) return state.arr[index].users.splice(index, 1);
-
-
-            // let index2 = state.arr.findIndex((e: any) => e.name === action.payload.name)
-            // if (index2 !== undefined) return state.arr[index].users.splice(index, 1);
-            // state.arr[index].users.splice(index, 1);
         }, search: (state, action) => {
             let index = state.arr.findIndex((e: item) => e.name === action.payload.name)
             state.arr[index].search = false
@@ -73,7 +59,7 @@ const arrays = createSlice({
     }
 });
 // also exported fetchUsers at the top
-export const { addItems, delteItem, search, onchange, addfindItems, addfindItems2 } = arrays.actions;
+export const { addItems, search, onchange, addfindItems, addfindItems2 } = arrays.actions;
 
 //export the reducer
 export default arrays.reducer

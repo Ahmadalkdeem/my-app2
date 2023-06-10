@@ -6,10 +6,12 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import css from './css.module.scss'
 import Card from './../../components/card/Card'
 import { Container, Row, Col } from 'react-bootstrap';
-import { limet, sort, stylelableOption } from '../../arrays/list'
+import { Url, limet, sort, stylelableOption } from '../../arrays/list'
 import { eachDayOfInterval, format, isValid, isBefore, isAfter } from 'date-fns';
 import { addarr } from '../../features/user/Performence';
 import Spiner from '../../components/Spiner/Spiner';
+import List from '../../components/List/List';
+import H2 from '../../components/h2/H2';
 export const Data = () => {
     const [Loading, setloding] = useState(false)
     const [Loading2, setloding2] = useState(false)
@@ -18,7 +20,7 @@ export const Data = () => {
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
     const today = new Date();
     const { accessToken } = useAppSelector((s) => s.user);
-    const { data1, data2, data3 } = useAppSelector((s) => s.Performence);
+    const { data1, data2, data3, data4 } = useAppSelector((s) => s.Performence);
 
     const [mylist, setmylist] = useState('');
     const [startDate, setStartDate] = useState<string>(`${thirtyDaysAgo.getFullYear().toString()}-${(thirtyDaysAgo.getMonth() + 1).toString().padStart(2, '0')}-${thirtyDaysAgo.getDate().toString().padStart(2, '0')}`);
@@ -33,11 +35,12 @@ export const Data = () => {
             setloding2(true)
             getdata()
             topproduct()
+            favorites()
         }
     }, []);
 
     function getdata() {
-        axios.get(`http://localhost:3001/Performence/getorders/detales`, { params: { str: startDate, end: endDate, accessToken: accessToken } }).then((response) => {
+        axios.get(`${Url}Performence/getorders/detales`, { params: { str: startDate, end: endDate, accessToken: accessToken } }).then((response) => {
             setloding(false)
             let arr: any = []
             dates.map((date) => {
@@ -58,7 +61,7 @@ export const Data = () => {
             console.log(err.response.data.error);
         })
 
-        axios.get(`http://localhost:3001/Performence/getorders/count`, { params: { str: startDate, end: endDate, accessToken: accessToken } }).then((response) => {
+        axios.get(`${Url}Performence/getorders/count`, { params: { str: startDate, end: endDate, accessToken: accessToken } }).then((response) => {
             setloding(false)
             if (response.data.result[0] !== undefined) {
                 Dispatch(addarr({ name: 'data2', arr: response.data.result[0] }))
@@ -71,9 +74,17 @@ export const Data = () => {
         })
     }
     function topproduct() {
-        axios.get(`http://localhost:3001/Performence/detales`, { params: { str: startDate, end: endDate, accessToken: accessToken, limet: limet1, sort: sort1 } }).then((response) => {
+        axios.get(`${Url}Performence/detales`, { params: { str: startDate, end: endDate, accessToken: accessToken, limet: limet1, sort: sort1 } }).then((response) => {
             setloding2(false)
             Dispatch(addarr({ name: 'data3', arr: response.data }))
+        }).catch((err: any) => {
+            setloding2(false)
+            console.log(err);
+        })
+    }
+    function favorites() {
+        axios.get(`${Url}Performence/favorites`, { params: { str: startDate, end: endDate, accessToken: accessToken, limet: limet1, sort: sort1 } }).then((response) => {
+            Dispatch(addarr({ name: 'data4', arr: response.data[0].products }))
         }).catch((err: any) => {
             setloding2(false)
             console.log(err);
@@ -201,7 +212,8 @@ export const Data = () => {
 
                         </Row>
                     </Container></>}
-
+            <H2 h2='Favorites' />
+            <List arr={data4} />
         </>
     )
 }
