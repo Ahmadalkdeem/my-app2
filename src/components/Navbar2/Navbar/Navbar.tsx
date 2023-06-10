@@ -29,7 +29,7 @@ function MyNavbar() {
 
     return (
         <>
-            <p className={css.p}>شحن مجاني حتى باب المنزل لكل طلبية فوق ₪349</p>
+            <p className={css.p}>משלוח חינם עד הדלת בהזמנות מעל ₪349</p>
             <header className={color === true ? css.MyHeader : `${css.MyHeader} ${css.MyHeader2}`}>
                 <>
                     <Navbar className={`${css.MyNavbar}`} expand="xl" onToggle={() => setNavbarExpanded(!navbarExpanded)} expanded={navbarExpanded}>
