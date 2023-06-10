@@ -12,25 +12,18 @@ import { MdOutlineFavoriteBorder } from "react-icons/md";
 function MyNavbar() {
     let { roles } = useAppSelector(e => e.user)
     const [count, setCount] = useState(false);
-    const [color, setcolor] = useState(false);
     const [display, setdisplay] = useState(false);
     const [navbarExpanded, setNavbarExpanded] = useState(false);
     function closenavbar() {
         setNavbarExpanded(false)
         setCount(false)
     }
-    window.onscroll = () => {
-        if (window.scrollY >= 66) {
-            setcolor(true)
-        } else {
-            setcolor(false)
-        }
-    }
+
 
     return (
         <>
             <p className={css.p}>משלוח חינם עד הדלת בהזמנות מעל ₪349</p>
-            <header className={color === true ? css.MyHeader : `${css.MyHeader} ${css.MyHeader2}`}>
+            <header className={css.MyHeader}>
                 <>
                     <Navbar className={`${css.MyNavbar}`} expand="xl" onToggle={() => setNavbarExpanded(!navbarExpanded)} expanded={navbarExpanded}>
                         <div>
