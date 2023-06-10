@@ -154,7 +154,6 @@ export const Data = () => {
             </div>
             <div className='d-flex flex-wrap'>
                 <Select
-                    id='SizeOptions2'
                     options={sort}
                     onChange={(e: any) => {
                         console.log(e.value);
@@ -170,10 +169,9 @@ export const Data = () => {
                         setmylist('')
                     }}
                     className={mylist === 'SizeOptions2' ? `${css.selest}` : `${css.selest2}`}
-                    placeholder='מותגים'
+                    placeholder='סדר המוצרים'
                 />
                 <Select
-                    id='SizeOptions2'
                     options={limet}
                     onChange={(e: any) => {
                         console.log(e.value);
@@ -189,7 +187,7 @@ export const Data = () => {
                         setmylist('')
                     }}
                     className={mylist === 'SizeOptions' ? `${css.selest}` : `${css.selest2}`}
-                    placeholder='מותגים'
+                    placeholder='כמות המוצרים'
                 />
                 <input onClick={() => {
                     setloding2(true)
