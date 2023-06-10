@@ -35,8 +35,10 @@ const Login = () => {
         }
         if (valpassword.test(password) && valMail.test(username)) {
             axios.post(`${Url}api/auth/signin`, { email: username, password: password }).then((response) => {
-                if (response.data.favorite[0].products[0].length !== 0) {
-                    Dispatch(addItems(response.data.favorite[0].products[0]))
+                // console.log(response.data.favorite[0].products);
+
+                if (response.data.favorite[0].products.length !== 0) {
+                    Dispatch(addItems(response.data.favorite[0].products))
                 }
                 Dispatch(updatedetalise(response.data))
                 Navigate('/')
@@ -46,10 +48,6 @@ const Login = () => {
                     showConfirmButton: false,
                     timer: 1500
                 })
-                seterrusername('')
-                setusername('')
-                seterrpassword('')
-                setpassword('')
             }).catch(e => {
                 console.log(e);
 
