@@ -3,7 +3,6 @@ import css from './css.module.scss'
 import axios from 'axios';
 import { valMail, valpassword } from '../../validators/validators';
 import { useAppDispatch } from '../../app/hooks';
-import { useNavigate } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 import { updatedetalise } from '../../features/user/user';
 import { Url } from '../../arrays/list';
@@ -11,7 +10,6 @@ const ForgotPassword = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
-    let Navigate = useNavigate()
     let Dispatch = useAppDispatch()
     const [username, setusername] = useState('');
     const [errusername, seterrusername] = useState('');

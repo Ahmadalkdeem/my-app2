@@ -160,5 +160,4 @@ export const brands2: brandstype[] = [
     { value: `Louis Vuitton`, src: `https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-syWtyNstSFScxr3ECgHohLzc-zVdAOSEE13q0bYmeg&s` },
     { value: `Armani`, src: `https://logowik.com/content/uploads/images/877_emporioarmani.jpg` },
     { value: `Bershka`, src: `https://1000logos.net/wp-content/uploads/2023/04/bershka-logo.jpg` },
-
 ];

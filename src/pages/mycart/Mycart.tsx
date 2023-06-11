@@ -12,8 +12,6 @@ import {
     MDBTypography,
 } from "mdb-react-ui-kit";
 import { Helmet } from "react-helmet";
-
-import Swal from 'sweetalert2';
 import axios from 'axios';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
@@ -23,7 +21,7 @@ import css from './css.module.scss'
 import Cartitem from './Cartitem';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import { deleteArr } from '../../features/cards/mycart';
-import { Cardforcart, prouctorderdetales } from '../../@types/Mytypes';
+import { prouctorderdetales } from '../../@types/Mytypes';
 import Swall from '../../components/swal/Swal';
 import { Url } from '../../arrays/list';
 const Mycart = () => {
@@ -54,10 +52,7 @@ const Mycart = () => {
         if (cityRegex.test(City) === true) seterrCity(''); else seterrCity('שם העיר לא תקין');
         if (isZipRegex.test(Zip) === true) seterrZip(''); else seterrZip('המיקוד לא תקין');
         if (fullNameRegex.test(fullname) && valMail.test(Email) && addressRegex.test(Address) && cityRegex.test(City) && isZipRegex.test(Zip)) {
-            if (cart[0] === undefined || null) {
-                console.log('aa');
-
-            }
+            if (cart[0] === undefined || null) { }
             else {
                 let cart2: prouctorderdetales[] = []
                 cart.map((e) => {

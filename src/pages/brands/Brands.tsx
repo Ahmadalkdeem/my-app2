@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import css from './css.module.scss'
 import { Link } from 'react-router-dom';
 import { brands2 } from '../../arrays/list';
-import { Cardtype, brandstype } from '../../@types/Mytypes';
+import { brandstype } from '../../@types/Mytypes';
 import H2 from '../../components/h2/H2';
 const Brands = () => {
     const [serahre, setserahre] = useState<string>('');
@@ -14,7 +14,6 @@ const Brands = () => {
         <div className={css.div}>
             <H2 h2='מותגים' />
             <input value={serahre} onChange={(event) => setserahre(event.target.value)} className={css.input} type="text" placeholder='חיפוש...' />
-
 
             <Container fluid>
                 <Row xs={2} sm={3} lg={4} xxl={5}>

@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { addCard } from '../../features/cards/mycart';
 import './style.css'
-import Swal from 'sweetalert2';
 import Swall from '../../components/swal/Swal';
 import Spiner from '../../components/Spiner/Spiner';
 import { Helmet } from "react-helmet";

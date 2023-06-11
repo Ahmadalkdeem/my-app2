@@ -2,33 +2,34 @@ import { useState, useEffect } from 'react'
 import css from './css.module.scss'
 import axios from 'axios';
 import { valpassword } from '../../validators/validators';
-import { useAppDispatch } from '../../app/hooks';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Helmet } from "react-helmet";
 import { Url } from '../../arrays/list';
+import Swall from '../../components/swal/Swal';
 const Changepasword = () => {
+    let Navigate = useNavigate()
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
     let { token } = useParams();
-    let Navigate = useNavigate()
-    let Dispatch = useAppDispatch()
     const [password, setpassword] = useState('');
     const [errpassword, seterrpassword] = useState('');
     const Restartpassword = () => {
         if (valpassword.test(password)) {
             axios.post(`${Url}api/auth/Restartpassword2`, { token: token, password: password }).then((response) => {
+                console.log(response);
+
                 if (response.data.good === 'good') {
-                    console.log(true);
+                    Swall({ titel: 'סיסמה התעדכנה בהצלחה', timer: 2000 })
 
                 }
+                Navigate('/connection/login')
             }).catch(e => {
                 console.log(e);
             })
         }
         if (!valpassword.test(password)) {
             seterrpassword('הסיסמה צרכיה להיוות 8-14 שמיכלה מספרים ואותיות באגלית')
-
         } else {
             seterrpassword('')
         }

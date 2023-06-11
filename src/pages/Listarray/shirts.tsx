@@ -193,7 +193,7 @@ function Pants() {
                             className={mylist === 'SizeOptions3' ? `${css.selest}` : `${css.selest2}`}
                             placeholder='צבעים'
                         />
-                        <button onClick={() => {
+                        <button className={css.btn} onClick={() => {
                             if (value.size[0] === undefined && value.colors[0] === undefined && value.brands[0] === undefined) {
                                 return Dispatch(search1())
 

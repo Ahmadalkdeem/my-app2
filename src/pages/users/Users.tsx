@@ -62,7 +62,6 @@ const Users = () => {
 
                                                     if (response.data.Message === "susces") {
                                                         Dispatch(delteItem(user._id))
-                                                        //delteItem
                                                         Swal.fire({
                                                             icon: 'success',
                                                             title: 'המשתמש נמחק בהצלחה',

@@ -3,19 +3,8 @@ import css from './acording.module.scss'
 import { acording } from '../../@types/Acording'
 const data: acording[] = [
     {
-        question: 'תיאור', answer: `עד הבית או למקום העבודה שלך? משלוח מהיר ובטוח לאן שאת תחליטי.
-
-ברכישה עד 399₪ | 19.9₪
-
-ברכישה מעל 399₪ | משלוח חינם
-
-זמני אספקה:
-
-כמו שאת יודעת כל נעל שלנו מיוצרת בעבודת יד במיוחד עבורך מהרגע שאת מזמינה אותה! פה בארץ!
-מרגע הזמנה ועד שהנעל שלך מוכנה לשילוח לוקח עד 3 ימי עסקים. הנעל תגיע אליך עד 8 ימי עסקים מרגע ההזמנה.
-תודה על הסבלנות זה ישתלם לך!
-
-** כלות Brides - לבקשות למשלוח מהיר ודחוף, צרי קשר בטלפון, בוואטסאפ או השאירי פנייה פה בטופס` },
+        question: 'תיאור', answer: ``
+    },
     {
         question: 'משלוחיים', answer: `עד הבית או למקום העבודה שלך? משלוח מהיר ובטוח לאן שאת תחליטי.
 
@@ -26,8 +15,8 @@ const data: acording[] = [
 ]
 function Acording2(e: { aa: string }) {
     data[0].answer = e.aa
-    const [acording, setacording] = useState(null)
-    const toggle = (p: any) => {
+    const [acording, setacording] = useState<any>(null)
+    const toggle = (p: number) => {
         if (acording === p) {
             return setacording(null)
         }
@@ -36,9 +25,9 @@ function Acording2(e: { aa: string }) {
 
     return (
         <div>
-            {data.map((item: acording, i: any) => (
+            {data.map((item: acording, i: number) => (
                 <div key={i} className={css.item}>
-                    <div className={`${css.mytitel} d-flex justify-content-between`} onClick={() => { toggle(i) }} >
+                    <div className={`${css.titel} d-flex justify-content-between`} onClick={() => { toggle(i) }} >
                         <h5>{item.question}</h5>
                         <h5 className='fw-bold '>{acording === i ? '-' : '+'}</h5>
                     </div>

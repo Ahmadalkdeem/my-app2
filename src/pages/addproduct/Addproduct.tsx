@@ -57,7 +57,7 @@ function Editpage() {
     }
 
 
-    const handleSaveStudentClicked = async () => {
+    const handleSaveCardClicked = async () => {
         let errors: string[] = []
         if (Permissivecategory.length === 0) errors.push('תבחר כתוגרי ראשית')
         if (secondarycategory.length === 0) errors.push('תבחר כתוגרי משנית')
@@ -70,10 +70,10 @@ function Editpage() {
         if (photo7.length === 0) errors.push('תעלה תמונות')
         seterror(errors)
         if (description.length > 0 && titel.length > 0 && brand.length > 0 && Permissivecategory.length > 0 && secondarycategory.length > 0 && saleprice.length > 0 && regularprice.length > 0 && fSizeOptions2.length > 0 && photo7.length > 0) {
-            handleSaveStudentClicked2()
+            Savecard()
         }
     }
-    const handleSaveStudentClicked2 = async () => {
+    const Savecard = async () => {
         const formData = new FormData()
         for (let i = 0; i < 8; i++) {
             formData.append('profileImg', photo7[i])
@@ -104,7 +104,7 @@ function Editpage() {
     }
 
     return (
-        <div className={css.myfdiv}>
+        <div className={css.div}>
             <h3>הוספת מוצר:</h3>
             {error.length !== 0 && <>
                 {error.map((e, i) =>
@@ -138,7 +138,6 @@ function Editpage() {
                 <Select
                     options={brands}
                     onChange={(e: any) => {
-                        console.log(e);
                         setbrand(e.value)
                     }}
                     styles={stylelableOption}
@@ -148,7 +147,7 @@ function Editpage() {
                 <br />
                 <input placeholder='שם המוצר' onChange={(e) => {
                     settitel(e.target.value)
-                }} className={css.Myinput2} type="text" id='titel' />
+                }} className={css.input} type="text" id='titel' />
                 <br />
                 <input value={saleprice} placeholder='מחיר המכירה' onChange={(e: any) => {
 
@@ -158,7 +157,7 @@ function Editpage() {
                         setsaleprice(e.target.value)
                     }
 
-                }} className={css.Myinput2} type="number" id='titel' />
+                }} className={css.input} type="number" id='titel' />
                 <br />
                 <input value={regularprice} placeholder='מחיר הרגיל' onChange={(e: any) => {
                     if (e.target.value < 0) { }
@@ -166,7 +165,7 @@ function Editpage() {
                     else if (e.target.value.length < 7) {
                         setregularprice(e.target.value)
                     }
-                }} className={css.Myinput2} type="number" id='titel' />
+                }} className={css.input} type="number" id='titel' />
                 <br />
                 <Select
                     closeMenuOnSelect={false}
@@ -226,19 +225,19 @@ function Editpage() {
                 <textarea rows={4} id="description" onChange={(e) => {
                     setdescription(e.target.value)
                 }}
-                    className={css.Myinput2}
+                    className={css.input}
                     placeholder="description"
                 />
             </div>
-            <label className={css.mylable} htmlFor="files">
+            <label className={css.lable} htmlFor="files">
                 <AiOutlineUpload size={50} />
                 <h5>תבחר תמונות</h5>
             </label>
             <input id='files' onChange={(e: any) => {
-                setphoto7(e.target.files); console.log(e.target.files[0]);
-            }} type="file" accept=".jpg, .jpeg, .png, .svg, .gif" name="file" multiple className={css.Myinput} />
+                setphoto7(e.target.files);
+            }} type="file" accept=".jpg, .jpeg, .png, .svg, .gif" name="file" multiple className='d-none' />
             <br />
-            <button className={css.mybtn} onClick={handleSaveStudentClicked}>uplode</button>
+            <button className={css.btn} onClick={handleSaveCardClicked}>uplode</button>
         </div>
     )
 }

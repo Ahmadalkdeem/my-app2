@@ -1,8 +1,4 @@
-.Myinput {
-    display: none;
-}
-
-.mylable {
+.lable {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -12,16 +8,16 @@
     border-radius: 10px;
 }
 
-.myfdiv {
+.div {
     max-width: 1500px;
     margin: 0 auto;
     display: flex;
     margin-top: 10px;
-    padding: 0 10px;
+    padding: 0 5px;
     flex-direction: column;
 }
 
-.Myinput2 {
+.input {
     width: 100%;
     border-radius: 3px;
     border: 1.5px solid black;
@@ -30,7 +26,7 @@
     padding: 5px;
 }
 
-.mybtn {
+.btn {
     padding: 2px 0;
     font-size: 23px;
     margin-bottom: 10px;
@@ -39,7 +35,7 @@
     border: 1.5px solid black;
 }
 
-.mybtn:hover {
+.btn:hover {
     background-color: green;
 
 }

@@ -14,7 +14,7 @@ const User = () => {
     const [username, setusername] = useState('');
     const [errusername, seterrusername] = useState('');
 
-    const login = () => {
+    const Serahe = () => {
         if (valMail.test(username)) {
             let find = arr.find((e) => e.email === username)
             if (find !== undefined) {
@@ -45,14 +45,14 @@ const User = () => {
     }
     return (
         <>
-            <form className={`d-flex flex-column  p-2 ${css.form}`} action="">
-                <label className={css.lable} htmlFor="email">המייל:</label>
+            <form className={`d-flex flex-column p-2`} action="">
+                <label htmlFor="email">המייל:</label>
                 <div className='d-flex'>
 
                     <input value={username} onChange={(e) => {
                         setusername(e.target.value)
                     }} className='w-100' type="text" id='email' />
-                    <input className={css.btn} type="button" value="חיפוש" onClick={login} />
+                    <input type="button" value="חיפוש" onClick={Serahe} />
                 </div>
                 <p className={css.P}>{errusername === '' ? '' : errusername}</p>
 

@@ -35,8 +35,6 @@ const Login = () => {
         }
         if (valpassword.test(password) && valMail.test(username)) {
             axios.post(`${Url}api/auth/signin`, { email: username, password: password }).then((response) => {
-                // console.log(response.data.favorite[0].products);
-
                 if (response.data.favorite[0].products.length !== 0) {
                     Dispatch(addItems(response.data.favorite[0].products))
                 }

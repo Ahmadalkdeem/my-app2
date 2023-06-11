@@ -15,14 +15,14 @@ const Items = (props: { arr: order[] }) => {
     const navigate = useNavigate();
     return (
         <MDBTableBody>
-            {props.arr.map((number, i: number) =>
-                <tr className={number.status === true ? css.tr : ''} key={i}>
+            {props.arr.map((Order, i: number) =>
+                <tr className={Order.status === true ? css.tr : ''} key={i}>
                     <th onClick={() => {
-                        navigate(`/orders/detales/${number._id}`)
+                        navigate(`/orders/detales/${Order._id}`)
                     }} scope='row'>{i + 1}</th>
-                    <td> {number._id}</td>
-                    <td> {number.fullname}</td>
-                    <td> {number.Email}</td>
+                    <td> {Order._id}</td>
+                    <td> {Order.fullname}</td>
+                    <td> {Order.Email}</td>
                     <td><FiDelete onClick={() => {
                         Swal.fire({
                             title: 'האם אתה רוצה למחוק את ההזמנה?',
@@ -30,10 +30,10 @@ const Items = (props: { arr: order[] }) => {
                             confirmButtonText: 'Save',
                         }).then((result) => {
                             if (result.isConfirmed) {
-                                axios.delete(`${Url}carts/delate`, { params: { id: number._id, accessToken: accessToken } }).then((response) => {
+                                axios.delete(`${Url}carts/delate`, { params: { id: Order._id, accessToken: accessToken } }).then((response) => {
 
                                     if (response.data.Message === "susces") {
-                                        Dispatch(delateitem(number._id))
+                                        Dispatch(delateitem(Order._id))
                                         Swall({ titel: 'ההזמנה נמחקה בהצלחה', timer: 1000 })
                                     }
 

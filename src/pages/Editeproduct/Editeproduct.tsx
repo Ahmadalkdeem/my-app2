@@ -159,7 +159,7 @@ function Editeproduct() {
         }
     }, [Permissivecategory])
     return (
-        <div className={css.myfdiv}>
+        <div className={css.div}>
             <h3>עריכת המוצר:</h3>
             {error.length !== 0 && <>
                 {error.map((e, i) =>
@@ -171,7 +171,6 @@ function Editeproduct() {
                 <Select
                     options={categorys}
                     onChange={(e: any) => {
-                        console.log(e);
                         setPermissivecategory(e.value)
                     }}
                     styles={stylelableOption}
@@ -183,7 +182,6 @@ function Editeproduct() {
                     value={{ value: secondarycategory, label: secondarycategory }}
                     options={opsions}
                     onChange={(e: any) => {
-                        console.log(e);
                         setsecondarycategory(e.value)
                     }}
                     styles={stylelableOption}
@@ -193,7 +191,6 @@ function Editeproduct() {
                 <Select
                     options={brands}
                     value={{ value: brand, label: brand }}
-
                     onChange={(e: any) => {
                         setbrand(e.value)
                     }}
@@ -204,7 +201,7 @@ function Editeproduct() {
                 <br />
                 <input value={titel} placeholder='שם המוצר' onChange={(e) => {
                     settitel(e.target.value)
-                }} className={css.Myinput2} type="text" id='titel' />
+                }} className={css.input} type="text" id='titel' />
                 <br />
                 <input value={saleprice} placeholder='מחיר המכירה' onChange={(e: any) => {
 
@@ -214,7 +211,7 @@ function Editeproduct() {
                         setsaleprice(e.target.value)
                     }
 
-                }} className={css.Myinput2} type="number" id='titel' />
+                }} className={css.input} type="number" id='titel' />
                 <br />
                 <input value={regularprice} placeholder='מחיר הרגיל' onChange={(e: any) => {
                     if (e.target.value < 0) {
@@ -228,7 +225,7 @@ function Editeproduct() {
                         console.log(e.target.value[0]);
 
                     }
-                }} className={css.Myinput2} type="number" id='titel' />
+                }} className={css.input} type="number" id='titel' />
                 <br />
                 <Select
                     closeMenuOnSelect={false}
@@ -287,31 +284,31 @@ function Editeproduct() {
                 <textarea value={description} rows={4} id="description" onChange={(e) => {
                     setdescription(e.target.value)
                 }}
-                    className={css.Myinput2}
+                    className={css.input}
                     placeholder="description"
                 />
             </div>
-            <label className={css.mylable} htmlFor="files">
+            <label className={css.lable} htmlFor="files">
                 <AiOutlineUpload size={50} />
                 <h5>תבחר תמונות</h5>
             </label>
-            <input id='files' onChange={(e: any) => { setphoto7(e.target.files); }} type="file" accept=".jpg, .jpeg, .png, .svg, .gif" name="file" multiple className={css.Myinput} />
+            <input id='files' onChange={(e: any) => { setphoto7(e.target.files); }} type="file" accept=".jpg, .jpeg, .png, .svg, .gif" name="file" multiple className='d-none' />
             <br />
             <div className='d-flex justify-content-center align-items-center flex-wrap'>
                 {photos.map((src: string, i: number) =>
-                    <div key={i} className={css.mydiv}>
+                    <div key={i} className={css.div2}>
                         <AiFillDelete onClick={() => {
                             let index = photos.findIndex((e: string) => e === src)
-                            const newArray = [...photos]; // make a copy of the array
-                            newArray.splice(index, 1); // remove the item at the index
+                            const newArray = [...photos];
+                            newArray.splice(index, 1);
                             setphotodelte((e: []) => [...e, src])
                             setphotos(newArray)
-                        }} className={css.Mydelteicon} size={30} />
-                        <img className={css.Myimg} src={src} alt="" />
+                        }} className={css.delteicon} size={30} />
+                        <img className={css.img} src={src} alt="" />
                     </div>
                 )}
             </div>
-            <button className={css.mybtn} onClick={handleSaveStudentClicked}>update</button>
+            <button className={css.btn} onClick={handleSaveStudentClicked}>update</button>
         </div>
     )
 }

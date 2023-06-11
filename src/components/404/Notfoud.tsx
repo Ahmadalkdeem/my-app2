@@ -4,11 +4,11 @@ import { NavLink } from "react-router-dom";
 import { BiSad } from 'react-icons/bi';
 function Notfoud() {
     return (
-        <div className={css.mybody}>
-            <p className={css.myp}>
+        <div className={css.body}>
+            <p className={css.p}>
                 4<BiSad />4
             </p>
-            <p className={css.myp2}>! ops The page is not found</p>
+            <p className={css.p2}>! ops The page is not found</p>
             <NavLink className={css.link} to="/">back</NavLink>
 
         </div>

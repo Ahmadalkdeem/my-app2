@@ -1,18 +1,14 @@
 import { useState, useEffect } from 'react'
 import css from './css.module.scss'
 import axios from 'axios';
-import { valMail, valpassword } from '../../validators/validators';
-import { useAppDispatch } from '../../app/hooks';
-import { useNavigate } from 'react-router-dom';
+import { valMail } from '../../validators/validators';
 import { Helmet } from "react-helmet";
-import { updatedetalise } from '../../features/user/user';
 import { Url } from '../../arrays/list';
+import Swal from 'sweetalert2';
 const Restartpassword = () => {
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
-    let Navigate = useNavigate()
-    let Dispatch = useAppDispatch()
     const [username, setusername] = useState('');
     const [errusername, seterrusername] = useState('');
 
@@ -20,7 +16,14 @@ const Restartpassword = () => {
     const Restartpassword = () => {
         if (valMail.test(username)) {
             axios.post(`${Url}api/auth/Restartpassword`, { email: username }).then((response) => {
-                if (response.data.good === 'good') { }
+                console.log(response);
+
+                if (response.data.good === 'good') {
+                    Swal.fire({
+                        title: 'תשנה את הססיסמה דרך הקישור במייל',
+                        icon: 'success',
+                    })
+                }
             }).catch(e => {
                 console.log(e);
             })

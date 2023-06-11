@@ -14,3 +14,17 @@
     flex-wrap: wrap;
     gap: 5px;
 }
+
+.btn {
+    background-color: green;
+    padding: 0 5px;
+    height: 35px;
+    font-size: 20px;
+    border-radius: 2px;
+    border: 1.5px solid black;
+}
+
+.btn:hover {
+    background-color: rgba(0, 128, 0, 0.871);
+
+}

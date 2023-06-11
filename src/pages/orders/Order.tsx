@@ -15,7 +15,6 @@ const Order = () => {
     let Dispatch = useAppDispatch()
     const { arr, arr2 } = useAppSelector((s) => s.orders);
     const { accessToken } = useAppSelector((s) => s.user);
-    const navigate = useNavigate();
     function getdata() {
         axios.get(`${Url}carts/getorders`, { params: { order: 'all', skip: arr.length, accessToken: accessToken } }).then((response) => {
             Dispatch(addItems(response.data))

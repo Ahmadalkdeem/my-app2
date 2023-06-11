@@ -16,14 +16,12 @@ const Order = () => {
     const [email, setemail] = useState('');
     const [erremail, seterremail] = useState('');
 
-    const login = () => {
+    const Serahe = () => {
         if (valMail.test(email)) {
-
             axios.get(`${Url}carts/getoneorder`, { params: { email: email, accessToken: accessToken } }).then((response) => {
                 if (response.data.length === 0) { return seterremail('אין הזמנות להמייל הזה') }
                 setemail('')
                 seterremail('')
-                // Dispatch(addItems(response.data))
                 Dispatch(addfindItems(response.data))
             }).catch(e => {
                 if (e.response.data.message === 'No Such User') {
@@ -46,14 +44,13 @@ const Order = () => {
     }
     return (
         <>
-            <form className={`d-flex flex-column  p-2 ${css.form}`} action="">
-                <label className={css.lable} htmlFor="email">המייל:</label>
+            <form className={`d-flex flex-column  p-2`} action="">
+                <label htmlFor="email">המייל:</label>
                 <div className='d-flex'>
-
                     <input value={email} onChange={(e) => {
                         setemail(e.target.value)
                     }} className='w-100' type="text" id='email' />
-                    <input className={css.btn} type="button" value="חיפוש" onClick={login} />
+                    <input type="button" value="חיפוש" onClick={Serahe} />
                 </div>
                 <p className={css.P}>{erremail === '' ? '' : erremail}</p>
 

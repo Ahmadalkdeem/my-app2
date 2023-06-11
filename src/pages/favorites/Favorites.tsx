@@ -5,7 +5,6 @@ import css from './css.module.scss'
 import H2 from '../../components/h2/H2'
 const Favorites = () => {
     let { arr } = useAppSelector(e => e.Favorites)
-
     return (
         <>
             <H2 h2='Favorites' />

@@ -18,28 +18,26 @@ export const Data = () => {
     let Dispatch = useAppDispatch()
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
-    const today = new Date();
     const { accessToken } = useAppSelector((s) => s.user);
     const { data1, data2, data3, data4 } = useAppSelector((s) => s.Performence);
-
     const [mylist, setmylist] = useState('');
-    const [startDate, setStartDate] = useState<string>(`${thirtyDaysAgo.getFullYear().toString()}-${(thirtyDaysAgo.getMonth() + 1).toString().padStart(2, '0')}-${thirtyDaysAgo.getDate().toString().padStart(2, '0')}`);
-    const [endDate, setEndDate] = useState<string>(`${today.getFullYear().toString()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`);
+    const [startDate, setStartDate] = useState<string>(`2023-05-10`);
+    const [endDate, setEndDate] = useState<string>(`2023-06-10`);
     const dates = eachDayOfInterval({ start: new Date(startDate), end: new Date(endDate) });
-    const [sort1, setsort1] = useState('-1');
-    const [limet1, setlimet1] = useState('10');
+    const [sort1, setsort1] = useState(-1);
+    const [limet1, setlimet1] = useState(10);
     useEffect(() => {
         window.scrollTo(0, 0)
         if (data1.length < 1) {
             setloding(true)
             setloding2(true)
-            getdata()
-            topproduct()
+            getOrdersDetalese()
+            topProduct()
             favorites()
         }
     }, []);
 
-    function getdata() {
+    function getOrdersDetalese() {
         axios.get(`${Url}Performence/getorders/detales`, { params: { str: startDate, end: endDate, accessToken: accessToken } }).then((response) => {
             setloding(false)
             let arr: any = []
@@ -73,7 +71,7 @@ export const Data = () => {
             console.log(err);
         })
     }
-    function topproduct() {
+    function topProduct() {
         axios.get(`${Url}Performence/detales`, { params: { str: startDate, end: endDate, accessToken: accessToken, limet: limet1, sort: sort1 } }).then((response) => {
             setloding2(false)
             Dispatch(addarr({ name: 'data3', arr: response.data }))
@@ -147,7 +145,7 @@ export const Data = () => {
                         }} />
                     </label>
                     <input type="button" value="click" onClick={() => {
-                        getdata()
+                        getOrdersDetalese()
                         setloding(true)
                     }} />
                 </form>
@@ -156,8 +154,6 @@ export const Data = () => {
                 <Select
                     options={sort}
                     onChange={(e: any) => {
-                        console.log(e.value);
-
                         setsort1(e.value)
                     }}
                     styles={stylelableOption}
@@ -174,8 +170,6 @@ export const Data = () => {
                 <Select
                     options={limet}
                     onChange={(e: any) => {
-                        console.log(e.value);
-
                         setlimet1(e.value)
                     }}
                     styles={stylelableOption}
@@ -191,25 +185,22 @@ export const Data = () => {
                 />
                 <input onClick={() => {
                     setloding2(true)
-                    topproduct()
+                    topProduct()
                 }} className='btn btn-primary' type="button" value="click" />
             </div>
             {Loading2 ? <Spiner /> :
-                <>
+                <Container fluid>
+                    <Row xs={2} sm={3} lg={4} xxl={5}>
 
-                    <Container fluid>
-                        <Row xs={2} sm={3} lg={4} xxl={5}>
-
-                            {data3.map((e: any, index: number) =>
-                                <Col key={index} className="mt-2 p-1">
-                                    {e.shoes_product !== undefined && <Card {...e.shoes_product} key={index} />}
-                                    {e.pants_product !== undefined && <Card {...e.pants_product} key={index} />}
-                                    {e.shirts_product !== undefined && <Card {...e.shirts_product} key={index} />}
-                                </Col>
-                            )}
-
-                        </Row>
-                    </Container></>}
+                        {data3.map((e: any, index: number) =>
+                            <Col key={index} className="mt-2 p-1">
+                                {e.shoes_product !== undefined && <Card {...e.shoes_product} key={index} />}
+                                {e.pants_product !== undefined && <Card {...e.pants_product} key={index} />}
+                                {e.shirts_product !== undefined && <Card {...e.shirts_product} key={index} />}
+                            </Col>
+                        )}
+                    </Row>
+                </Container>}
             <H2 h2='Favorites' />
             <List arr={data4} />
         </>

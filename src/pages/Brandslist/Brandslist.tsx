@@ -6,9 +6,8 @@ import { addItems, search, onchange, addfindItems, addfindItems2 } from '../../f
 import axios from 'axios'
 import css from './css.module.scss'
 import List from '../../components/List/List'
-import { item, Cardtype } from '../../@types/Mytypes'
 import Spiner from '../../components/Spiner/Spiner'
-import { brands, colourOptions, SizeOptions, SizeOptions2, stylelableOption, categorys4, categorys3, categorys2, categorys, Url } from '../../arrays/list'
+import { colourOptions, SizeOptions, SizeOptions2, stylelableOption, categorys4, categorys3, categorys2, categorys, Url } from '../../arrays/list'
 import { optionstype } from '../../@types/Mytypes'
 import Ops from '../../components/404/Ops'
 import H2 from '../../components/h2/H2'
@@ -29,12 +28,8 @@ const Brandslist = () => {
                 brands: [Brands], skip: item?.users.length
             }
         }).then((response) => {
-            console.log(response);
-
             setloding(false)
             setlodingfind(false)
-
-
             Dispatch(addItems({ name: Brands, arr: response.data }))
             if (response.data[0] === undefined) {
                 Dispatch(onchange({ name: item?.name, slice: { size: item?.value.size, colors: item?.value.colors, brands: item?.value.brands, stopfindusers: item?.value.stopfindusers, stopusers: true, categorys: item?.value.categorys, categorys2: item?.value.categorys2 } }))
@@ -45,7 +40,7 @@ const Brandslist = () => {
         })
     }
 
-    function getdata2() {
+    function getFinddData() {
         setloding(true)
         let arr2: any = []
         item?.value.colors.map((e: optionstype) => {
@@ -84,7 +79,7 @@ const Brandslist = () => {
 
         })
     }
-    function getdata3() {
+    function moreFindData() {
         let arr2: any = []
         item?.value.colors.map((e: optionstype) => {
             arr2.push(e.value)
@@ -134,7 +129,7 @@ const Brandslist = () => {
             if (lodingfind === false && loding === false) {
                 setlodingfind(true)
                 if (item?.search === false) { if (item.value.stopusers === false) { getdata() } }
-                else { if (item?.value.stopfindusers === false) { getdata3() } }
+                else { if (item?.value.stopfindusers === false) { moreFindData() } }
             }
         }
     }
@@ -169,8 +164,7 @@ const Brandslist = () => {
                         setmylist('')
                     }}
                     className={mylist === 'SizeOptions' ? `${css.selest}` : `${css.selest2}`}
-                    placeholder='כתוגרי רשית'
-                />
+                    placeholder='כתוגרי רשית' />
                 <Select
                     isMulti
                     value={item?.value.categorys2}
@@ -230,15 +224,14 @@ const Brandslist = () => {
                     className={mylist === 'SizeOptions4' ? `${css.selest}` : `${css.selest2}`}
                     placeholder='צבעים'
                 />
-                <button onClick={() => {
-                    if (item?.value.size[0] === undefined && item?.value.categorys[0] === undefined && item?.value.categorys2[0] === undefined && item?.value.colors[0] === undefined) {//&& item?.value.brands[0] === undefined
+                <button className={css.btn} onClick={() => {
+                    if (item?.value.size[0] === undefined && item?.value.categorys[0] === undefined && item?.value.categorys2[0] === undefined && item?.value.colors[0] === undefined) {
                         return Dispatch(search({ name: item?.name }))
-
                     }
                     setloding(true);
-                    getdata2();
+                    getFinddData();
                 }
-                }> Click </button>
+                }>Serahe</button>
 
             </div>
 

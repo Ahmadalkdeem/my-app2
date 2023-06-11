@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../app/hooks';
 import { updatedetalise } from '../../features/user/user';
 import { Helmet } from "react-helmet";
-import Swal from 'sweetalert2';
 import Swall from '../../components/swal/Swal';
 import { Url } from '../../arrays/list';
 const Signup = () => {
