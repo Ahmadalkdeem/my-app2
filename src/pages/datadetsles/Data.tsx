@@ -19,7 +19,9 @@ export const Data = () => {
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
     const { accessToken } = useAppSelector((s) => s.user);
-    const { data1, data2, data3, data4 } = useAppSelector((s) => s.Performence);
+    const { data1, data2, data3 } = useAppSelector((s) => s.Performence);
+    console.log(data2);
+    console.log(data1);
 
     const [mylist, setmylist] = useState('');
     const [startDate, setStartDate] = useState<string>(`2023-05-10`);
@@ -42,8 +44,6 @@ export const Data = () => {
             setloding(false)
             let arr: any = []
             dates.map((date) => {
-
-
                 let item = response.data.find((e: any) => e._id.date === format(date, 'dd-MM-yyyy'))
                 if (item === undefined) {
                     arr.push({ _id: { date: format(date, 'dd-MM-yyyy') }, totalPrice: 0, count: 0, avg: 0 })
@@ -57,18 +57,6 @@ export const Data = () => {
 
             console.log(err);
             console.log(err.response.data.error);
-        })
-
-        axios.get(`${Url}Performence/getorders/count`, { params: { str: startDate, end: endDate, accessToken: accessToken } }).then((response) => {
-            setloding(false)
-            if (response.data.result[0] !== undefined) {
-                Dispatch(addarr({ name: 'data2', arr: response.data.result[0] }))
-            }
-
-        }).catch((err: any) => {
-            setloding(false)
-
-            console.log(err);
         })
     }
     async function topProduct() {
