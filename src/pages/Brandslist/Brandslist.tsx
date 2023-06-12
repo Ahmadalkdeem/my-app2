@@ -12,8 +12,8 @@ import { optionstype } from '../../@types/Mytypes'
 import Ops from '../../components/404/Ops'
 import H2 from '../../components/h2/H2'
 const Brandslist = () => {
-    const [loding, setloding] = useState<Boolean>(false)
-    const [lodingfind, setlodingfind] = useState<Boolean>(false)
+    const [lodingg, setlodingg] = useState<Boolean>(false)
+    const [lodinggfind, setlodinggfind] = useState<Boolean>(false)
     const [mylist, setmylist] = useState('');
 
     let Dispatch = useAppDispatch()
@@ -28,20 +28,20 @@ const Brandslist = () => {
                 brands: [Brands], skip: item?.users.length
             }
         }).then((response) => {
-            setloding(false)
-            setlodingfind(false)
+            setlodingg(false)
+            setlodinggfind(false)
             Dispatch(addItems({ name: Brands, arr: response.data }))
             if (response.data[0] === undefined) {
                 Dispatch(onchange({ name: item?.name, slice: { size: item?.value.size, colors: item?.value.colors, brands: item?.value.brands, stopfindusers: item?.value.stopfindusers, stopusers: true, categorys: item?.value.categorys, categorys2: item?.value.categorys2 } }))
             }
         }).catch(e => {
             console.log(e);
-            setloding(false)
+            setlodingg(false)
         })
     }
 
     function getFinddData() {
-        setloding(true)
+        setlodingg(true)
         let arr2: any = []
         item?.value.colors.map((e: optionstype) => {
             arr2.push(e.value)
@@ -67,8 +67,8 @@ const Brandslist = () => {
             skip: 0
         };
         axios.get(`${Url}cards/brands/filtering`, { params: data }).then((response) => {
-            setloding(false)
-            setlodingfind(false)
+            setlodingg(false)
+            setlodinggfind(false)
             Dispatch(addfindItems({ name: Brands, arr: response.data }))
             if (response.data[0] === undefined) {
                 Dispatch(onchange({ name: item?.name, slice: { size: item?.value.size, colors: item?.value.colors, brands: item?.value.brands, stopfindusers: true, stopusers: item?.value.stopusers, categorys: item?.value.categorys, categorys2: item?.value.categorys2 } }))
@@ -105,8 +105,7 @@ const Brandslist = () => {
             skip: item?.findusers.length
         };
         axios.get(`${Url}cards/brands/filtering`, { params: data }).then((response) => {
-            console.log(response);
-            setlodingfind(false)
+            setlodinggfind(false)
             Dispatch(addfindItems2({ name: Brands, arr: response.data }))
             if (response.data[0] === undefined) {
                 Dispatch(onchange({ name: item?.name, slice: { size: item?.value.size, colors: item?.value.colors, brands: item?.value.brands, stopfindusers: true, stopusers: item?.value.stopusers, categorys: item?.value.categorys, categorys2: item?.value.categorys2 } }))
@@ -126,8 +125,8 @@ const Brandslist = () => {
         const scrollPercentage = (scrollPosition / (bodyHeight - windowHeight)) * 100;
 
         if (scrollPercentage > 65 && scrollPercentage <= 100) {
-            if (lodingfind === false && loding === false) {
-                setlodingfind(true)
+            if (lodinggfind === false && lodingg === false) {
+                setlodinggfind(true)
                 if (item?.search === false) { if (item.value.stopusers === false) { getdata() } }
                 else { if (item?.value.stopfindusers === false) { moreFindData() } }
             }
@@ -137,7 +136,7 @@ const Brandslist = () => {
         window.scrollTo(0, 0)
         if (item === undefined) return Navigate('/')
         if (item.users.length === 0) {
-            setloding(true)
+            setlodingg(true)
             return getdata()
         }
     }, [Brands])
@@ -228,7 +227,7 @@ const Brandslist = () => {
                     if (item?.value.size[0] === undefined && item?.value.categorys[0] === undefined && item?.value.categorys2[0] === undefined && item?.value.colors[0] === undefined) {
                         return Dispatch(search({ name: item?.name }))
                     }
-                    setloding(true);
+                    setlodingg(true);
                     getFinddData();
                 }
                 }>Serahe</button>
@@ -236,8 +235,8 @@ const Brandslist = () => {
             </div>
 
 
-            {loding && <Spiner />}
-            {loding === false && <>
+            {lodingg && <Spiner />}
+            {lodingg === false && <>
                 {arr?.length === 0 ?
                     <>
                         {item?.search === false ? <Ops p='אין מוצרים' /> :

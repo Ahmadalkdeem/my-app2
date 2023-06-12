@@ -6,7 +6,6 @@ import css from './css.module.scss'
 import { Container, Row, Col } from 'react-bootstrap';
 import { addarr } from '../../features/user/Performence';
 import Card from '../../components/card/Card'
-import List from '../../components/List/List';
 import H2 from '../../components/h2/H2';
 import { colourOptions, SizeOptions, SizeOptions2, stylelableOption, categorys4, categorys3, categorys2, categorys, Url, brands } from '../../arrays/list'
 const Topproduct = (Props: { str: string, end: string, limet: number, sort: number }) => {
@@ -32,12 +31,8 @@ const Topproduct = (Props: { str: string, end: string, limet: number, sort: numb
 
     async function topProduct() {
         axios.get(`${Url}Performence/detales`, { params: { str: Props.str, end: Props.end, accessToken: accessToken, limet: Props.limet, sort: Props.sort, colors: color, sizes: sizes, categorys2: category, categorys: categorysPrimere, brands: brandss } }).then((response) => {
-            console.log(response);
-
-            // setloding2(false)
             Dispatch(addarr({ name: 'data3', arr: response.data }))
         }).catch((err: any) => {
-            // setloding2(false)
             console.log(err);
         })
     }
