@@ -3,15 +3,18 @@ import { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import css from './css.module.scss'
+import { Container, Row, Col } from 'react-bootstrap';
 import { addarr } from '../../features/user/Performence';
+import Card from '../../components/card/Card'
 import List from '../../components/List/List';
 import H2 from '../../components/h2/H2';
 import { colourOptions, SizeOptions, SizeOptions2, stylelableOption, categorys4, categorys3, categorys2, categorys, Url, brands } from '../../arrays/list'
-const Favorites = () => {
+const Topproduct = (Props: { str: string, end: string, limet: number, sort: number }) => {
     let Dispatch = useAppDispatch()
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
     const { accessToken } = useAppSelector((s) => s.user);
-    const { data1, data4 } = useAppSelector((s) => s.Performence);
-
+    const { data3 } = useAppSelector((s) => s.Performence);
     const [mylist, setmylist] = useState('');
     const [color, setcolor] = useState<string[]>([]);
     const [sizes, setsizes] = useState<string[]>([]);
@@ -22,22 +25,25 @@ const Favorites = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
-        if (data1.length < 1) {
-            favorites()
+        if (data3.length < 1) {
+            topProduct()
         }
     }, []);
 
-    async function favorites() {
-        axios.get(`${Url}Performence/favorites`, { params: { accessToken: accessToken, colors: color, sizes: sizes, categorys2: category, categorys: categorysPrimere, brands: brandss } }).then((response) => {
-            Dispatch(addarr({ name: 'data4', arr: response.data[0].products }))
+    async function topProduct() {
+        axios.get(`${Url}Performence/detales`, { params: { str: Props.str, end: Props.end, accessToken: accessToken, limet: Props.limet, sort: Props.sort, colors: color, sizes: sizes, categorys2: category, categorys: categorysPrimere, brands: brandss } }).then((response) => {
+            console.log(response);
+
+            // setloding2(false)
+            Dispatch(addarr({ name: 'data3', arr: response.data }))
         }).catch((err: any) => {
+            // setloding2(false)
             console.log(err);
         })
     }
     return (
-
         <>
-            <H2 h2='Favorites' />
+            <H2 h2='Top product' />
             <div className={css.selestdiv} >
                 <Select
                     isMulti
@@ -151,14 +157,27 @@ const Favorites = () => {
                     placeholder='צבעים'
                 />
                 <button className={css.btn} onClick={() => {
-                    favorites()
+                    topProduct()
                 }
                 }>Serahe</button>
 
             </div>
-            <List arr={data4} />
+            <Container fluid>
+                <Row xs={2} sm={3} lg={4} xxl={5}>
+
+                    {data3.map((e: any, index: number) =>
+                        <>
+                            <Col className="mt-2 p-1" key={index}>
+                                {e.shirts_product !== undefined && <Card {...e.shirts_product} />}
+                                {e.pants_product !== undefined && <Card {...e.pants_product} />}
+                                {e.shoes_product !== undefined && <Card {...e.shoes_product} />}
+                            </Col>
+
+                        </>)}
+                </Row>
+            </Container>
         </>
     )
 }
 
-export default Favorites
+export default Topproduct

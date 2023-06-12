@@ -11,6 +11,7 @@ import { addarr } from '../../features/user/Performence';
 import Spiner from '../../components/Spiner/Spiner';
 import { stylelableOption, Url, sort, limet } from '../../arrays/list'
 import Favorites from './Favorites';
+import Topproduct from './Topproduct';
 
 export const Data = () => {
     const [Loading, setloding] = useState(false)
@@ -20,8 +21,6 @@ export const Data = () => {
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
     const { accessToken } = useAppSelector((s) => s.user);
     const { data1, data2, data3 } = useAppSelector((s) => s.Performence);
-    console.log(data2);
-    console.log(data1);
 
     const [mylist, setmylist] = useState('');
     const [startDate, setStartDate] = useState<string>(`2023-05-10`);
@@ -35,7 +34,6 @@ export const Data = () => {
             setloding(true)
             setloding2(true)
             getOrdersDetalese()
-            topProduct()
         }
     }, []);
 
@@ -59,18 +57,6 @@ export const Data = () => {
             console.log(err.response.data.error);
         })
     }
-    async function topProduct() {
-        axios.get(`${Url}Performence/detales`, { params: { str: startDate, end: endDate, accessToken: accessToken, limet: limet1, sort: sort1 } }).then((response) => {
-            console.log(response);
-
-            setloding2(false)
-            Dispatch(addarr({ name: 'data3', arr: response.data }))
-        }).catch((err: any) => {
-            setloding2(false)
-            console.log(err);
-        })
-    }
-
 
     return (
         <>
@@ -166,26 +152,8 @@ export const Data = () => {
                     className={mylist === 'SizeOptions' ? `${css.selest}` : `${css.selest2}`}
                     placeholder='כמות המוצרים'
                 />
-                <input onClick={() => {
-                    setloding2(true)
-                    topProduct()
-                }} className='btn btn-primary' type="button" value="click" />
             </div>
-            {Loading2 ? <Spiner /> :
-                <Container fluid>
-                    <Row xs={2} sm={3} lg={4} xxl={5}>
-
-                        {data3.map((e: any, index: number) =>
-                            <>
-                                {e.shoes_product !== undefined && <Col key={index} className="mt-2 p-1">
-                                    {e.shoes_product !== undefined && <Card key={index} {...e.shoes_product} />}</Col>}
-                                {e.pants_product !== undefined && <Col key={index} className="mt-2 p-1">
-                                    {e.pants_product !== undefined && <Card key={index} {...e.pants_product} />}</Col>}
-                                {e.shirts_product !== undefined && <Col key={index} className="mt-2 p-1">
-                                    {e.shirts_product !== undefined && <Card key={index} {...e.shirts_product} />}</Col>}
-                            </>)}
-                    </Row>
-                </Container>}
+            <Topproduct end={endDate} limet={limet1} sort={sort1} str={startDate} />
             <Favorites />
         </>
     )
