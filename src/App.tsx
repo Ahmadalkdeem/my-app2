@@ -89,7 +89,7 @@ function App() {
       {/* <MyNavbar2 /> */}
       <MyNavbar />
       {/* <ChatComponent /> */}
-      <button onClick={() => {
+      {/* <button onClick={() => {
         axios.get(`${Url}email/ahmad`, {
         }).then((response) => {
           console.log(response.data);
@@ -97,7 +97,7 @@ function App() {
           console.log(e);
 
         })
-      }}>ahmad</button>
+      }}>ahmad</button> */}
       <Routes >
         <Route path='/' element={<Cardlist />} />
         <Route path='/connection' element={<Bootstrapform />} >

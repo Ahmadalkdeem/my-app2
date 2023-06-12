@@ -8,7 +8,6 @@ import { Helmet } from "react-helmet";
 import List from '../../components/List/List';
 import { divcomponts } from '../../arrays/list';
 import H2 from '../../components/h2/H2';
-
 function Cardlist() {
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -23,6 +22,7 @@ function Cardlist() {
                 <meta name="description" content="כאן תוכלו למצוא את המגוון הרחב שלנו של מכנסיים, נעליים, חולצות ועוד. הזמינו עכשיו ותהיו מרוצים!" />
                 <meta name="keywords" content="אופנה, מכנסיים, נעליים, חולצות, חנות, אינטרנט, קניות" />
             </Helmet>
+
             <MYCarousel />
             <Myslider />
             <H2 h2='המוצרים החמים' />

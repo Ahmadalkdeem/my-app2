@@ -90,7 +90,7 @@ function Editeproduct() {
         })
     }
 
-    const handleSaveStudentClicked = async () => {
+    const handleSaveCardClicked = async () => {
         let errors: string[] = []
         if (Permissivecategory.length === 0) errors.push('תבחר כתוגרי ראשית')
         if (secondarycategory.length === 0) errors.push('תבחר כתוגרי משנית')
@@ -105,12 +105,12 @@ function Editeproduct() {
 
         if (description.length > 0 && titel.length > 0 && brand.length > 0 && Permissivecategory.length > 0 && secondarycategory.length > 0 && saleprice > 0 && regularprice > 0 && fSizeOptions2.length > 0) {
             if (photo7.length > 0 || photos.length > 0) {
-                handleSaveStudentClicked2()
+                handleClicked2()
             }
         }
     }
 
-    const handleSaveStudentClicked2 = async () => {
+    const handleClicked2 = async () => {
         const formData = new FormData()
         for (let i = 0; i < 8 - photos.length; i++) {
             formData.append('profileImg', photo7[i])
@@ -129,6 +129,9 @@ function Editeproduct() {
         formData.append('id', `${id}`)
         axios.put(`${Url}update/${accessToken}`, formData, {
         }).then((res) => {
+            console.log(res);
+            console.log({ _id: id, ...res.data });
+
             Dispatch(addUpdate({ _id: id, ...res.data }))
             Swall({ titel: 'השיניום נשמרו בהצלחה', timer: 1500 })
             setTimeout(() => {
@@ -308,7 +311,7 @@ function Editeproduct() {
                     </div>
                 )}
             </div>
-            <button className={css.btn} onClick={handleSaveStudentClicked}>update</button>
+            <button className={css.btn} onClick={handleSaveCardClicked}>update</button>
         </div>
     )
 }

@@ -29,6 +29,7 @@ function Page() {
     const users3 = useAppSelector((s) => s.cardshose.findusers);
     const users1 = useAppSelector((s) => s.cardshirts.findusers);
     const users12 = useAppSelector((s) => s.arrays.arrproduct);
+    const { update } = useAppSelector((s) => s.updates);
     const { cart } = useAppSelector((s) => s.mycart);
 
     const getData = async (e: { category: string, id: string }) => {
@@ -43,11 +44,18 @@ function Page() {
     };
     const item = () => {
         let arr: Cardtype[] = [...users22, ...users11, ...users33, ...users1, ...users2, ...users3, ...users12]
-        let x = arr.find((e) => e._id === id)
-        if (x !== undefined) {
-            setTheitem(x)
-            setState(x.stock[0].size)
-            setcolor(x.stock[0].colors[0].color)
+        let item = arr.find((e) => e._id === id)
+        let item2 = update.find((e) => e._id === id)
+
+        if (item !== undefined) {
+            setTheitem(item)
+            setState(item.stock[0].size)
+            setcolor(item.stock[0].colors[0].color)
+        }
+        if (item2 !== undefined) {
+            setTheitem(item2)
+            setState(item2.stock[0].size)
+            setcolor(item2.stock[0].colors[0].color)
         } else {
             getData({ category: `${fcategory}`, id: `${id}` })
         }
