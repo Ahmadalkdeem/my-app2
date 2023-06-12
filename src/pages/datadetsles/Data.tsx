@@ -6,13 +6,11 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import css from './css.module.scss'
 import Card from './../../components/card/Card'
 import { Container, Row, Col } from 'react-bootstrap';
-// import { Url, limet, sort, stylelableOption } from '../../arrays/list'
-import { eachDayOfInterval, format, isValid, isBefore, isAfter } from 'date-fns';
+import { eachDayOfInterval, format, isValid, isBefore } from 'date-fns';
 import { addarr } from '../../features/user/Performence';
 import Spiner from '../../components/Spiner/Spiner';
-import List from '../../components/List/List';
-import H2 from '../../components/h2/H2';
-import { colourOptions, SizeOptions, SizeOptions2, stylelableOption, categorys4, categorys3, categorys2, categorys, Url, sort, limet, brands } from '../../arrays/list'
+import { stylelableOption, Url, sort, limet } from '../../arrays/list'
+import Favorites from './Favorites';
 
 export const Data = () => {
     const [Loading, setloding] = useState(false)
@@ -24,11 +22,6 @@ export const Data = () => {
     const { data1, data2, data3, data4 } = useAppSelector((s) => s.Performence);
 
     const [mylist, setmylist] = useState('');
-    const [color, setcolor] = useState<string[]>([]);
-    const [sizes, setsizes] = useState<string[]>([]);
-    const [category, setcategorys] = useState<string[]>([]);
-    const [categorysPrimere, setcategorysPrimere] = useState<string[]>([]);
-    const [brandss, setbrands] = useState<string[]>([]);
     const [startDate, setStartDate] = useState<string>(`2023-05-10`);
     const [endDate, setEndDate] = useState<string>(`2023-06-10`);
     const dates = eachDayOfInterval({ start: new Date(startDate), end: new Date(endDate) });
@@ -41,7 +34,6 @@ export const Data = () => {
             setloding2(true)
             getOrdersDetalese()
             topProduct()
-            favorites()
         }
     }, []);
 
@@ -81,6 +73,8 @@ export const Data = () => {
     }
     async function topProduct() {
         axios.get(`${Url}Performence/detales`, { params: { str: startDate, end: endDate, accessToken: accessToken, limet: limet1, sort: sort1 } }).then((response) => {
+            console.log(response);
+
             setloding2(false)
             Dispatch(addarr({ name: 'data3', arr: response.data }))
         }).catch((err: any) => {
@@ -88,14 +82,7 @@ export const Data = () => {
             console.log(err);
         })
     }
-    async function favorites() {
-        axios.get(`${Url}Performence/favorites`, { params: { accessToken: accessToken, colors: color, sizes: sizes, categorys2: category, categorys: categorysPrimere, brands: brandss } }).then((response) => {
-            Dispatch(addarr({ name: 'data4', arr: response.data[0].products }))
-        }).catch((err: any) => {
-            setloding2(false)
-            console.log(err);
-        })
-    }
+
 
     return (
         <>
@@ -202,133 +189,14 @@ export const Data = () => {
 
                         {data3.map((e: any, index: number) =>
                             <Col key={index} className="mt-2 p-1">
-                                {e.shoes_product !== undefined && <Card {...e.shoes_product} key={index} />}
-                                {e.pants_product !== undefined && <Card {...e.pants_product} key={index} />}
-                                {e.shirts_product !== undefined && <Card {...e.shirts_product} key={index} />}
+                                {e.shoes_product !== undefined && <Card {...e.shoes_product} />}
+                                {e.pants_product !== undefined && <Card {...e.pants_product} />}
+                                {e.shirts_product !== undefined && <Card {...e.shirts_product} />}
                             </Col>
                         )}
                     </Row>
                 </Container>}
-            <H2 h2='Favorites' />
-            <div className={css.selestdiv} >
-                <Select
-                    isMulti
-                    closeMenuOnSelect={false}
-                    options={categorys}
-                    onChange={(e) => {
-                        let arr: string[] = []
-                        e.map((e) => {
-                            arr.push(e.value)
-                        })
-                        setcategorysPrimere(arr)
-                    }}
-                    styles={stylelableOption}
-                    onMenuOpen={() => {
-                        setmylist('SizeOptions')
-                    }}
-
-                    onMenuClose={() => {
-                        setmylist('')
-                    }}
-                    className={mylist === 'SizeOptions' ? `${css.selest}` : `${css.selest2}`}
-                    placeholder='כתוגרי רשית' />
-                <Select
-                    isMulti
-                    closeMenuOnSelect={false}
-                    options={[...categorys4, ...categorys3, ...categorys2]}
-                    onChange={(e) => {
-                        let arr: string[] = []
-                        e.map((e) => {
-                            arr.push(e.value)
-                        })
-                        setcategorys(arr)
-
-                    }}
-                    styles={stylelableOption}
-                    onMenuOpen={() => {
-                        setmylist('SizeOptions2')
-                    }}
-
-                    onMenuClose={() => {
-                        setmylist('')
-                    }}
-                    className={mylist === 'SizeOptions2' ? `${css.selest}` : `${css.selest2}`}
-                    placeholder='כתוגרי משנית'
-                />
-                <Select
-                    isMulti
-                    closeMenuOnSelect={false}
-                    options={brands}
-                    onChange={(e) => {
-                        let arr: string[] = []
-                        e.map((e) => {
-                            arr.push(e.value)
-                        })
-                        setbrands(arr)
-
-                    }}
-                    styles={stylelableOption}
-                    onMenuOpen={() => {
-                        setmylist('SizeOptions3')
-                    }}
-
-                    onMenuClose={() => {
-                        setmylist('')
-                    }}
-                    className={mylist === 'SizeOptions3' ? `${css.selest}` : `${css.selest2}`}
-                    placeholder='brands'
-                />
-                <Select
-                    isMulti
-                    closeMenuOnSelect={false}
-                    options={[...SizeOptions, ...SizeOptions2]}
-                    onChange={(e) => {
-                        let arr: string[] = []
-                        e.map((e) => {
-                            arr.push(e.value)
-                        })
-                        setsizes(arr)
-                    }}
-                    styles={stylelableOption}
-                    onMenuOpen={() => {
-                        setmylist('SizeOptions4')
-                    }}
-
-                    onMenuClose={() => {
-                        setmylist('')
-                    }}
-                    className={mylist === 'SizeOptions4' ? `${css.selest}` : `${css.selest2}`}
-                    placeholder='מידות'
-                />
-                <Select
-                    isMulti
-                    closeMenuOnSelect={false}
-                    options={colourOptions}
-                    onChange={(e) => {
-                        let arr: string[] = []
-                        e.map((e) => {
-                            arr.push(e.value)
-                        })
-                        setcolor(arr)
-                    }}
-                    styles={stylelableOption}
-                    onMenuOpen={() => {
-                        setmylist('SizeOptions5')
-                    }}
-
-                    onMenuClose={() => {
-                        setmylist('')
-                    }}
-                    className={mylist === 'SizeOptions5' ? `${css.selest}` : `${css.selest2}`}
-                    placeholder='צבעים'
-                />
-                <button className={css.btn} onClick={() => {
-                    favorites()
-                }
-                }>Serahe</button>
-
-            </div>
-            <List arr={data4} />
+            <Favorites />
         </>
     )
 }
