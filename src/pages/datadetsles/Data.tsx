@@ -188,12 +188,14 @@ export const Data = () => {
                     <Row xs={2} sm={3} lg={4} xxl={5}>
 
                         {data3.map((e: any, index: number) =>
-                            <Col key={index} className="mt-2 p-1">
-                                {e.shoes_product !== undefined && <Card {...e.shoes_product} />}
-                                {e.pants_product !== undefined && <Card {...e.pants_product} />}
-                                {e.shirts_product !== undefined && <Card {...e.shirts_product} />}
-                            </Col>
-                        )}
+                            <>
+                                {e.shoes_product !== undefined && <Col key={index} className="mt-2 p-1">
+                                    {e.shoes_product !== undefined && <Card key={index} {...e.shoes_product} />}</Col>}
+                                {e.pants_product !== undefined && <Col key={index} className="mt-2 p-1">
+                                    {e.pants_product !== undefined && <Card key={index} {...e.pants_product} />}</Col>}
+                                {e.shirts_product !== undefined && <Col key={index} className="mt-2 p-1">
+                                    {e.shirts_product !== undefined && <Card key={index} {...e.shirts_product} />}</Col>}
+                            </>)}
                     </Row>
                 </Container>}
             <Favorites />
