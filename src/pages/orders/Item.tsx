@@ -20,7 +20,9 @@ const Items = (props: { arr: order[] }) => {
                     <th onClick={() => {
                         navigate(`/orders/detales/${Order._id}`)
                     }} scope='row'>{i + 1}</th>
-                    <td> {Order._id}</td>
+                    <td onClick={() => {
+                        navigate(`/orders/detales/${Order._id}`)
+                    }}> {Order._id}</td>
                     <td> {Order.fullname}</td>
                     <td> {Order.Email}</td>
                     <td><FiDelete onClick={() => {
