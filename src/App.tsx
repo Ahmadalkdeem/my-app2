@@ -60,6 +60,8 @@ function App() {
     if (myData !== null && myData !== undefined) {
       Dispatch(updatedetalise(cart2))
       axios.post(`${Url}api/auth/valtoken`, { params: { accessToken: cart2.accessToken } }).then((response) => {
+        console.log(response);
+
         Dispatch(updatedetalise(response.data))
         if (response.data.favorite[0].products.length !== 0) {
           Dispatch(addItems(response.data.favorite[0].products))

@@ -9,6 +9,7 @@ import Card from '../../components/card/Card'
 import H2 from '../../components/h2/H2';
 import { colourOptions, SizeOptions, SizeOptions2, stylelableOption, categorys4, categorys3, categorys2, categorys, Url, brands } from '../../arrays/list'
 const Topproduct = (Props: { str: string, end: string, limet: number, sort: number }) => {
+
     let Dispatch = useAppDispatch()
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
@@ -159,16 +160,13 @@ const Topproduct = (Props: { str: string, end: string, limet: number, sort: numb
             </div>
             <Container fluid>
                 <Row xs={2} sm={3} lg={4} xxl={5}>
-
                     {data3.map((e: any, index: number) =>
-                        <>
-                            <Col className="mt-2 p-1" key={index}>
-                                {e.shirts_product !== undefined && <Card {...e.shirts_product} />}
-                                {e.pants_product !== undefined && <Card {...e.pants_product} />}
-                                {e.shoes_product !== undefined && <Card {...e.shoes_product} />}
-                            </Col>
-
-                        </>)}
+                        <Col className="mt-2 p-1" key={index}>
+                            {e.shirts_product !== undefined && <Card  {...e.shirts_product} />}
+                            {e.pants_product !== undefined && <Card  {...e.pants_product} />}
+                            {e.shoes_product !== undefined && <Card  {...e.shoes_product} />}
+                        </Col>
+                    )}
                 </Row>
             </Container>
         </>

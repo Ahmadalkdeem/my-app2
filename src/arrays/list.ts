@@ -161,3 +161,29 @@ export const brands2: brandstype[] = [
     { value: `Armani`, src: `https://logowik.com/content/uploads/images/877_emporioarmani.jpg` },
     { value: `Bershka`, src: `https://1000logos.net/wp-content/uploads/2023/04/bershka-logo.jpg` },
 ];
+let item = {
+    _id: '645a57d9a074bec371712bde',
+    src: ['ahmas', 'ahmad'],
+    name: 'Shirts',
+    category: 'pants',
+    category2: 'מכנסיים קצרים',
+    brand: 'Mango',
+    price2: 199,
+    price: 199,
+    stock: [
+        {
+            size: 'S', colors: [
+                { color: 'Blue' },
+                { color: 'Green' },
+                { color: 'Yellow' }
+            ]
+        }, {
+            size: 'M', colors: [
+                { color: 'Blue' },
+                { color: 'Green' },
+                { color: 'Yellow' }
+            ]
+        }
+    ]
+
+}
