@@ -19,15 +19,14 @@ const Orderdetales = () => {
 
     const { arr, arr2 } = useAppSelector((s) => s.orders)
     const { accessToken } = useAppSelector((s) => s.user)
-    const [users, setusers] = useState<order>()
-    console.log(users);
+    const [orderDetales, setorderDetales] = useState<order>()
 
     const [index, setindex] = useState<number>()
     function getorder() {
         axios.get(`${Url}carts/getoneorderId`, {
             params: { accessToken: accessToken, id: id }
         }).then((response) => {
-            setusers(response.data[0])
+            setorderDetales(response.data[0])
 
         }).catch((err: any) => {
             console.log(err);
@@ -41,12 +40,12 @@ const Orderdetales = () => {
         if (item === undefined) { getorder() }
         else {
             setindex(arr.findIndex((e) => e._id === id) + 1)
-            setusers(item)
+            setorderDetales(item)
         }
     }, [id]);
     return (
         <>
-            {users === undefined || null ? <Spiner /> :
+            {orderDetales === undefined || null ? <Spiner /> :
                 <>
                     <div className={css.Div}>
                         <input onClick={() => {
@@ -75,22 +74,22 @@ const Orderdetales = () => {
                             <MDBTableBody>
                                 <tr >
                                     <th scope='row'>{index}</th>
-                                    <td> {users._id}</td>
-                                    <td> {users.fullname}</td>
-                                    <td> {users.Email}</td>
-                                    <td> {users.City}</td>
-                                    <td> {users.Address}</td>
-                                    <td> {users.Address2}</td>
+                                    <td> {orderDetales._id}</td>
+                                    <td> {orderDetales.fullname}</td>
+                                    <td> {orderDetales.Email}</td>
+                                    <td> {orderDetales.City}</td>
+                                    <td> {orderDetales.Address}</td>
+                                    <td> {orderDetales.Address2}</td>
                                 </tr>
 
                             </MDBTableBody>
                         </MDBTable>
                     </div>
                     <div className={css.Divcards}>
-                        {users.arr.map((number: any, i: number) =>
+                        {orderDetales.arr.map((orderdetales: any, i: number) =>
 
                             <Card key={i} style={{ width: '18rem' }}>
-                                <Card.Img className={css.Img} variant="top" src={users.products[0].find((e) => e._id === number.id)?.src[0] !== undefined ? users.products[0].find((e) => e._id === number.id)?.src[0] : 'a'} />
+                                <Card.Img className={css.Img} variant="top" src={orderDetales.products[0].find((e) => e._id === orderdetales.id)?.src[0] !== undefined ? orderDetales.products[0].find((e) => e._id === orderdetales.id)?.src[0] : 'a'} />
                                 <Card.Body>
                                     <div>
                                         <MDBTable className={css.table}>
@@ -102,8 +101,8 @@ const Orderdetales = () => {
                                             </MDBTableHead>
                                             <MDBTableBody>
                                                 <tr >
-                                                    <td> {users.products[0].find((e) => e._id === number.id)?.brand !== undefined ? users.products[0].find((e) => e._id === number.id)?.brand : ''}</td>
-                                                    <td> {users.products[0].find((e) => e._id === number.id)?.category !== undefined ? users.products[0].find((e) => e._id === number.id)?.category : ''}</td>
+                                                    <td> {orderDetales.products[0].find((e) => e._id === orderdetales.id)?.brand !== undefined ? orderDetales.products[0].find((e) => e._id === orderdetales.id)?.brand : ''}</td>
+                                                    <td> {orderDetales.products[0].find((e) => e._id === orderdetales.id)?.category !== undefined ? orderDetales.products[0].find((e) => e._id === orderdetales.id)?.category : ''}</td>
                                                 </tr>
 
                                             </MDBTableBody>
@@ -120,9 +119,9 @@ const Orderdetales = () => {
                                             </MDBTableHead>
                                             <MDBTableBody>
                                                 <tr >
-                                                    <td>{number.quantity}</td>
-                                                    <td>{number.sizeselect}</td>
-                                                    <td>{number.color}</td>
+                                                    <td>{orderdetales.quantity}</td>
+                                                    <td>{orderdetales.sizeselect}</td>
+                                                    <td>{orderdetales.color}</td>
                                                 </tr>
 
                                             </MDBTableBody>
