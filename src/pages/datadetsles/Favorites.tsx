@@ -29,6 +29,8 @@ const Favorites = () => {
 
     async function favorites() {
         axios.get(`${Url}Performence/favorites`, { params: { accessToken: accessToken, colors: color, sizes: sizes, categorys2: category, categorys: categorysPrimere, brands: brandss } }).then((response) => {
+            console.log(response);
+
             Dispatch(addarr({ name: 'data4', arr: response.data[0].products }))
         }).catch((err: any) => {
             console.log(err);

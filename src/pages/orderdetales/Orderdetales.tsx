@@ -20,7 +20,6 @@ const Orderdetales = () => {
     const { arr, arr2 } = useAppSelector((s) => s.orders)
     const { accessToken } = useAppSelector((s) => s.user)
     const [orderDetales, setorderDetales] = useState<order>()
-
     const [index, setindex] = useState<number>()
     function getorder() {
         axios.get(`${Url}carts/getoneorderId`, {
