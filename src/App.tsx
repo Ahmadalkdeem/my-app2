@@ -37,6 +37,7 @@ import Brands from './pages/brands/Brands';
 import Favorites from './pages/favorites/Favorites';
 import { addItems } from './features/cards/favorites';
 import { Url } from './arrays/list';
+import ChatGPTExample from './components/chatgbt/Chatgbt';
 function App() {
   let { roles } = useAppSelector(e => e.user)
   let Dispatch = useAppDispatch()
@@ -89,6 +90,7 @@ function App() {
       {/* <MyNavbar2 /> */}
       <MyNavbar />
       {/* <ChatComponent /> */}
+      <ChatGPTExample />
       {/* <button onClick={() => {
         axios.get(`${Url}email/ahmad`, {
         }).then((response) => {

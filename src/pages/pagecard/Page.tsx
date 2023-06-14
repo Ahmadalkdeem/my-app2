@@ -17,7 +17,6 @@ import List from '../../components/List/List';
 import { Url } from '../../arrays/list';
 
 function Page() {
-    window.onscroll = () => { }
     let { id, fcategory } = useParams()
     const [Theitem, setTheitem] = useState<Cardtype>()
     const [arr, setarr] = useState<Cardtype[]>([])

@@ -12,7 +12,6 @@ import Favorites from './Favorites';
 import Topproduct from './Topproduct';
 
 export const Data = () => {
-    window.onscroll = () => { }
     const [Loading, setloding] = useState(false)
     let Dispatch = useAppDispatch()
     const thirtyDaysAgo = new Date();

@@ -25,7 +25,6 @@ import { prouctorderdetales } from '../../@types/Mytypes';
 import Swall from '../../components/swal/Swal';
 import { Url } from '../../arrays/list';
 const Mycart = () => {
-    window.onscroll = () => { }
     let { cart } = useAppSelector((s) => s.mycart)
     let Dispatch = useAppDispatch()
     let pricecart = 0

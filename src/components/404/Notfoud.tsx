@@ -3,7 +3,6 @@ import css from './a404.module.scss'
 import { NavLink } from "react-router-dom";
 import { BiSad } from 'react-icons/bi';
 function Notfoud() {
-    window.onscroll = () => { }
     return (
         <div className={css.body}>
             <p className={css.p}>

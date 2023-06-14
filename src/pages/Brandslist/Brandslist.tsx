@@ -118,22 +118,28 @@ const Brandslist = () => {
 
         })
     }
+    useEffect(() => {
+        function handleScroll() {
+            const scrollPosition = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const bodyHeight = document.body.clientHeight;
+            const scrollPercentage = (scrollPosition / (bodyHeight - windowHeight)) * 100;
 
-
-    window.onscroll = () => {
-        const scrollPosition = window.scrollY;
-        const windowHeight = window.innerHeight;
-        const bodyHeight = document.body.clientHeight;
-        const scrollPercentage = (scrollPosition / (bodyHeight - windowHeight)) * 100;
-
-        if (scrollPercentage > 65 && scrollPercentage <= 100) {
-            if (lodinggfind === false && lodingg === false) {
-                setlodinggfind(true)
-                if (item?.search === false) { if (item.value.stopusers === false) { getdata() } }
-                else { if (item?.value.stopfindusers === false) { moreFindData() } }
+            if (scrollPercentage > 65 && scrollPercentage <= 100) {
+                if (lodinggfind === false && lodingg === false) {
+                    setlodinggfind(true)
+                    if (item?.search === false) { if (item.value.stopusers === false) { getdata() } }
+                    else { if (item?.value.stopfindusers === false) { moreFindData() } }
+                }
             }
         }
-    }
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, [Brands]);
+
     useEffect(() => {
         window.scrollTo(0, 0)
         if (item === undefined) return Navigate('/')

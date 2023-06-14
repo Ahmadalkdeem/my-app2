@@ -13,7 +13,6 @@ import { order } from '../../@types/Mytypes';
 import Swall from '../../components/swal/Swal';
 import { Url } from '../../arrays/list';
 const Orderdetales = () => {
-    window.onscroll = () => { }
     let Navigate = useNavigate()
     let Dispatch = useAppDispatch()
     let { id } = useParams()

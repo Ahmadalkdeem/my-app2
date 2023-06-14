@@ -7,7 +7,6 @@ import { Helmet } from "react-helmet";
 import { Url } from '../../arrays/list';
 import Swall from '../../components/swal/Swal';
 const Changepasword = () => {
-    window.onscroll = () => { }
     let Navigate = useNavigate()
     useEffect(() => {
         window.scrollTo(0, 0)

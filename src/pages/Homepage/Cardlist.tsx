@@ -9,7 +9,6 @@ import List from '../../components/List/List';
 import { divcomponts } from '../../arrays/list';
 import H2 from '../../components/h2/H2';
 function Cardlist() {
-    window.onscroll = () => { }
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
