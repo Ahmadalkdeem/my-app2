@@ -4,8 +4,6 @@ import axios from 'axios';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
 import css from './css.module.scss'
-import Card from './../../components/card/Card'
-import { Container, Row, Col } from 'react-bootstrap';
 import { eachDayOfInterval, format, isValid, isBefore } from 'date-fns';
 import { addarr } from '../../features/user/Performence';
 import Spiner from '../../components/Spiner/Spiner';

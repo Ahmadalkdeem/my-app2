@@ -47,7 +47,9 @@ const Myslider = () => {
     return (
         <Slider className={css.slider} {...settings} dots={false}>
             {brands2.map((e, i: number) =>
-                <Link to={`/Brands/${e.value}`} key={i} > <img className={css.img} src={e.src} alt={e.value} /></Link>
+                <Link to={`/Brands/${e.value}`} key={i} >
+                    <img className={css.img} src={e.src} alt={e.value} />
+                </Link>
             )}
         </Slider>
     );
