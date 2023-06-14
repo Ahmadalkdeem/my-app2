@@ -1,17 +1,15 @@
 import { useEffect } from 'react'
 import axios from 'axios'
 import css from './css.module.scss'
-import { MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
-import { useNavigate } from "react-router-dom";
+import { MDBTable, MDBTableHead } from 'mdb-react-ui-kit';
 import { useAppDispatch, useAppSelector } from '../../app/hooks'
 import Spiner from '../../components/Spiner/Spiner'
-import { addItems, delateitem } from '../../features/cards/orderdetales';
-import { FiDelete, FiChevronsDown } from "react-icons/fi";
-import Swal from 'sweetalert2';
+import { addItems } from '../../features/cards/orderdetales';
 import FindOrder from '../../components/item/Order';
 import Items from './Item';
 import { Url } from '../../arrays/list';
 const Order = () => {
+    window.onscroll = () => { }
     let Dispatch = useAppDispatch()
     const { arr, arr2 } = useAppSelector((s) => s.orders);
     const { accessToken } = useAppSelector((s) => s.user);

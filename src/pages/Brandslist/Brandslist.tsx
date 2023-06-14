@@ -28,6 +28,8 @@ const Brandslist = () => {
                 brands: [Brands], skip: item?.users.length
             }
         }).then((response) => {
+            console.log(response);
+
             setlodingg(false)
             setlodinggfind(false)
             Dispatch(addItems({ name: Brands, arr: response.data }))

@@ -15,7 +15,7 @@ const Users = () => {
     let Dispatch = useAppDispatch()
     const { arr } = useAppSelector((s) => s.users);
     const { accessToken } = useAppSelector((s) => s.user);
-
+    window.onscroll = () => { }
     function getdata() {
         axios.get(`${Url}users`, { params: { skip: arr.length, accessToken: accessToken } }).then((response) => {
             Dispatch(addItems(response.data))

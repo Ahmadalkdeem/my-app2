@@ -8,11 +8,11 @@ import { AiOutlineUpload, AiFillDelete } from "react-icons/ai";
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { Cardtype } from '../../@types/Mytypes';
 import { useParams, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import { optionstype } from '../../@types/Mytypes';
 import { SizeOptions, brands, categorys2, categorys3, categorys4, stylelableOption, categorys, colourOptions, Url, } from '../../arrays/list'
 import { addUpdate } from '../../features/cards/updates';
 function Editeproduct() {
+    window.onscroll = () => { }
     let Dispatch = useAppDispatch()
     let Navigate = useNavigate()
     const getData = async (e: { category: string, id: string }) => {
