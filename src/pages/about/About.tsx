@@ -3,6 +3,7 @@ import css from './css.module.scss'
 import { Helmet } from "react-helmet";
 
 function Aboutt() {
+    window.onscroll = () => { }
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])

@@ -9,6 +9,7 @@ import { Helmet } from "react-helmet";
 import Swall from '../../components/swal/Swal';
 import { Url } from '../../arrays/list';
 const Signup = () => {
+    window.onscroll = () => { }
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])

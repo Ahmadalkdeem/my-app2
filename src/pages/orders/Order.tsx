@@ -9,6 +9,7 @@ import FindOrder from '../../components/item/Order';
 import Items from './Item';
 import { Url } from '../../arrays/list';
 const Order = () => {
+    window.onscroll = () => { }
     let Dispatch = useAppDispatch()
     const { arr, arr2 } = useAppSelector((s) => s.orders);
     const { accessToken } = useAppSelector((s) => s.user);

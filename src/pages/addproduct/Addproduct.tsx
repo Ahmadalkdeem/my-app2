@@ -11,6 +11,7 @@ import { useAppSelector } from '../../app/hooks';
 import Swall from '../../components/swal/Swal';
 
 function Editpage() {
+    window.onscroll = () => { }
     let Navigate = useNavigate()
     useEffect(() => {
         window.scrollTo(0, 0)

@@ -12,6 +12,7 @@ import { optionstype } from '../../@types/Mytypes';
 import { SizeOptions, brands, categorys2, categorys3, categorys4, stylelableOption, categorys, colourOptions, Url, } from '../../arrays/list'
 import { addUpdate } from '../../features/cards/updates';
 function Editeproduct() {
+    window.onscroll = () => { }
     let Dispatch = useAppDispatch()
     let Navigate = useNavigate()
     const getData = async (e: { category: string, id: string }) => {

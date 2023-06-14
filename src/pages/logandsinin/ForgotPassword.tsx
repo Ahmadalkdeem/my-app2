@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet";
 import { updatedetalise } from '../../features/user/user';
 import { Url } from '../../arrays/list';
 const ForgotPassword = () => {
+    window.onscroll = () => { }
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])

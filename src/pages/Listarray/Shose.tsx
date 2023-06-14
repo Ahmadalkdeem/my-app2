@@ -92,7 +92,6 @@ function Shose() {
     }
     function getdata2() {
         if (data === true) {
-
             setdata(false)
             axios.get(`${Url}cards/filtering/shoesproduct`, { params: { skip: users.length } }).then((response) => {
                 setdata(true)
@@ -109,25 +108,18 @@ function Shose() {
         }
     }
 
-    useEffect(() => {
-        function handleScroll() {
-            const scrollPosition = window.scrollY;
-            const windowHeight = window.innerHeight;
-            const bodyHeight = document.body.clientHeight;
-            const scrollPercentage = (scrollPosition / (bodyHeight - windowHeight)) * 100;
+    window.onscroll = () => {
+        const scrollPosition = window.scrollY;
+        const windowHeight = window.innerHeight;
+        const bodyHeight = document.body.clientHeight;
+        const scrollPercentage = (scrollPosition / (bodyHeight - windowHeight)) * 100;
 
-            if (scrollPercentage > 65 && scrollPercentage <= 100) {
-                if (search === false) { if (value.stopusers === false) { getdata2() } }
-                else { if (value.stopfindusers === false) { getdata3() } }
-            }
+        if (scrollPercentage > 65 && scrollPercentage <= 100) {
+            if (search === false) { if (value.stopusers === false) { getdata2() } }
+            else { if (value.stopfindusers === false) { getdata3() } }
         }
+    }
 
-        window.addEventListener('scroll', handleScroll);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
 
 
     return (

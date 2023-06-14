@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 import User from '../../components/item/User';
 import { Url } from '../../arrays/list';
 const Users = () => {
-
+    window.onscroll = () => { }
     let Dispatch = useAppDispatch()
     const { arr } = useAppSelector((s) => s.users);
     const { accessToken } = useAppSelector((s) => s.user);

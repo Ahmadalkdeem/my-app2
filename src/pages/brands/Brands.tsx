@@ -6,6 +6,7 @@ import { brands2 } from '../../arrays/list';
 import { brandstype } from '../../@types/Mytypes';
 import H2 from '../../components/h2/H2';
 const Brands = () => {
+    window.onscroll = () => { }
     const [serahre, setserahre] = useState<string>('');
     useEffect(() => {
         window.scrollTo(0, 0)

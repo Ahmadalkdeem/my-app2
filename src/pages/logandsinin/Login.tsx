@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import { addItems } from '../../features/cards/favorites';
 import { Url } from '../../arrays/list';
 const Login = () => {
+    window.onscroll = () => { }
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])

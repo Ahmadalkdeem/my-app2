@@ -6,6 +6,7 @@ import { Helmet } from "react-helmet";
 import { Url } from '../../arrays/list';
 import Swal from 'sweetalert2';
 const Restartpassword = () => {
+    window.onscroll = () => { }
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [])
