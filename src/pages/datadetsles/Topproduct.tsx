@@ -8,8 +8,9 @@ import { addarr } from '../../features/user/Performence';
 import Card from '../../components/card/Card'
 import H2 from '../../components/h2/H2';
 import { colourOptions, SizeOptions, SizeOptions2, stylelableOption, categorys4, categorys3, categorys2, categorys, Url, brands } from '../../arrays/list'
+import Spiner from '../../components/Spiner/Spiner';
 const Topproduct = (Props: { str: string, end: string, limet: number, sort: number }) => {
-
+    const [Loading, setloding] = useState(false)
     let Dispatch = useAppDispatch()
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
@@ -24,14 +25,15 @@ const Topproduct = (Props: { str: string, end: string, limet: number, sort: numb
 
 
     useEffect(() => {
-        window.scrollTo(0, 0)
         if (data3.length < 1) {
+            setloding(true)
             topProduct()
         }
     }, []);
 
     async function topProduct() {
         axios.get(`${Url}Performence/detales`, { params: { str: Props.str, end: Props.end, accessToken: accessToken, limet: Props.limet, sort: Props.sort, colors: color, sizes: sizes, categorys2: category, categorys: categorysPrimere, brands: brandss } }).then((response) => {
+            setloding(false)
             Dispatch(addarr({ name: 'data3', arr: response.data }))
         }).catch((err: any) => {
             console.log(err);
@@ -153,12 +155,13 @@ const Topproduct = (Props: { str: string, end: string, limet: number, sort: numb
                     placeholder='צבעים'
                 />
                 <button className={css.btn} onClick={() => {
+                    setloding(true)
                     topProduct()
                 }
                 }>Serahe</button>
 
             </div>
-            <Container fluid>
+            {Loading === true ? <Spiner /> : <Container fluid>
                 <Row xs={2} sm={3} lg={4} xxl={5}>
                     {data3.map((e: any, index: number) =>
                         <Col className="mt-2 p-1" key={index}>
@@ -168,7 +171,7 @@ const Topproduct = (Props: { str: string, end: string, limet: number, sort: numb
                         </Col>
                     )}
                 </Row>
-            </Container>
+            </Container>}
         </>
     )
 }

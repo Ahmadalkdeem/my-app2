@@ -7,11 +7,12 @@ import { addarr } from '../../features/user/Performence';
 import List from '../../components/List/List';
 import H2 from '../../components/h2/H2';
 import { colourOptions, SizeOptions, SizeOptions2, stylelableOption, categorys4, categorys3, categorys2, categorys, Url, brands } from '../../arrays/list'
+import Spiner from '../../components/Spiner/Spiner';
 const Favorites = () => {
     let Dispatch = useAppDispatch()
     const { accessToken } = useAppSelector((s) => s.user);
-    const { data1, data4 } = useAppSelector((s) => s.Performence);
-
+    const { data4 } = useAppSelector((s) => s.Performence);
+    const [Loading, setloding] = useState(false)
     const [mylist, setmylist] = useState('');
     const [color, setcolor] = useState<string[]>([]);
     const [sizes, setsizes] = useState<string[]>([]);
@@ -19,10 +20,10 @@ const Favorites = () => {
     const [categorysPrimere, setcategorysPrimere] = useState<string[]>([]);
     const [brandss, setbrands] = useState<string[]>([]);
 
-
     useEffect(() => {
         window.scrollTo(0, 0)
-        if (data1.length < 1) {
+        if (data4.length < 1) {
+            setloding(true)
             favorites()
         }
     }, []);
@@ -30,7 +31,7 @@ const Favorites = () => {
     async function favorites() {
         axios.get(`${Url}Performence/favorites`, { params: { accessToken: accessToken, colors: color, sizes: sizes, categorys2: category, categorys: categorysPrimere, brands: brandss } }).then((response) => {
             console.log(response);
-
+            setloding(false)
             Dispatch(addarr({ name: 'data4', arr: response.data[0].products }))
         }).catch((err: any) => {
             console.log(err);
@@ -153,12 +154,13 @@ const Favorites = () => {
                     placeholder='צבעים'
                 />
                 <button className={css.btn} onClick={() => {
+                    setloding(true)
                     favorites()
                 }
                 }>Serahe</button>
 
             </div>
-            <List arr={data4} />
+            {Loading === false ? <List arr={data4} /> : <Spiner />}
         </>
     )
 }

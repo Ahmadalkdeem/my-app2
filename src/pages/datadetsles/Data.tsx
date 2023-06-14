@@ -15,13 +15,11 @@ import Topproduct from './Topproduct';
 
 export const Data = () => {
     const [Loading, setloding] = useState(false)
-    const [Loading2, setloding2] = useState(false)
     let Dispatch = useAppDispatch()
     const thirtyDaysAgo = new Date();
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
     const { accessToken } = useAppSelector((s) => s.user);
-    const { data1, data2, data3 } = useAppSelector((s) => s.Performence);
-
+    const { data1, data2 } = useAppSelector((s) => s.Performence);
     const [mylist, setmylist] = useState('');
     const [startDate, setStartDate] = useState<string>(`2023-05-10`);
     const [endDate, setEndDate] = useState<string>(`2023-06-10`);
@@ -32,7 +30,6 @@ export const Data = () => {
         window.scrollTo(0, 0)
         if (data1.length < 1) {
             setloding(true)
-            setloding2(true)
             getOrdersDetalese()
         }
     }, []);
