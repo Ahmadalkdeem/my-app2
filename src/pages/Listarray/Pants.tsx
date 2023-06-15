@@ -5,7 +5,7 @@ import Select from 'react-select'
 import { useState, useEffect } from 'react'
 import css from './css.module.scss'
 import axios from 'axios'
-import { stylelableOption, brands, colourOptions, SizeOptions, Url } from '../../arrays/list'
+import { stylelableOption, brands, colourOptions, SizeOptions, SizeOptions2, Url } from '../../arrays/list'
 import { useAppDispatch } from '../../app/hooks'
 import { addfindusers, search as search22, onchange, addItem } from '../../features/cards/cardPants'
 import { optionstype } from '../../@types/Mytypes'
@@ -162,7 +162,7 @@ function Pants() {
                             isMulti
                             value={value.size}
                             closeMenuOnSelect={false}
-                            options={SizeOptions}
+                            options={[...SizeOptions2, ...SizeOptions]}
                             onChange={(e) => {
                                 Dispatch(onchange({ size: e, colors: value.colors, brands: value.brands, stopfindusers: value.stopfindusers, stopusers: value.stopusers }))
                             }}
