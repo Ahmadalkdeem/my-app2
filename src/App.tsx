@@ -90,7 +90,7 @@ function App() {
       {/* <MyNavbar2 /> */}
       <MyNavbar />
       {/* <ChatComponent /> */}
-      <ChatGPTExample />
+      {/* <ChatGPTExample /> */}
       {/* <button onClick={() => {
         axios.get(`${Url}email/ahmad`, {
         }).then((response) => {
