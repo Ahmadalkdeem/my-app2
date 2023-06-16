@@ -5,9 +5,11 @@ import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import { onchange } from '../../features/cards/arrays'
 import css from './css.module.scss'
 import { colourOptions, SizeOptions, SizeOptions2, stylelableOption, categorys4, categorys3, categorys2, categorys } from '../../arrays/list'
-import { item as itemType } from '../../@types/Mytypes'
-const Fillter = (item: itemType) => {
+const Fillter = () => {
     const [mylist, setmylist] = useState('');
+    let { Brands } = useParams();
+    let item = useAppSelector((e) => e.arrays.arr.find((e) => e.name === Brands))
+
     let Dispatch = useAppDispatch()
     return (
         <>

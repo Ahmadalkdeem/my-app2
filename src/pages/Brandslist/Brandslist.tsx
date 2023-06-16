@@ -19,7 +19,7 @@ const Brandslist = () => {
     let Dispatch = useAppDispatch()
     let Navigate = useNavigate()
     let { Brands } = useParams()
-    let item: any = useAppSelector((e) => e.arrays.arr.find((e) => e.name === Brands))
+    let item = useAppSelector((e) => e.arrays.arr.find((e) => e.name === Brands))
     let arr: any = item?.search === false ? item.users : item?.findusers
 
     function getdata() {
@@ -146,8 +146,7 @@ const Brandslist = () => {
             <H2 h2={`${Brands}`} />
 
             <div className={css.selestdiv} >
-                <Fillter {...item} />
-
+                <Fillter />
                 <button className={css.btn} onClick={() => {
                     if (item?.value.size[0] === undefined && item?.value.categorys[0] === undefined && item?.value.categorys2[0] === undefined && item?.value.colors[0] === undefined) {
                         return Dispatch(search({ name: item?.name }))
