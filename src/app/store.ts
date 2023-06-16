@@ -10,6 +10,7 @@ import users from '../features/cards/users';
 import updates from '../features/cards/updates';
 import Performence from '../features/user/Performence';
 import Favorites from '../features/cards/favorites';
+import fillter from '../features/cards/fillter';
 
 export const store = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ export const store = configureStore({
     Performence: Performence,
     updates: updates,
     Favorites: Favorites,
+    fillter: fillter,
   },
 });
 
