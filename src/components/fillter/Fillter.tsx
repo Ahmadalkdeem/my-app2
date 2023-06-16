@@ -31,13 +31,13 @@ const Fillter = (props: { name: string }) => {
                 }}
                 styles={stylelableOption}
                 onMenuOpen={() => {
-                    setmylist('SizeOptions')
+                    setmylist('1')
                 }}
 
                 onMenuClose={() => {
                     setmylist('')
                 }}
-                className={mylist === 'SizeOptions' ? `${css.selest}` : `${css.selest2}`}
+                className={mylist === '1' ? `${css.selest}` : `${css.selest2}`}
                 placeholder='כתוגרי רשית' />
             <Select
                 isMulti
@@ -53,13 +53,13 @@ const Fillter = (props: { name: string }) => {
                 }}
                 styles={stylelableOption}
                 onMenuOpen={() => {
-                    setmylist('SizeOptions2')
+                    setmylist('2')
                 }}
 
                 onMenuClose={() => {
                     setmylist('')
                 }}
-                className={mylist === 'SizeOptions2' ? `${css.selest}` : `${css.selest2}`}
+                className={mylist === '2' ? `${css.selest}` : `${css.selest2}`}
                 placeholder='כתוגרי משנית'
             />
             <Select
@@ -76,13 +76,13 @@ const Fillter = (props: { name: string }) => {
                 }}
                 styles={stylelableOption}
                 onMenuOpen={() => {
-                    setmylist('SizeOptions3')
+                    setmylist('3')
                 }}
 
                 onMenuClose={() => {
                     setmylist('')
                 }}
-                className={mylist === 'SizeOptions3' ? `${css.selest}` : `${css.selest2}`}
+                className={mylist === '3' ? `${css.selest}` : `${css.selest2}`}
                 placeholder='brands'
             />
             <Select
@@ -99,13 +99,13 @@ const Fillter = (props: { name: string }) => {
                 }}
                 styles={stylelableOption}
                 onMenuOpen={() => {
-                    setmylist('SizeOptions4')
+                    setmylist('4')
                 }}
 
                 onMenuClose={() => {
                     setmylist('')
                 }}
-                className={mylist === 'SizeOptions4' ? `${css.selest}` : `${css.selest2}`}
+                className={mylist === '4' ? `${css.selest}` : `${css.selest2}`}
                 placeholder='מידות'
             />
             <Select
@@ -122,13 +122,13 @@ const Fillter = (props: { name: string }) => {
                 }}
                 styles={stylelableOption}
                 onMenuOpen={() => {
-                    setmylist('SizeOptions5')
+                    setmylist('5')
                 }}
 
                 onMenuClose={() => {
                     setmylist('')
                 }}
-                className={mylist === 'SizeOptions5' ? `${css.selest}` : `${css.selest2}`}
+                className={mylist === '5' ? `${css.selest}` : `${css.selest2}`}
                 placeholder='צבעים'
             />
         </>

@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
-import Select from 'react-select'
+import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useAppSelector, useAppDispatch } from '../../app/hooks'
 import { addItems, search, onchange, addfindItems, addfindItems2 } from '../../features/cards/arrays'
@@ -7,19 +6,20 @@ import axios from 'axios'
 import css from './css.module.scss'
 import List from '../../components/List/List'
 import Spiner from '../../components/Spiner/Spiner'
-import { colourOptions, SizeOptions, SizeOptions2, stylelableOption, categorys4, categorys3, categorys2, categorys, Url } from '../../arrays/list'
+import { Url } from '../../arrays/list'
 import { optionstype } from '../../@types/Mytypes'
 import Ops from '../../components/404/Ops'
 import H2 from '../../components/h2/H2'
+import Fillter from './Fillter'
+
+
 const Brandslist = () => {
     const [lodingg, setlodingg] = useState<Boolean>(false)
     const [lodinggfind, setlodinggfind] = useState<Boolean>(false)
-    const [mylist, setmylist] = useState('');
-
     let Dispatch = useAppDispatch()
     let Navigate = useNavigate()
     let { Brands } = useParams()
-    let item = useAppSelector((e) => e.arrays.arr.find((e) => e.name === Brands))
+    let item: any = useAppSelector((e) => e.arrays.arr.find((e) => e.name === Brands))
     let arr: any = item?.search === false ? item.users : item?.findusers
 
     function getdata() {
@@ -146,83 +146,8 @@ const Brandslist = () => {
             <H2 h2={`${Brands}`} />
 
             <div className={css.selestdiv} >
-                <Select
-                    isMulti
-                    value={item?.value.categorys}
-                    closeMenuOnSelect={false}
-                    options={categorys}
-                    onChange={(e: any) => {
-                        return Dispatch(onchange({ name: item?.name, slice: { size: item?.value.size, colors: item?.value.colors, brands: item?.value.brands, stopfindusers: item?.value.stopfindusers, stopusers: item?.value.stopusers, categorys: e, categorys2: item?.value.categorys2 } }))
-                    }}
-                    styles={stylelableOption}
-                    onMenuOpen={() => {
-                        setmylist('SizeOptions')
-                    }}
+                <Fillter {...item} />
 
-                    onMenuClose={() => {
-                        setmylist('')
-                    }}
-                    className={mylist === 'SizeOptions' ? `${css.selest}` : `${css.selest2}`}
-                    placeholder='כתוגרי רשית' />
-                <Select
-                    isMulti
-                    value={item?.value.categorys2}
-                    closeMenuOnSelect={false}
-                    options={[...categorys4, ...categorys3, ...categorys2]}
-                    onChange={(e: any) => {
-                        return Dispatch(onchange({ name: item?.name, slice: { size: item?.value.size, colors: item?.value.colors, brands: item?.value.brands, stopfindusers: item?.value.stopfindusers, stopusers: item?.value.stopusers, categorys: item?.value.categorys, categorys2: e } }))
-                    }}
-                    styles={stylelableOption}
-                    onMenuOpen={() => {
-                        setmylist('SizeOptions2')
-                    }}
-
-                    onMenuClose={() => {
-                        setmylist('')
-                    }}
-                    className={mylist === 'SizeOptions2' ? `${css.selest}` : `${css.selest2}`}
-                    placeholder='כתוגרי משנית'
-                />
-                <Select
-                    isMulti
-                    value={item?.value.size}
-                    closeMenuOnSelect={false}
-                    options={[...SizeOptions, ...SizeOptions2]}
-                    onChange={(e: any) => {
-                        return Dispatch(onchange({ name: item?.name, slice: { size: e, colors: item?.value.colors, brands: item?.value.brands, stopfindusers: item?.value.stopfindusers, stopusers: item?.value.stopusers, categorys: item?.value.categorys, categorys2: item?.value.categorys2 } }))
-
-                    }}
-                    styles={stylelableOption}
-                    onMenuOpen={() => {
-                        setmylist('SizeOptions3')
-                    }}
-
-                    onMenuClose={() => {
-                        setmylist('')
-                    }}
-                    className={mylist === 'SizeOptions3' ? `${css.selest}` : `${css.selest2}`}
-                    placeholder='מידות'
-                />
-                <Select
-                    isMulti
-                    closeMenuOnSelect={false}
-                    options={colourOptions}
-                    value={item?.value.colors}
-                    onChange={(e: any) => {
-                        return Dispatch(onchange({ name: item?.name, slice: { size: item?.value.size, colors: e, brands: item?.value.brands, stopfindusers: item?.value.stopfindusers, categorys: item?.value.categorys, categorys2: item?.value.categorys2, stopusers: item?.value.stopusers } }))
-
-                    }}
-                    styles={stylelableOption}
-                    onMenuOpen={() => {
-                        setmylist('SizeOptions4')
-                    }}
-
-                    onMenuClose={() => {
-                        setmylist('')
-                    }}
-                    className={mylist === 'SizeOptions4' ? `${css.selest}` : `${css.selest2}`}
-                    placeholder='צבעים'
-                />
                 <button className={css.btn} onClick={() => {
                     if (item?.value.size[0] === undefined && item?.value.categorys[0] === undefined && item?.value.categorys2[0] === undefined && item?.value.colors[0] === undefined) {
                         return Dispatch(search({ name: item?.name }))
