@@ -77,15 +77,15 @@ function MyCard(props: Cardtype) {
 
                     <Carousel indicators={false} dir="ltr" className={`${css.corsla}`}>
 
-                        {card?.src.map((e: any, i: number) =>
+                        {card?.src.map((e: string, i: number) =>
                             <Carousel.Item key={i} interval={100000000000000} >
                                 <img
                                     onClick={() => {
                                         navigate(`/${card.category}/${card._id}`);
                                     }}
                                     className={css.Img}
-                                    src={`${e}`}
-                                    alt="First slide"
+                                    src={e}
+                                    alt={card.name}
                                 />
                             </Carousel.Item>
                         )}
