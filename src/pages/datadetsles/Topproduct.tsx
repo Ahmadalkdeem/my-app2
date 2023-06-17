@@ -9,7 +9,7 @@ import H2 from '../../components/h2/H2';
 import { Url } from '../../arrays/list'
 import Spiner from '../../components/Spiner/Spiner';
 import Fillter from '../../components/fillter/Fillter';
-const Topproduct = (Props: { str: string, end: string, limet: number, sort: number }) => {
+const Topproduct = (Props: { str: string, end: string }) => {
     const [Loading, setloding] = useState(false)
     let Dispatch = useAppDispatch()
     const thirtyDaysAgo = new Date();
@@ -24,9 +24,9 @@ const Topproduct = (Props: { str: string, end: string, limet: number, sort: numb
             topProduct()
         }
     }, []);
-
+    //, limet: Props.limet, sort: Props.sort
     async function topProduct() {
-        axios.get(`${Url}Performence/detales`, { params: { str: Props.str, end: Props.end, accessToken: accessToken, limet: Props.limet, sort: Props.sort, ...Topproduct } }).then((response) => {
+        axios.get(`${Url}Performence/detales`, { params: { str: Props.str, end: Props.end, accessToken: accessToken, ...Topproduct } }).then((response) => {
             setloding(false)
             Dispatch(addarr({ name: 'data3', arr: response.data }))
         }).catch((err: any) => {

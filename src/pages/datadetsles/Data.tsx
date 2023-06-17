@@ -19,12 +19,9 @@ export const Data = () => {
     thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
     const { accessToken } = useAppSelector((s) => s.user);
     const { data1, data2 } = useAppSelector((s) => s.Performence);
-    const [mylist, setmylist] = useState('');
     const [startDate, setStartDate] = useState<string>(`2023-05-10`);
     const [endDate, setEndDate] = useState<string>(`2023-06-10`);
     const dates = eachDayOfInterval({ start: new Date(startDate), end: new Date(endDate) });
-    const [sort1, setsort1] = useState(-1);
-    const [limet1, setlimet1] = useState(10);
     useEffect(() => {
         window.scrollTo(0, 0)
         if (data1.length < 1) {
@@ -115,41 +112,7 @@ export const Data = () => {
                     }} />
                 </form>
             </div>
-            <div className='d-flex flex-wrap'>
-                <Select
-                    options={sort}
-                    onChange={(e: any) => {
-                        setsort1(e.value)
-                    }}
-                    styles={stylelableOption}
-                    onMenuOpen={() => {
-                        setmylist('SizeOptions2')
-                    }}
-
-                    onMenuClose={() => {
-                        setmylist('')
-                    }}
-                    className={mylist === 'SizeOptions2' ? `${css.selest}` : `${css.selest2}`}
-                    placeholder='סדר המוצרים'
-                />
-                <Select
-                    options={limet}
-                    onChange={(e: any) => {
-                        setlimet1(e.value)
-                    }}
-                    styles={stylelableOption}
-                    onMenuOpen={() => {
-                        setmylist('SizeOptions')
-                    }}
-
-                    onMenuClose={() => {
-                        setmylist('')
-                    }}
-                    className={mylist === 'SizeOptions' ? `${css.selest}` : `${css.selest2}`}
-                    placeholder='כמות המוצרים'
-                />
-            </div>
-            <Topproduct end={endDate} limet={limet1} sort={sort1} str={startDate} />
+            <Topproduct end={endDate} str={startDate} />
             <Favorites />
         </>
     )

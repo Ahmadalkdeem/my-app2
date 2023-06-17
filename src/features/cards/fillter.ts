@@ -1,14 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { optionstype } from "../../@types/Mytypes";
 export interface initialStatetype {
-    Topproduct: { size: optionstype[], colors: optionstype[], brands: optionstype[], categorys: optionstype[], categorys2: optionstype[] },
-    Favoriteproduct: { size: optionstype[], colors: optionstype[], brands: optionstype[], categorys: optionstype[], categorys2: optionstype[] },
-
-
+    Topproduct: { size: optionstype[], colors: optionstype[], brands: optionstype[], categorys: optionstype[], categorys2: optionstype[], limet: number, sort: number },
+    Favoriteproduct: { size: optionstype[], colors: optionstype[], brands: optionstype[], categorys: optionstype[], categorys2: optionstype[], limet: number, sort: number },
 }
 const initialState: initialStatetype = {
-    Topproduct: { size: [], colors: [], brands: [], categorys: [], categorys2: [] },
-    Favoriteproduct: { size: [], colors: [], brands: [], categorys: [], categorys2: [] },
+    Topproduct: { size: [], colors: [], brands: [], categorys: [], categorys2: [], limet: 10, sort: -1 },
+    Favoriteproduct: { size: [], colors: [], brands: [], categorys: [], categorys2: [], limet: 10, sort: -1 },
 
 };
 

@@ -1,4 +1,3 @@
-import Select from 'react-select'
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import { useAppSelector, useAppDispatch } from '../../app/hooks';
@@ -24,7 +23,6 @@ const Favorites = () => {
     }, []);
 
     async function favorites() {
-
         axios.get(`${Url}Performence/favorites`, { params: { accessToken: accessToken, ...Favoriteproduct } }).then((response) => {
             console.log(response);
             setloding(false)
