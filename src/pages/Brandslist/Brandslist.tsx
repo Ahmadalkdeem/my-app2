@@ -23,7 +23,7 @@ const Brandslist = () => {
     let arr: any = item?.search === false ? item.users : item?.findusers
 
     function getdata() {
-        axios.get(`${Url}cards/brands`, {
+        axios.get(`${Url}cards/brands/filtering`, {
             params: {
                 brands: [Brands], skip: item?.users.length
             }
