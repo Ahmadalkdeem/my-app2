@@ -1,6 +1,6 @@
 import Select from 'react-select'
 import { useState, useEffect } from 'react'
-import { useAppDispatch } from '../../app/hooks';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import css from './css.module.scss'
 import { colourOptions, SizeOptions, SizeOptions2, stylelableOption, categorys4, categorys3, categorys2, categorys, brands, sort, limet } from '../../arrays/list'
 import { addItem } from '../../features/cards/fillter';
