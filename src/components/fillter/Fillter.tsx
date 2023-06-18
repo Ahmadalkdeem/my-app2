@@ -4,6 +4,7 @@ import { useAppDispatch } from '../../app/hooks';
 import css from './css.module.scss'
 import { colourOptions, SizeOptions, SizeOptions2, stylelableOption, categorys4, categorys3, categorys2, categorys, brands, sort, limet } from '../../arrays/list'
 import { addItem } from '../../features/cards/fillter';
+import Example from './Example';
 
 const Fillter = (props: { name: string }) => {
     let Dispatch = useAppDispatch()
@@ -15,12 +16,15 @@ const Fillter = (props: { name: string }) => {
     const [category, setcategorys] = useState<string[]>([]);
     const [categorysPrimere, setcategorysPrimere] = useState<string[]>([]);
     const [brandss, setbrands] = useState<string[]>([]);
+    console.log({ colors: color, sizes: sizes, categorys2: category, categorys: categorysPrimere, brands: brandss, limet: limet1, sort: sort1 });
+
     useEffect(() => {
         Dispatch(addItem({ name: props.name, item: { colors: color, sizes: sizes, categorys2: category, categorys: categorysPrimere, brands: brandss, limet: limet1, sort: sort1 } }))
     }, [color, sizes, category, categorysPrimere, brandss]);
 
     return (
         <>
+            <Example name={props.name} />
             {(props.name === 'Topproduct') && (<Select
                 options={sort}
                 onChange={(e: any) => {

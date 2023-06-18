@@ -57,7 +57,7 @@ const Users = () => {
                                             confirmButtonText: 'Save',
                                         }).then((result) => {
                                             if (result.isConfirmed) {
-                                                axios.delete(`${Url}users`, { params: { id: user._id, accessToken: accessToken } }).then((response) => {
+                                                axios.delete(`${Url}users`, { params: { email: user.email, accessToken: accessToken } }).then((response) => {
 
                                                     if (response.data.Message === "susces") {
                                                         Dispatch(delteItem(user._id))
