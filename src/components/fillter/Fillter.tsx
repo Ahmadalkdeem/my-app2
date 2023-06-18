@@ -4,7 +4,6 @@ import { useAppDispatch } from '../../app/hooks';
 import css from './css.module.scss'
 import { colourOptions, SizeOptions, SizeOptions2, stylelableOption, categorys4, categorys3, categorys2, categorys, brands, sort, limet } from '../../arrays/list'
 import { addItem } from '../../features/cards/fillter';
-import Example from './Example';
 
 const Fillter = (props: { name: string }) => {
     let Dispatch = useAppDispatch()
@@ -24,7 +23,6 @@ const Fillter = (props: { name: string }) => {
 
     return (
         <>
-            <Example name={props.name} />
             {(props.name === 'Topproduct') && (<Select
                 options={sort}
                 onChange={(e: any) => {
