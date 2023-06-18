@@ -17,6 +17,8 @@ const Topproduct = (Props: { str: string, end: string }) => {
     const { accessToken } = useAppSelector((s) => s.user);
     const { data3 } = useAppSelector((s) => s.Performence);
     const { Topproduct } = useAppSelector((s) => s.fillter);
+    console.log(Topproduct);
+    console.log(data3);
 
     useEffect(() => {
         if (data3.length < 1) {
@@ -48,10 +50,13 @@ const Topproduct = (Props: { str: string, end: string }) => {
             {Loading === true ? <Spiner /> : <Container fluid>
                 <Row xs={2} sm={3} lg={4} xxl={5}>
                     {data3.map((e: any, index: number) =>
-                        <Col className="mt-2 p-1" key={index}>
-                            {e.shirts_product !== undefined && <Card  {...e.shirts_product} />}
-                            {e.pants_product !== undefined && <Card  {...e.pants_product} />}
-                            {e.shoes_product !== undefined && <Card  {...e.shoes_product} />}
+                        <Col className=" p-1" key={index}>
+                            <div className='m-0'>
+                                <p>{e.count}</p>
+                                {e.shirts_product !== undefined && <Card  {...e.shirts_product} />}
+                                {e.pants_product !== undefined && <Card  {...e.pants_product} />}
+                                {e.shoes_product !== undefined && <Card  {...e.shoes_product} />}
+                            </div>
                         </Col>
                     )}
                 </Row>

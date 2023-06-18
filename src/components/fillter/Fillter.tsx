@@ -15,7 +15,6 @@ const Fillter = (props: { name: string }) => {
     const [category, setcategorys] = useState<string[]>([]);
     const [categorysPrimere, setcategorysPrimere] = useState<string[]>([]);
     const [brandss, setbrands] = useState<string[]>([]);
-    console.log({ colors: color, sizes: sizes, categorys2: category, categorys: categorysPrimere, brands: brandss, limet: limet1, sort: sort1 });
 
     useEffect(() => {
         Dispatch(addItem({ name: props.name, item: { colors: color, sizes: sizes, categorys2: category, categorys: categorysPrimere, brands: brandss, limet: limet1, sort: sort1 } }))
