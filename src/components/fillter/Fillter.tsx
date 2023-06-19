@@ -18,7 +18,7 @@ const Fillter = (props: { name: string }) => {
 
     useEffect(() => {
         Dispatch(addItem({ name: props.name, item: { colors: color, sizes: sizes, categorys2: category, categorys: categorysPrimere, brands: brandss, limet: limet1, sort: sort1 } }))
-    }, [color, sizes, category, categorysPrimere, brandss]);
+    }, [color, sizes, category, categorysPrimere, brandss, sort1, limet1]);
 
     return (
         <>

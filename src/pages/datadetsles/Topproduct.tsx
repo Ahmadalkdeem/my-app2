@@ -26,7 +26,7 @@ const Topproduct = (Props: { str: string, end: string }) => {
             topProduct()
         }
     }, []);
-    //, limet: Props.limet, sort: Props.sort
+    console.log({ str: Props.str, end: Props.end, accessToken: accessToken, ...Topproduct });
     async function topProduct() {
         axios.get(`${Url}Performence/detales`, { params: { str: Props.str, end: Props.end, accessToken: accessToken, ...Topproduct } }).then((response) => {
             setloding(false)
