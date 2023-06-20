@@ -71,7 +71,7 @@ function OffcanvasExample() {
                                         <Button
                                             onClick={() => {
                                                 setOpen(!open)
-                                                // setOpen2(false)
+                                                setOpen2(false)
                                             }}
                                             aria-controls="example-collapse-text"
                                             aria-expanded={open}
