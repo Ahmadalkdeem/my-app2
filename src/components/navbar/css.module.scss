@@ -47,7 +47,17 @@
 }
 
 .link2 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: rgba(0, 0, 0, 0.7);
+    padding: 0 !important;
+    text-decoration: none;
+    display: block;
+    margin: 0 4px;
     font-size: 14px;
+}
+
+.link2:hover {
+    color: rgba(0, 0, 0, 0.7);
 }
 
 .Mylink:hover {

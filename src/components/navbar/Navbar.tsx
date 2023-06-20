@@ -17,11 +17,15 @@ import { AiOutlineClose } from "react-icons/ai";
 function OffcanvasExample() {
     const [serahre, setserahre] = useState<string>('');
     const [open, setOpen] = useState(false);
+    console.log(open);
+
     const [open2, setOpen2] = useState(false);
     const [innerWidth, setinnerWidth] = useState(window.innerWidth)
     const [show, setshow] = useState(false)
     let { roles } = useAppSelector(e => e.user)
-
+    const handleToggle = () => {
+        setshow(!show);
+    };
     window.onresize = () => {
         setinnerWidth(window.innerWidth)
         if (window.innerWidth > 992) {
@@ -30,6 +34,7 @@ function OffcanvasExample() {
     }
     return (
         <>
+            <p className={css.p}>משלוח חינם עד הדלת בהזמנות מעל ₪349</p>
             {['lg'].map((expand) => (
                 <Navbar key={expand} expand={expand} className={css.MyHeader}>
                     {/* <Container fluid> */}
@@ -43,9 +48,7 @@ function OffcanvasExample() {
                             <MdOutlineFavoriteBorder size={33} />
                         </NavLink>
                     </span>
-                    <Navbar.Toggle className='border-0 shadow-none p-0' aria-controls={`offcanvasNavbar-expand-${expand}`} onClick={() => {
-                        setshow(true)
-                    }} />
+                    <Navbar.Toggle className='border-0 shadow-none p-1' aria-controls={`offcanvasNavbar-expand-${expand}`} onClick={handleToggle} />
                     <Navbar.Offcanvas
                         id={`offcanvasNavbar-expand-${expand}`}
                         aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
@@ -68,7 +71,7 @@ function OffcanvasExample() {
                                         <Button
                                             onClick={() => {
                                                 setOpen(!open)
-                                                setOpen2(false)
+                                                // setOpen2(false)
                                             }}
                                             aria-controls="example-collapse-text"
                                             aria-expanded={open}
@@ -77,10 +80,10 @@ function OffcanvasExample() {
                                             קטגוריות
                                         </Button>
                                         <Collapse in={open}>
-                                            <div id="example-collapse-text">
-                                                <NavLink onClick={() => { setshow(false) }} className={`${css.Mylink} ${css.link2}`} to="/Shirts">חולצות</NavLink>
-                                                <NavLink onClick={() => { setshow(false) }} className={`${css.Mylink} ${css.link2}`} to="/pants">מכנסיים</NavLink>
-                                                <NavLink onClick={() => { setshow(false) }} className={`${css.Mylink} ${css.link2}`} to="/shoes">נעליים</NavLink>
+                                            <div id="example-collapse-text" >
+                                                <NavLink onClick={() => { setshow(false) }} className={`${css.link2}`} to="/Shirts">חולצות</NavLink>
+                                                <NavLink onClick={() => { setshow(false) }} className={`${css.link2}`} to="/pants">מכנסיים</NavLink>
+                                                <NavLink onClick={() => { setshow(false) }} className={`${css.link2}`} to="/shoes">נעליים</NavLink>
                                             </div>
                                         </Collapse>
                                         <Button

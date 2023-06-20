@@ -87,8 +87,8 @@ function App() {
   return (
     <>
 
-      {/* <MyNavbar2 /> */}
-      <MyNavbar />
+      {/* <MyNavbar /> */}
+      <MyNavbar2 />
       {/* <ChatComponent /> */}
       {/* <ChatGPTExample /> */}
       {/* <button onClick={() => {
