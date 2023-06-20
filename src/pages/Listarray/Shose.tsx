@@ -135,7 +135,7 @@ function Shose() {
 
             {users.length > 0 &&
                 <>
-                    <h1 className={css.h1}>חולצות גבריים</h1>
+                    <h1 className={css.h1}>נעליים גבריים</h1>
                     <div className={css.selestdiv}>
                         <Select
                             isMulti
