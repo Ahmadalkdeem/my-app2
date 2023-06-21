@@ -37,7 +37,7 @@ function OffcanvasExample() {
         <>
 
             <p className={css.p}>משלוח חינם עד הדלת בהזמנות מעל ₪349</p>
-            {innerWidth > 992 ? <Navbae2 /> : <>
+            {innerWidth > 991 ? <Navbae2 /> : <>
                 {['lg'].map((expand) => (
                     <Navbar key={expand} expand={expand} className={css.MyHeader}>
                         <span>
