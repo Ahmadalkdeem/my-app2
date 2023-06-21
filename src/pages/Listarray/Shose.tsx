@@ -150,64 +150,6 @@ function Shose() {
 
                     <div className={css.selestdiv}>
                         <Fillter name='shose' value={value} />
-                        {/* <Select
-                            isMulti
-                            value={value.brands}
-                            closeMenuOnSelect={false}
-                            options={brands}
-                            onChange={(e: any) => {
-                                Dispatch(onchange({ size: value.size, colors: value.colors, brands: e, stopfindusers: value.stopfindusers, stopusers: value.stopusers }))
-                            }}
-                            styles={stylelableOption}
-                            onMenuOpen={() => {
-                                setmylist('SizeOptions2')
-                            }}
-
-                            onMenuClose={() => {
-                                setmylist('')
-                            }}
-                            className={mylist === 'SizeOptions2' ? `${css.selest}` : `${css.selest2}`}
-                            placeholder='מותגים'
-                        />
-                        <Select
-                            isMulti
-                            value={value.size}
-                            closeMenuOnSelect={false}
-                            options={[...SizeOptions2, ...SizeOptions]}
-                            onChange={(e: any) => {
-                                Dispatch(onchange({ size: e, colors: value.colors, brands: value.brands, stopfindusers: value.stopfindusers, stopusers: value.stopusers }))
-                            }}
-                            styles={stylelableOption}
-                            onMenuOpen={() => {
-                                setmylist('SizeOptions')
-                            }}
-
-                            onMenuClose={() => {
-                                setmylist('')
-                            }}
-                            className={mylist === 'SizeOptions' ? `${css.selest}` : `${css.selest2}`}
-                            placeholder='מידות'
-                        />
-                        <Select
-                            isMulti
-                            closeMenuOnSelect={false}
-                            options={colourOptions}
-                            value={value.colors}
-                            onChange={(e: any) => {
-                                return Dispatch(onchange({ size: value.size, colors: e, brands: value.brands, stopfindusers: value.stopfindusers, stopusers: value.stopusers }))
-
-                            }}
-                            styles={stylelableOption}
-                            onMenuOpen={() => {
-                                setmylist('SizeOptions3')
-                            }}
-
-                            onMenuClose={() => {
-                                setmylist('')
-                            }}
-                            className={mylist === 'SizeOptions3' ? `${css.selest}` : `${css.selest2}`}
-                            placeholder='צבעים'
-                        /> */}
                         <button className={css.btn} onClick={() => {
                             if (value.size[0] === undefined && value.catgre[0] === undefined && value.colors[0] === undefined && value.brands[0] === undefined) {
                                 return Dispatch(search1())
