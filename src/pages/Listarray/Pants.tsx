@@ -10,6 +10,7 @@ import { useAppDispatch } from '../../app/hooks'
 import { addfindusers, search as search22, onchange, addItem } from '../../features/cards/cardPants'
 import { optionstype } from '../../@types/Mytypes'
 import List from '../../components/List/List';
+import Fillter from './Fillter';
 function Pants() {
     const { loading, users, error, findusers, search, value } = useAppSelector((s) => s.cardPants);
     const Dispatch = useAppDispatch();
@@ -35,10 +36,15 @@ function Pants() {
             value.size.map((e: optionstype) => {
                 arr3.push(e.value)
             })
+            let arr4: any = []
+            value.catgre.map((e: optionstype) => {
+                arr4.push(e.value)
+            })
             const data = {
                 brands: arr,
                 colors: arr2,
                 sizes: arr3,
+                categorys2: arr4,
                 skip: 0
             };
             axios.get(`${Url}cards/filtering/pantsproduct`, { params: data }).then((response) => {
@@ -68,12 +74,16 @@ function Pants() {
             value.size.map((e: optionstype) => {
                 arr3.push(e.value)
             })
+            let arr4: any = []
+            value.catgre.map((e: optionstype) => {
+                arr4.push(e.value)
+            })
             const data = {
                 brands: arr,
                 colors: arr2,
                 sizes: arr3,
-                skip: findusers.length
-
+                categorys2: arr4,
+                skip: 0
             };
             axios.get(`${Url}cards/filtering/pantsproduct`, { params: data }).then((response) => {
                 setdata(true)
@@ -136,12 +146,14 @@ function Pants() {
             {users.length > 0 &&
                 <>
                     <h1 className={css.h1}>מכנסיים גבריים</h1>
+
                     <div className={css.selestdiv}>
-                        <Select
+                        <Fillter name='pants' value={value} />
+                        {/* <Select
                             isMulti
                             value={value.brands}
                             closeMenuOnSelect={false}
-                            options={brands}//optionstype
+                            options={brands}
                             onChange={(e) => {
                                 console.log(e);
 
@@ -196,14 +208,15 @@ function Pants() {
                             }}
                             className={mylist === 'SizeOptions3' ? `${css.selest}` : `${css.selest2}`}
                             placeholder='צבעים'
-                        />
+                        /> */}
                         <button className={css.btn} onClick={() => {
-                            if (value.size[0] === undefined && value.colors[0] === undefined && value.brands[0] === undefined) {
+                            if (value.size[0] === undefined && value.catgre[0] === undefined && value.colors[0] === undefined && value.brands[0] === undefined) {
                                 return Dispatch(search22())
 
                             }
                             setloding(false);
                             getdata();
+                            console.log(value);
 
                         }}>Click</button>
 

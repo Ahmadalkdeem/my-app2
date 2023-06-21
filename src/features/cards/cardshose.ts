@@ -8,7 +8,7 @@ const initialState: sliCecatgre = {
     users: [],
     findusers: [],
     search: false,
-    value: { size: [], colors: [], brands: [], stopfindusers: false, stopusers: false },
+    value: { size: [], colors: [], catgre: [], brands: [], stopfindusers: false, stopusers: false },
 };
 
 export const fetchUsers3 = createAsyncThunk<any[]>("user3/fetchUsers3", () =>

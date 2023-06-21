@@ -10,6 +10,7 @@ import { useAppDispatch } from '../../app/hooks'
 import { addfindusers, search as search1, onchange, addItem } from '../../features/cards/cardshose'
 import { optionstype } from '../../@types/Mytypes'
 import List from '../../components/List/List';
+import Fillter from './Fillter';
 function Shose() {
     const { loading, users, error, findusers, search, value } = useAppSelector((s) => s.cardshose);
     const Dispatch = useAppDispatch();
@@ -35,10 +36,15 @@ function Shose() {
             value.size.map((e: optionstype) => {
                 arr3.push(e.value)
             })
+            let arr4: any = []
+            value.catgre.map((e: optionstype) => {
+                arr4.push(e.value)
+            })
             const data = {
                 brands: arr,
                 colors: arr2,
                 sizes: arr3,
+                categorys2: arr4,
                 skip: 0
             };
             axios.get(`${Url}cards/filtering/shoesproduct`, { params: data }).then((response) => {
@@ -70,11 +76,16 @@ function Shose() {
             value.size.map((e: optionstype) => {
                 arr3.push(e.value)
             })
+            let arr4: any = []
+            value.catgre.map((e: optionstype) => {
+                arr4.push(e.value)
+            })
             const data = {
                 brands: arr,
                 colors: arr2,
                 sizes: arr3,
-                skip: findusers.length
+                categorys2: arr4,
+                skip: 0
             };
             axios.get(`${Url}cards/filtering/shoesproduct`, { params: data }).then((response) => {
                 setdata(true)
@@ -136,8 +147,10 @@ function Shose() {
             {users.length > 0 &&
                 <>
                     <h1 className={css.h1}>נעליים גבריים</h1>
+
                     <div className={css.selestdiv}>
-                        <Select
+                        <Fillter name='shose' value={value} />
+                        {/* <Select
                             isMulti
                             value={value.brands}
                             closeMenuOnSelect={false}
@@ -194,14 +207,16 @@ function Shose() {
                             }}
                             className={mylist === 'SizeOptions3' ? `${css.selest}` : `${css.selest2}`}
                             placeholder='צבעים'
-                        />
+                        /> */}
                         <button className={css.btn} onClick={() => {
-                            if (value.size[0] === undefined && value.colors[0] === undefined && value.brands[0] === undefined) {
+                            if (value.size[0] === undefined && value.catgre[0] === undefined && value.colors[0] === undefined && value.brands[0] === undefined) {
                                 return Dispatch(search1())
 
                             }
                             setloding(false);
                             getdata();
+                            console.log(value);
+
 
                         }}>Click</button>
 

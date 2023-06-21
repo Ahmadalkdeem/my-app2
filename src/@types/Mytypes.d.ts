@@ -69,7 +69,7 @@ export interface sliCecatgre {
     users: Cardtype[],
     findusers: Cardtype[],
     search: boolean,
-    value: { size: optionstype[], colors: optionstype[], brands: optionstype[], stopusers: boolean, stopfindusers: boolean },
+    value: { size: optionstype[], colors: optionstype[], brands: optionstype[], catgre: optionstype[], stopusers: boolean, stopfindusers: boolean },
 
 }
 export interface props {

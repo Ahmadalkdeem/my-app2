@@ -38,6 +38,7 @@ import Favorites from './pages/favorites/Favorites';
 import { addItems } from './features/cards/favorites';
 import { Url } from './arrays/list';
 import ChatGPTExample from './components/chatgbt/Chatgbt';
+import Navbae2 from './components/navbar/Navbar2';
 function App() {
   let { roles } = useAppSelector(e => e.user)
   let Dispatch = useAppDispatch()
@@ -86,6 +87,9 @@ function App() {
 
   return (
     <>
+      {/* <Navbae2 /> */}
+      {/* <br /> */}
+      {/* <br /> */}
 
       {/* <MyNavbar /> */}
       <MyNavbar2 />
